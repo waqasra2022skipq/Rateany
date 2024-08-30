@@ -43,7 +43,7 @@ class ProfessionSeeder extends Seeder
         ];
 
         foreach ($professions as $profession) {
-            DB::table('profession')->insert([
+            DB::table('professions')->insert([
                 'name' => $profession,
                 'created_at' => now(),
                 'updated_at' => now(),
