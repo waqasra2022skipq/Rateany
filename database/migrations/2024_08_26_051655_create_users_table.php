@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->foreignId('profession_id')->nullable()->constrained('profession')->nullable();
+            $table->foreignId('profession_id')->nullable()->constrained('professions')->nullable();
             $table->timestamps();
         });
 

@@ -9,6 +9,8 @@ class Profession extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['count'];
+
     public function users()
     {
         return $this->hasMany(User::class);
