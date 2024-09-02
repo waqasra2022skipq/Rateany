@@ -42,4 +42,22 @@ class UserController extends Controller
             return $this->apiError($th->getMessage(), [], 500);
         }
     }
+
+    public function deleteUser($user_id)
+    {
+        try {
+            // $user = User::find($user_id);
+            // if (!$user) {
+            //     return response()->json(["error" => "User Not Found"],  404);
+            // }
+
+            // $user->delete();
+
+            User::destroy($user_id);
+
+            return response()->json(['User Delete Successfully']);
+        } catch (\Throwable $th) {
+            return $this->apiError($th->getMessage(), [], 500);
+        }
+    }
 }
