@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'waqas.rahman.sculptor@gmail.com',
         // ]);
 
-        $this->call(ProfessionSeeder::class);
+        // $this->call(ProfessionSeeder::class);
+
+        // $this->call(CategoriesSeeder::class);
     }
 }
