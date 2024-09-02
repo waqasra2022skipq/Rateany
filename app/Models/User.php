@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Profession::class, 'profession_id');
     }
+
+    public function businesses()
+    {
+        return $this->hasMany(Business::class, 'userId');
+    }
 }
