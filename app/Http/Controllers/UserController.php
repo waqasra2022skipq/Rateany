@@ -18,8 +18,12 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = $this->userService->getAllUsers();
-        return response()->json($users);
+        try {
+            $users = $this->userService->getAllUsers();
+            return response()->json($users);
+        } catch (\Throwable $th) {
+            return $this->apiError($th->getMessage(), [], 500);
+        }
     }
 
     public function show($user_id)

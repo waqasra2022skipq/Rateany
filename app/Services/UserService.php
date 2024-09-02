@@ -13,7 +13,7 @@ class UserService
     public function __construct() {}
     public function getAllUsers()
     {
-        $users = User::with('profession')->get();
+        $users = User::with('profession', 'businesses')->get();
         return $users;
     }
 
