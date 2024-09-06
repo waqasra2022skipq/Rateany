@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserController extends Controller
 {
@@ -40,8 +41,9 @@ class UserController extends Controller
         try {
             $validatedData = $request->validated();
             $user = $this->userService->createUser($validatedData);
-
-            return response()->json($user, 200);
+            FacadesAuth::login($user);
+            // return response()->json($user, 200);
+            return redirect('/')->with("You have successfully register with us");
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
         }

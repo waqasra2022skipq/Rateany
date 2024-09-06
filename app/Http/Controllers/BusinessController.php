@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusinessCreateRequest;
 
 class BusinessController extends Controller
 {
+    public function create()
+    {
+        $categories = Category::all();
+        return view("business.create", [
+            'categories' => $categories
+        ]);
+    }
 
     public function show($id)
     {
