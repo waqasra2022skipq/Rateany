@@ -21,5 +21,6 @@ Route::controller(BusinessController::class)->group(function () {
     Route::get('/businesses', 'index');
     Route::get('/businesses/{id}', 'show');
     Route::post('/businesses', 'createBusiness');
+    Route::put('/businesses/{id}', 'updateBusiness');
     Route::delete('/businesses/{id}', 'deleteBusiness');
 });
