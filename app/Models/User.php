@@ -55,4 +55,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Business::class, 'userId');
     }
+
+    // Reviews written by this user
+    public function writtenReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
+
+    // Reviews about this user
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

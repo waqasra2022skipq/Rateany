@@ -19,4 +19,10 @@ class Business extends Model
     {
         return $this->belongsTo(Category::class, 'categoryId');
     }
+
+    // Reviews about this business
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
