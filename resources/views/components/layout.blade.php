@@ -1,82 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="images/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            laravel: "#ef3b2d",
-                        },
-                    },
-                },
-            };
-        </script>
-        <title>Rateany | Rate Anything and Anyone</title>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <title>Rateany | Rate Anything and Anyone</title>
+    @vite(['resources/js/app.js'])
+    @vite(['resources/sass/app.scss'])
+</head>
 
-    <body class="mb-48">
-        <nav class="flex justify-between items-center mb-4">
-            <a href="/"><img class="w-24" src="{{ asset('images/logo.png') }}" alt=""
-                    class="logo" />Rateany</a>
-            <ul class="flex space-x-6 mr-6 text-lg">
+<body class="mb-48">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('images/logo.png') }}" alt="Rateany Logo" class="logo" width="96">
+            Rateany
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 @auth
-                    <li>
-                        <span class="font-bold upercase">
-                            Welcome {{ auth()->user()->name }}
-                        </span>
-                    </li>
-                    <li>
-                        <a href="/reviews/manage" class="hover:text-laravel">
-                            <i class="fa-solid fa-gear"></i>
-                            Manage Reviews
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-user-circle"></i> {{ auth()->user()->name }}
                         </a>
-                    </li>
-                    <li>
-                        <a href="/businesses/create" class="hover:text-laravel">
-                            <i class="fa-solid fa-city"></i>
-                            Manage Businesses
-                        </a>
-                    </li>
-
-                    <li>
-                        <form method="POST" action="/auth/logout" class="inline">
-                            @csrf
-                            <button type="submit">Logout</button>
-                        </form>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ url('/profile/' . auth()->user()->id) }}">Manage Profile</a></li>
+                            <li><a class="dropdown-item" href="/businesses/manage">Manage Businesses</a></li>
+                            <li><a class="dropdown-item" href="/reviews/manage">Manage Reviews</a></li>
+                            <li>
+                                <form method="POST" action="/auth/logout" class="px-3 py-2">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 @else
-                    <li>
-                        <a href="register" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i> Register</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/register">
+                            <i class="fa-solid fa-user-plus"></i> Register
+                        </a>
                     </li>
-                    <li>
-                        <a href="/auth/login" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            Login</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                        </a>
                     </li>
                 @endauth
             </ul>
-        </nav>
-        <main>
-            {{ $slot }}
-        </main>
+        </div>
+    </nav>
 
-        <footer
-            class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 md:justify-center">
-            <p class="ml-2">Copyright &copy; 2024, All Rights reserved</p>
+    <main>
+        {{ $slot }}
+    </main>
 
-            <a href="/reviews/create" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Write a
-                Rewiew</a>
-        </footer>
-        <x-flash-message />
-    </body>
+    <footer class="fixed-bottom bg-dark text-white text-center">
+        <p class="mb-0">Copyright &copy; 2024, All Rights Reserved</p>
+        <a href="/reviews/create" class="btn btn-light position-absolute end-0 me-3">Write a Review</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <x-flash-message />
+</body>
 
 </html>

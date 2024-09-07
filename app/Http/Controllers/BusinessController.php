@@ -33,7 +33,8 @@ class BusinessController extends Controller
     {
         try {
             $businesses = Business::with(['user', 'category'])->get();
-            return $this->apiSuccess('success', $businesses, 200);
+            return view('business.manage', ['businesses' => $businesses]);
+            // return $this->apiSuccess('success', $businesses, 200);
         } catch (\Throwable $th) {
             return $this->apiError('error', $th->getMessage(), 500);
         }
@@ -43,12 +44,24 @@ class BusinessController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            $business = Business::create($validatedData);
+            Business::create($validatedData);
 
-            return $this->apiSuccess("New Business Created", $business, 201);
+            $businesses = $request->user()->businesses;
+            // return $this->apiSuccess("New Business Created", $business, 201);
+            return view('business.manage', ['businesses' => $businesses]);
         } catch (\Throwable $th) {
             return $this->apiError('error', $th->getMessage(), 500);
         }
+    }
+
+    public function edit($id)
+    {
+        $business = Business::find($id);
+        $categories = Category::all();
+        return view("business.edit", [
+            'categories' => $categories,
+            'business' => $business
+        ]);
     }
 
     public function updateBusiness(BusinessCreateRequest $request, $id)
@@ -57,10 +70,21 @@ class BusinessController extends Controller
             $validatedData = $request->validated();
             $business = Business::find($id);
             $business->update($validatedData);
+            // return $this->apiSuccess("New Business Created", $business, 201);
 
-            return $this->apiSuccess("New Business Created", $business, 201);
+            $user = $request->user();
+            return redirect()->route('profile.show', $user->id)->with('Message', 'Business Deleted successfully.');
+
+            // return $this->apiSuccess("New Business Created", $business, 201);
         } catch (\Throwable $th) {
             return $this->apiError('error', $th->getMessage(), 500);
         }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        Business::destroy($id);
+        $user = $request->user();
+        return redirect()->route('profile.show', $user->id)->with('Message', 'Business Deleted successfully.');
     }
 }

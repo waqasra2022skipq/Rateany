@@ -5,6 +5,7 @@ namespace app\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profession;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -27,13 +28,31 @@ class UserController extends Controller
         }
     }
 
-    public function show($user_id)
+    public function edit($user_id)
     {
         $user = User::find($user_id);
+        $professions = Profession::all();
+
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);
         }
-        return response()->json($user);
+        // return response()->json($user);
+        return view('user.edit', ['user' => $user, 'professions' => $professions]);
+    }
+
+    public function show($user_id)
+    {
+        $user = User::find($user_id);
+        $professions = Profession::all();
+
+        if (!$user) {
+            return response()->json(["error" => "User Not Found"],  404);
+        }
+        // return response()->json($user);
+        return view(
+            'user.profile',
+            ['user' => $user, 'professions' => $professions, 'businesses' => $user->businesses]
+        );
     }
 
     public function createUser(CreateUserRequest $request)
@@ -57,5 +76,31 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
         }
+    }
+
+    // UserController.php
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'profession' => 'nullable|exists:professions,id',
+            'password' => 'nullable|confirmed|min:8',
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->profession_id = $request->input('profession');
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.show', $user->id)->with('Message', 'Profile updated successfully.');
     }
 }

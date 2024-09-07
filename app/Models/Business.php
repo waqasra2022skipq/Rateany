@@ -11,7 +11,7 @@ class Business extends Model
 
     protected $fillable = ['userId', 'categoryId', 'name', 'description', 'location'];
 
-    public function user()
+    public function owner()
     {
         return $this->belongsTo(User::class, 'userId');
     }

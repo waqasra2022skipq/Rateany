@@ -19,6 +19,9 @@ Route::prefix('auth')->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/users', 'index');
+    Route::get('/profile/{id}/edit', 'edit')->name("profile.edit")->middleware('auth');
+    Route::get('/profile/{id}', 'show')->name("profile.show")->middleware('auth');
+    Route::put('/profile/{id}', 'updateUser')->name("users.update")->middleware('auth');
     Route::get('/users/{id}', 'show');
     Route::post('/users', 'createUser');
     Route::delete('/users/{id}', 'deleteUser');
@@ -28,7 +31,11 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
-        Route::get('/create', 'create');
+        Route::get('/manage', 'index');
+        Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
+        Route::get('/{id}', 'edit')->name('businesses.edit');
+        Route::put('/{id}', 'updateBusiness')->name('businesses.update');
+        Route::delete('/{id}', 'destroy')->name('businesses.destroy');
     });
 });

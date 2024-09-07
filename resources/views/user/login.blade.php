@@ -1,45 +1,38 @@
 <x-layout>
-    <header class="text-center">
-        <h2 class="text-2xl font-bold uppercase mb-1">Login</h2>
-        <p class="mb-4">Log into your account to post gigs</p>
-    </header>
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h2 class="text-2xl font-bold">Login</h2>
+            <p>Log into your account to post gigs</p>
+        </header>
 
-    <form method="POST" action="/auth/authenticate">
-        @csrf
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="/auth/authenticate">
+                    @csrf
 
-        <div class="mb-6">
-            <label for="email" class="inline-block text-lg mb-2">Email</label>
-            <input type="email" class="border border-gray-200 rounded p-2 w-full" name="email"
-                value="{{ old('email') }}" />
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" />
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-            @error('email')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" />
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Sign In</button>
+
+                    <div class="mt-3 text-center">
+                        <p>Don't have an account? <a href="/auth/register" class="text-primary">Register</a></p>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="mb-6">
-            <label for="password" class="inline-block text-lg mb-2">
-                Password
-            </label>
-            <input type="password" class="border border-gray-200 rounded p-2 w-full" name="password"
-                value="{{ old('password') }}" />
-
-            @error('password')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="mb-6">
-            <button type="submit" class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                Sign In
-            </button>
-        </div>
-
-        <div class="mt-8">
-            <p>
-                Don't have an account?
-                <a href="/auth/register" class="text-laravel">Register</a>
-            </p>
-        </div>
-    </form>
+    </div>
 </x-layout>
