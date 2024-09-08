@@ -3,11 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BusinessController::class, 'index']);
 
 
 Route::prefix('auth')->group(function () {
@@ -37,5 +36,9 @@ Route::controller(BusinessController::class)->group(function () {
         Route::get('/{id}', 'edit')->name('businesses.edit');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
+
+        Route::get('/{id}/write-review', 'reviewForm')->name('businesses.write-review');
     });
 });
+
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');

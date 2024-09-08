@@ -32,7 +32,7 @@ class BusinessController extends Controller
     public function index()
     {
         try {
-            $businesses = Business::with(['user', 'category'])->get();
+            $businesses = Business::with(['owner', 'category'])->get();
             return view('business.manage', ['businesses' => $businesses]);
             // return $this->apiSuccess('success', $businesses, 200);
         } catch (\Throwable $th) {
@@ -86,5 +86,14 @@ class BusinessController extends Controller
         Business::destroy($id);
         $user = $request->user();
         return redirect()->route('profile.show', $user->id)->with('Message', 'Business Deleted successfully.');
+    }
+
+
+    public function reviewForm($id)
+    {
+        return view('business.write-review', [
+            'business_id' => $id,
+            'user' => ''
+        ]);
     }
 }
