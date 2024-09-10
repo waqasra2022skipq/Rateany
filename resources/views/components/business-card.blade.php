@@ -5,15 +5,18 @@
             <p class="card-text">
                 <strong>Category:</strong> {{ $business->category->name }}
             </p>
-            @if(auth()->user()->id == $business->userId)
-            <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn-sm">Edit</a>
-            <form action="{{ route('businesses.destroy', $business->id) }}" method="POST" style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-            </form>
+            @if (auth()->check() && auth()->user()->id == $business->userId)
+                <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                <form action="{{ route('businesses.destroy', $business->id) }}" method="POST"
+                    style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
             @else
-            <a href="{{ route('businesses.write-review', $business->id) }}" class="btn btn-primary btn-sm">Write Review</a>
+                <a href="{{ route('businesses.write-review', $business->id) }}" class="btn btn-primary btn-sm">Write
+                    Review</a>
             @endif
         </div>
     </div>

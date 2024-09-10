@@ -59,6 +59,11 @@ class UserController extends Controller
     {
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('profile_pic')) {
+                $imagePath = $request->file('profile_pic')->store('profile_pics', 'public');
+                $validatedData['profile_pic'] = $imagePath;
+            }
             $user = $this->userService->createUser($validatedData);
             FacadesAuth::login($user);
             // return response()->json($user, 200);
@@ -89,6 +94,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'profession' => 'nullable|exists:professions,id',
             'password' => 'nullable|confirmed|min:8',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user->name = $request->input('name');
@@ -97,6 +103,15 @@ class UserController extends Controller
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
+        }
+
+        if ($request->hasFile('profile_pic')) {
+            // Delete old profile picture if exists
+            if ($user->profile_pic && \Storage::exists('public/' . $user->profile_pic)) {
+                \Storage::delete('public/' . $user->profile_pic);
+            }
+            $imagePath = $request->file('profile_pic')->store('profile_pics', 'public');
+            $user->profile_pic = $imagePath;
         }
 
         $user->save();

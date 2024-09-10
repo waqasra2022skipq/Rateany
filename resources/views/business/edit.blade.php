@@ -4,17 +4,19 @@
             <div class="col-md-8 col-lg-6">
                 <h2 class="mb-4">Edit Business</h2>
 
-                <form action="{{ route('businesses.update', $business->id) }}" method="POST">
+                <form action="{{ route('businesses.update', $business->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <input type="hidden" name="userId" value="{{ old('userId', $business->userId) }}" required>
-                    
+
                     <div class="form-group mb-3">
                         <label for="name">Business Name</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $business->name) }}" required>
+                        <input type="text" name="name" id="name" class="form-control"
+                            value="{{ old('name', $business->name) }}" required>
                         @error('name')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -23,21 +25,23 @@
                         <select name="categoryId" id="categoryId" class="form-control" required>
                             <option value="">Select Category</option>
                             @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $category->id == old('categoryId', $business->categoryId) ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
+                                <option value="{{ $category->id }}"
+                                    {{ $category->id == old('categoryId', $business->categoryId) ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                         @error('categoryId')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="location">Location</label>
-                        <input type="text" name="location" id="location" class="form-control" value="{{ old('location', $business->location) }}">
+                        <input type="text" name="location" id="location" class="form-control"
+                            value="{{ old('location', $business->location) }}">
                         @error('location')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -45,7 +49,17 @@
                         <label for="description">Description</label>
                         <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $business->description) }}</textarea>
                         @error('description')
-                        <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="business_logo" class="form-label">Business Logo</label>
+                        <input type="file" name="business_logo" id="business_logo"
+                            class="form-control @error('business_logo') is-invalid @enderror" accept="image/*">
+
+                        @error('business_logo')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 

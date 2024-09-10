@@ -9,7 +9,7 @@ class Business extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['userId', 'categoryId', 'name', 'description', 'location'];
+    protected $fillable = ['userId', 'categoryId', 'name', 'description', 'location', 'business_logo'];
 
     public function owner()
     {

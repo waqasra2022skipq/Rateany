@@ -21,6 +21,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/profile/{id}/edit', 'edit')->name("profile.edit")->middleware('auth');
     Route::get('/profile/{id}', 'show')->name("profile.show")->middleware('auth');
     Route::put('/profile/{id}', 'updateUser')->name("users.update")->middleware('auth');
+    Route::put('/profile/update-image', 'updateProfileImage')->name("profile.updateImage")->middleware('auth');
     Route::get('/users/{id}', 'show');
     Route::post('/users', 'createUser');
     Route::delete('/users/{id}', 'deleteUser');
