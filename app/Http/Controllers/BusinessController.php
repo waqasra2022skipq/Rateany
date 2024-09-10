@@ -44,6 +44,11 @@ class BusinessController extends Controller
     {
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('business_logo')) {
+                $imagePath = $request->file('business_logo')->store('business_logos', 'public');
+                $validatedData['business_logo'] = $imagePath;
+            }
             Business::create($validatedData);
 
             $businesses = $request->user()->businesses;
@@ -69,6 +74,16 @@ class BusinessController extends Controller
         try {
             $validatedData = $request->validated();
             $business = Business::find($id);
+
+            if ($request->hasFile('business_logo')) {
+                // Delete old profile picture if exists
+                if ($business->business_logo && \Storage::exists('public/' . $business->business_logo)) {
+                    \Storage::delete('public/' . $business->business_logo);
+                }
+                $imagePath = $request->file('business_logo')->store('business_logos', 'public');
+                $validatedData['business_logo'] = $imagePath;
+            }
+
             $business->update($validatedData);
             // return $this->apiSuccess("New Business Created", $business, 201);
 
