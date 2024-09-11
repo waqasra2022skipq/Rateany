@@ -34,7 +34,8 @@ Route::controller(BusinessController::class)->group(function () {
         Route::get('/manage', 'index');
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
-        Route::get('/{id}', 'edit')->name('businesses.edit');
+        Route::get('/{id}/edit', 'edit')->name('businesses.edit');
+        Route::get('/{id}', 'show')->name('businesses.show');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 

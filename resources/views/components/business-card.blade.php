@@ -1,7 +1,11 @@
 <div class="col-md-4 mb-4">
     <div class="card h-100">
         <div class="card-body">
-            <h5 class="card-title">{{ $business->name }}</h5>
+            <h5 class="card-title">
+                <a href="{{ route('businesses.show', $business->id) }}">
+                    {{ $business->name }}
+                </a>
+            </h5>
             <p class="card-text">
                 <strong>Category:</strong> {{ $business->category->name }}
             </p>

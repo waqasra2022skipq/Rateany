@@ -17,16 +17,25 @@ class BusinessController extends Controller
         ]);
     }
 
+    // public function show($id)
+    // {
+    //     try {
+    //         $business = Business::where('id', $id)
+    //             ->with(['user', 'category'])->get();
+
+    //         return $this->apiSuccess('success', $business, 200);
+    //     } catch (\Throwable $th) {
+    //         //throw $th;
+    //     }
+    // }
+
     public function show($id)
     {
-        try {
-            $business = Business::where('id', $id)
-                ->with(['user', 'category'])->get();
+        $business = Business::with(['owner', 'category'])->find($id);
+        $reviews = $business->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
+        $averageRating = $business->reviews()->avg('rating'); // Calculate average rating
 
-            return $this->apiSuccess('success', $business, 200);
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        return view('business.show', compact('business', 'reviews', 'averageRating'));
     }
 
     public function index()
