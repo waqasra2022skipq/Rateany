@@ -42,16 +42,27 @@ class UserController extends Controller
 
     public function show($user_id)
     {
-        $user = User::find($user_id);
-        $professions = Profession::all();
+        $user_id = (int) $user_id;
+        $user = User::with(['profession', 'businesses'])->find($user_id);
+
+        $reviews = $user->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
+        $averageRating = $user->reviews()->avg('rating'); // Calculate average rating
+
+        // $businesses = $user->businesses;
 
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);
         }
-        // return response()->json($user);
+
+        if (! auth()->check() || auth()->user()->id !== $user_id) {
+            return view(
+                'user.show',
+                compact('user', 'reviews', 'averageRating')
+            );
+        }
         return view(
             'user.profile',
-            ['user' => $user, 'professions' => $professions, 'businesses' => $user->businesses]
+            ['user' => $user, 'businesses' => $user->businesses]
         );
     }
 

@@ -14,7 +14,15 @@
                 </div>
                 <div class="ms-3">
                     <h2>{{ $business->name }}</h2>
-                    <p>Owned by: <strong>{{ $business->owner->name }}</strong></p>
+                    <p>Owned by: <strong>
+                            <a href="{{ route('user.show', $business->owner->id) }}"
+                                style="text-decoration: none;">{{ $business->owner->name }}</a></strong></p>
+                    <h2>Category</h2>
+                    <p><strong>
+                            <a href="{{ route('businesses.categories', $business->category->id) }}"
+                                style="text-decoration: none;">{{ $business->category->name }}</a>
+                        </strong>
+                    </p>
                 </div>
             </div>
 
@@ -33,16 +41,7 @@
 
             @if ($reviews->count() > 0)
                 @foreach ($reviews as $review)
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $review->reviewer->name }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ $review->created_at->format('F j, Y') }}</h6>
-                            <div class="mb-2">
-                                <strong>Rating:</strong> {{ $review->rating }}/5
-                            </div>
-                            <p class="card-text">{{ $review->comments }}</p>
-                        </div>
-                    </div>
+                    @include('components.review-card', ['review' => $review])
                 @endforeach
 
                 <!-- Pagination Links -->

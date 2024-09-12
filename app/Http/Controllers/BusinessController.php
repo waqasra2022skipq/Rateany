@@ -11,6 +11,9 @@ class BusinessController extends Controller
 {
     public function create()
     {
+        if (!auth()->check()) {
+            return view('user.login');
+        }
         $categories = Category::all();
         return view("business.create", [
             'categories' => $categories
@@ -36,6 +39,11 @@ class BusinessController extends Controller
         $averageRating = $business->reviews()->avg('rating'); // Calculate average rating
 
         return view('business.show', compact('business', 'reviews', 'averageRating'));
+    }
+    public function catBusinesses($categoryId)
+    {
+        $businesses = Business::with(['owner', 'category'])->where('categoryId', $categoryId)->get();
+        return view('business.manage', ['businesses' => $businesses]);
     }
 
     public function index()
@@ -115,6 +123,9 @@ class BusinessController extends Controller
 
     public function reviewForm($id)
     {
+        if (!auth()->check()) {
+            return view('user.login');
+        }
         return view('business.write-review', [
             'business_id' => $id,
             'user' => ''

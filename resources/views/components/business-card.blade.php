@@ -2,12 +2,14 @@
     <div class="card h-100">
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('businesses.show', $business->id) }}">
+                <a href="{{ route('businesses.show', $business->id) }}" style="text-decoration: none;">
                     {{ $business->name }}
                 </a>
             </h5>
             <p class="card-text">
-                <strong>Category:</strong> {{ $business->category->name }}
+                <strong>Category:</strong>
+                <a href="{{ route('businesses.categories', $business->category->id) }}"
+                    style="text-decoration: none;">{{ $business->category->name }}</a>
             </p>
             @if (auth()->check() && auth()->user()->id == $business->userId)
                 <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn-sm">Edit</a>

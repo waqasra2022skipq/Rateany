@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BusinessController::class, 'index']);
@@ -22,7 +23,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/profile/{id}', 'show')->name("profile.show")->middleware('auth');
     Route::put('/profile/{id}', 'updateUser')->name("users.update")->middleware('auth');
     Route::put('/profile/update-image', 'updateProfileImage')->name("profile.updateImage")->middleware('auth');
-    Route::get('/users/{id}', 'show');
+    Route::get('/users/{id}', 'show')->name('user.show');
     Route::post('/users', 'createUser');
     Route::delete('/users/{id}', 'deleteUser');
 });
@@ -36,6 +37,7 @@ Route::controller(BusinessController::class)->group(function () {
         Route::post('/store', 'createBusiness')->name('businesses.store');
         Route::get('/{id}/edit', 'edit')->name('businesses.edit');
         Route::get('/{id}', 'show')->name('businesses.show');
+        Route::get('/categories/{categoryId}', 'catBusinesses')->name('businesses.categories');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 

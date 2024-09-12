@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Business;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,12 @@ class BusinessSeeder extends Seeder
      */
     public function run(): void
     {
-        Business::factory()->count(50)->create();
+        $users = User::all(); // Fetch all users
+
+        foreach ($users as $user) {
+            Business::factory()->count(3)->create([
+                'userId' => $user->id,
+            ]);
+        }
     }
 }
