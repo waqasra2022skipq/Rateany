@@ -117,7 +117,7 @@ class BusinessController extends Controller
     {
         Business::destroy($id);
         $user = $request->user();
-        return redirect()->route('profile.show', $user->id)->with('Message', 'Business Deleted successfully.');
+        return redirect()->back()->with('Message', 'Business Deleted successfully.');
     }
 
 
@@ -126,7 +126,7 @@ class BusinessController extends Controller
         if (!auth()->check()) {
             return view('user.login');
         }
-        return view('business.write-review', [
+        return view('components.write-review', [
             'business_id' => $id,
             'user' => ''
         ]);

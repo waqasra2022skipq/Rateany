@@ -129,4 +129,15 @@ class UserController extends Controller
 
         return redirect()->route('profile.show', $user->id)->with('Message', 'Profile updated successfully.');
     }
+
+    public function reviewForm($id)
+    {
+        if (!auth()->check()) {
+            return view('user.login');
+        }
+        return view('components.write-review', [
+            'business_id' => '',
+            'user_id' => $id
+        ]);
+    }
 }

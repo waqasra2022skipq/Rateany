@@ -11,6 +11,11 @@
                 <a href="{{ route('businesses.categories', $business->category->id) }}"
                     style="text-decoration: none;">{{ $business->category->name }}</a>
             </p>
+            <p class="card-text">
+                <strong>Owner:</strong>
+                <a href="{{ route('user.show', $business->owner->id) }}"
+                    style="text-decoration: none;">{{ $business->owner->name }}</a>
+            </p>
             @if (auth()->check() && auth()->user()->id == $business->userId)
                 <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn-sm">Edit</a>
                 <form action="{{ route('businesses.destroy', $business->id) }}" method="POST"

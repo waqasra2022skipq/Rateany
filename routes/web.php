@@ -26,6 +26,8 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'show')->name('user.show');
     Route::post('/users', 'createUser');
     Route::delete('/users/{id}', 'deleteUser');
+
+    Route::get('/users/{id}/write-review', 'reviewForm')->name('user.write-review');
 });
 
 

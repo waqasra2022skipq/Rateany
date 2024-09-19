@@ -25,6 +25,10 @@ class ReviewController extends Controller
             'comments' => $request->comment,
         ]);
 
-        return redirect()->back()->with('Message', 'Review submitted successfully!');
+        if ($request->business_id) {
+            return redirect()->route('businesses.show', $request->business_id)->with('Message', 'Review submitted successfully!');
+        } else {
+            return redirect()->route('user.show', $request->user_id)->with('Message', 'Review submitted successfully!');
+        }
     }
 }

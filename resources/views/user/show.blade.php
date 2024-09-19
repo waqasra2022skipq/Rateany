@@ -27,9 +27,15 @@
             </div>
             <div class="col-md-4 text-end">
                 <div class="bg-light p-3 rounded">
-                    <h4>Rating: <strong>{{ $averageRating }}</strong></h4>
+                    <h4>Rating: <strong>{{ number_format($averageRating, 1) }}</strong></h4>
                     <p>Based on {{ $reviews->total() }} Reviews</p>
                 </div>
+
+                <div>
+                    <a href="{{ route('user.write-review', $user->id) }}" class="btn btn-primary btn-sm">Write
+                        Review</a>
+                </div>
+
             </div>
 
             <!-- Reviews Section -->
