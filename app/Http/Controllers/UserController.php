@@ -45,9 +45,7 @@ class UserController extends Controller
         $user_id = (int) $user_id;
         $user = User::with(['profession', 'businesses'])->find($user_id);
 
-        $reviews = $user->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
-
-        // $businesses = $user->businesses;
+        $reviews = $user->reviews()->with('reviewer')->paginate(5);
 
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);

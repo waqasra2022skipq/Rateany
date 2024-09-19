@@ -20,18 +20,6 @@ class BusinessController extends Controller
         ]);
     }
 
-    // public function show($id)
-    // {
-    //     try {
-    //         $business = Business::where('id', $id)
-    //             ->with(['user', 'category'])->get();
-
-    //         return $this->apiSuccess('success', $business, 200);
-    //     } catch (\Throwable $th) {
-    //         //throw $th;
-    //     }
-    // }
-
     public function show($id)
     {
         $business = Business::with(['owner', 'category'])->find($id);
