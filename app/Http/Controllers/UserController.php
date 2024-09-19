@@ -46,7 +46,6 @@ class UserController extends Controller
         $user = User::with(['profession', 'businesses'])->find($user_id);
 
         $reviews = $user->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
-        $averageRating = $user->reviews()->avg('rating'); // Calculate average rating
 
         // $businesses = $user->businesses;
 
@@ -57,7 +56,7 @@ class UserController extends Controller
         if (! auth()->check() || auth()->user()->id !== $user_id) {
             return view(
                 'user.show',
-                compact('user', 'reviews', 'averageRating')
+                compact('user', 'reviews')
             );
         }
         return view(

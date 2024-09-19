@@ -6,6 +6,14 @@
                     {{ $business->name }}
                 </a>
             </h5>
+
+            <p class="card-text">
+                <strong>Ratings:</strong>
+                <span>
+                    {{ number_format($business->average_rating, 1) }} / 5
+                </span>
+            </p>
+
             <p class="card-text">
                 <strong>Category:</strong>
                 <a href="{{ route('businesses.categories', $business->category->id) }}"

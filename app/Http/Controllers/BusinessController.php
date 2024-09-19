@@ -36,9 +36,8 @@ class BusinessController extends Controller
     {
         $business = Business::with(['owner', 'category'])->find($id);
         $reviews = $business->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
-        $averageRating = $business->reviews()->avg('rating'); // Calculate average rating
 
-        return view('business.show', compact('business', 'reviews', 'averageRating'));
+        return view('business.show', compact('business', 'reviews'));
     }
     public function catBusinesses($categoryId)
     {

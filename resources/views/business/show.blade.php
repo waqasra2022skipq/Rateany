@@ -29,8 +29,8 @@
             <!-- Rating and Reviews -->
             <div class="col-md-4 text-end">
                 <div class="bg-light p-3 rounded">
-                    <h4>Rating: <strong>{{ number_format($averageRating, 1) }}</strong></h4>
-                    <p>Based on {{ $reviews->total() }} Reviews</p>
+                    <h4>Rating: <strong>{{ number_format($business->average_rating, 1) }}</strong></h4>
+                    <p>Based on {{ $business->reviews_count }} Reviews</p>
                 </div>
             </div>
         </div>
