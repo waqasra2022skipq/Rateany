@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Models\Category;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusinessCreateRequest;
 
+
 class BusinessController extends Controller
 {
+    public function home()
+    {
+        // / Get the last 20 reviews, sorted by the most recent.
+        $reviews = Review::with(['reviewer', 'user', 'business'])->latest()->take(20)->get();
+
+        return view('home', compact('reviews'));
+    }
     public function create()
     {
         if (!auth()->check()) {

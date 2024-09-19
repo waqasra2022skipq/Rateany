@@ -7,7 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [BusinessController::class, 'index']);
+Route::get('/', [BusinessController::class, 'home']);
 
 
 Route::prefix('auth')->group(function () {
