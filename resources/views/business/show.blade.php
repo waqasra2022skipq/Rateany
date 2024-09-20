@@ -16,11 +16,11 @@
                     <h2>{{ $business->name }}</h2>
                     <p>Owned by: <strong>
                             <a href="{{ route('user.show', $business->owner->id) }}"
-                                style="text-decoration: none;">{{ $business->owner->name }}</a></strong></p>
+                                class="user-link">{{ $business->owner->name }}</a></strong></p>
                     <h2>Category</h2>
                     <p><strong>
                             <a href="{{ route('businesses.categories', $business->category->id) }}"
-                                style="text-decoration: none;">{{ $business->category->name }}</a>
+                                class="business-link">{{ $business->category->name }}</a>
                         </strong>
                     </p>
                 </div>

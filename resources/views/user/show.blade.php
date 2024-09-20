@@ -18,7 +18,7 @@
                     @if ($user->profession)
                         <h2>Profession</h2>
                         <p><strong>
-                                <a href="" style="text-decoration: none;">{{ $user->profession->name }}</a>
+                                <a href="" class="business-link">{{ $user->profession->name }}</a>
                             </strong>
                         </p>
                     @endif

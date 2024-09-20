@@ -1,8 +1,42 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url("https://fonts.bunny.net/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+
+.hero-section {
+    background-image: url("/public/images/hero-background.webp"); /* Add your background image path */
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.review-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(
+        120 150 181
+    ) !important; /* Semi-transparent background */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker control background */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: #000; /* Fully black on hover */
+}
+
+.business-link,
+.user-link {
+    text-decoration: none;
+}

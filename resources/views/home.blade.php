@@ -9,12 +9,13 @@
                             <h3 class="mb-3">
                                 <strong>{{ $review->reviewer->name }}</strong> rated
                                 @if ($review->business_id)
-                                    <a
-                                        href="{{ route('businesses.show', $review->business->id) }}">{{ $review->business->name }}</a>
+                                    <a href="{{ route('businesses.show', $review->business->id) }}"
+                                        class="business-link">{{ $review->business->name }}</a>
                                 @elseif ($review->user_id)
-                                    <a href="{{ route('user.show', $review->user->id) }}">{{ $review->user->name }}</a>
+                                    <a href="{{ route('user.show', $review->user->id) }}"
+                                        class="user-link">{{ $review->user->name }}</a>
                                 @endif
-                                {{ $review->rating }}/5
+                                {{ number_format($review->rating, 1) }}/5
                             </h3>
                             <p class="text-muted">{{ Str::limit($review->comments, 150) }}</p>
                         </div>
@@ -33,5 +34,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+    @include('components.top-restaurants-card', ['topRestaurants' => $topRestaurants])
 
 </x-layout>

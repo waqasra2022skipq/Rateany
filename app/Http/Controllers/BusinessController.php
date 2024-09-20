@@ -16,7 +16,11 @@ class BusinessController extends Controller
         // / Get the last 20 reviews, sorted by the most recent.
         $reviews = Review::with(['reviewer', 'user', 'business'])->latest()->take(20)->get();
 
-        return view('home', compact('reviews'));
+        $topRestaurants = Business::with(['owner'])
+            ->where('categoryId', 1)
+            ->get();
+
+        return view('home', compact('reviews', 'topRestaurants'));
     }
     public function create()
     {
