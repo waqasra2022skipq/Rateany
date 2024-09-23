@@ -35,6 +35,23 @@
         </button>
     </div>
 
+    <div class="container my-5">
+        <h2 class="mb-4">Top Businesses</h2>
+    </div>
+
     @include('components.top-restaurants-card', ['topRestaurants' => $topRestaurants])
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Gyms</h2>
+        <div class="row">
+            @foreach ($topGyms as $gym)
+                @include('components.business-card', ['business' => $gym])
+            @endforeach
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h2 class="mb-4">Top Professionals</h2>
+    </div>
 
 </x-layout>

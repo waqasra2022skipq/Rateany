@@ -16,7 +16,7 @@
 
             <p class="card-text">
                 <strong>Category:</strong>
-                <a href="{{ route('businesses.categories', $business->category->id) }}"
+                <a href="{{ route('allBusinesses', ['categoryId' => $business->category->id]) }}"
                     class="business-link">{{ $business->category->name }}</a>
             </p>
             <p class="card-text">

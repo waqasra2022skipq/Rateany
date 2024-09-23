@@ -18,9 +18,19 @@ class BusinessController extends Controller
 
         $topRestaurants = Business::with(['owner'])
             ->where('categoryId', 1)
+            ->orderBy('average_rating', 'desc')
+            ->limit(6)
             ->get();
 
-        return view('home', compact('reviews', 'topRestaurants'));
+        $topGyms = Business::with(['owner'])
+            ->where('categoryId', 4)
+            ->orderBy('average_rating', 'desc')
+            ->limit(6)
+            ->get();
+
+        $categories = Category::all();
+
+        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'categories'));
     }
     public function create()
     {
@@ -40,16 +50,22 @@ class BusinessController extends Controller
 
         return view('business.show', compact('business', 'reviews'));
     }
-    public function catBusinesses($categoryId)
+    public function allBusinesses(Request $request)
     {
-        $businesses = Business::with(['owner', 'category'])->where('categoryId', $categoryId)->get();
+        $categoryId = $request->query('categoryId');
+        $businesses = Business::with(['owner', 'category'])
+            ->where('categoryId', $categoryId)
+            ->orderBy('average_rating', 'desc')
+            ->get();
         return view('business.manage', ['businesses' => $businesses]);
     }
 
-    public function index()
+    public function myBusinesses()
     {
         try {
-            $businesses = Business::with(['owner', 'category'])->get();
+            $businesses = Business::with(['owner', 'category'])
+                ->where('userId', request()->user()->id)
+                ->get();
             return view('business.manage', ['businesses' => $businesses]);
             // return $this->apiSuccess('success', $businesses, 200);
         } catch (\Throwable $th) {

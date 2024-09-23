@@ -34,12 +34,12 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
-        Route::get('/manage', 'index');
+        Route::get('/', 'allBusinesses')->name('allBusinesses');
+        Route::get('/manage', 'myBusinesses');
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
         Route::get('/{id}/edit', 'edit')->name('businesses.edit');
         Route::get('/{id}', 'show')->name('businesses.show');
-        Route::get('/categories/{categoryId}', 'catBusinesses')->name('businesses.categories');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 
