@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -28,9 +29,13 @@ class BusinessController extends Controller
             ->limit(6)
             ->get();
 
-        $categories = Category::all();
 
-        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'categories'));
+        $topMechanics = User::where('profession_id', 7)
+            ->orderBy('average_rating', 'desc')
+            ->limit(6)
+            ->get();
+
+        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics'));
     }
     public function create()
     {
@@ -52,12 +57,28 @@ class BusinessController extends Controller
     }
     public function allBusinesses(Request $request)
     {
+        // Get categoryId from query, if not present, it will be null
         $categoryId = $request->query('categoryId');
-        $businesses = Business::with(['owner', 'category'])
-            ->where('categoryId', $categoryId)
-            ->orderBy('average_rating', 'desc')
-            ->get();
-        return view('business.manage', ['businesses' => $businesses]);
+
+        // Get search from query, if not present, it will be null
+        $search = $request->query('search');
+
+        // Start building the query
+        $query = Business::with(['owner', 'category']);
+
+        // If categoryId exists in the query, apply the filter
+        if ($categoryId) {
+            $query->where('categoryId', $categoryId);
+        }
+
+        // If search exists in the query, apply the filter
+        if ($search) {
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        // Order by average_rating and paginate the results
+        $businesses = $query->orderBy('average_rating', 'desc')->paginate(6);
+        return view('business.index', ['businesses' => $businesses]);
     }
 
     public function myBusinesses()

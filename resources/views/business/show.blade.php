@@ -19,7 +19,7 @@
                                 class="user-link">{{ $business->owner->name }}</a></strong></p>
                     <h2>Category</h2>
                     <p><strong>
-                            <a href="{{ route('businesses.categories', $business->category->id) }}"
+                            <a href="{{ route('allBusinesses', ['categoryId' => $business->category->id]) }}"
                                 class="business-link">{{ $business->category->name }}</a>
                         </strong>
                     </p>

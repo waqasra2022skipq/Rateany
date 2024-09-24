@@ -54,4 +54,13 @@
         <h2 class="mb-4">Top Professionals</h2>
     </div>
 
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Mechanics</h2>
+        <div class="row">
+            @foreach ($topMechanics as $user)
+                @include('components.user-card', ['user' => $user])
+            @endforeach
+        </div>
+    </div>
+
 </x-layout>
