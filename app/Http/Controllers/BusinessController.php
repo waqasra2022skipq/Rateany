@@ -57,6 +57,7 @@ class BusinessController extends Controller
     }
     public function allBusinesses(Request $request)
     {
+        $userId = request()->user()->id;
         // Get categoryId from query, if not present, it will be null
         $categoryId = $request->query('categoryId');
 
@@ -65,6 +66,10 @@ class BusinessController extends Controller
 
         // Start building the query
         $query = Business::with(['owner', 'category']);
+
+        if ($userId) {
+            $query->whereNot('userId', $userId);
+        }
 
         // If categoryId exists in the query, apply the filter
         if ($categoryId) {

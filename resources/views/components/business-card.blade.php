@@ -1,5 +1,9 @@
 <div class="col-md-4 mb-4">
     <div class="card h-100">
+        <!-- Business Logo -->
+        <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
+            alt="{{ $business->name }} Logo" class="card-img-top img-fluid" style="height: 100px; object-fit: cover;">
+
         <div class="card-body">
             <h5 class="card-title">
                 <a href="{{ route('businesses.show', $business->id) }}" class="business-link">
@@ -19,11 +23,13 @@
                 <a href="{{ route('allBusinesses', ['categoryId' => $business->category->id]) }}"
                     class="business-link">{{ $business->category->name }}</a>
             </p>
+
             <p class="card-text">
                 <strong>Owner:</strong>
                 <a href="{{ route('user.show', $business->owner->id) }}"
                     class="business-link">{{ $business->owner->name }}</a>
             </p>
+
             @if (auth()->check() && auth()->user()->id == $business->userId)
                 <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn-sm">Edit</a>
                 <form action="{{ route('businesses.destroy', $business->id) }}" method="POST"
