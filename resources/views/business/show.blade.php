@@ -23,6 +23,8 @@
                                 class="business-link">{{ $business->category->name }}</a>
                         </strong>
                     </p>
+                    <strong>Location:</strong>
+                    <span>{{ $business->location }}</span>
                 </div>
             </div>
 

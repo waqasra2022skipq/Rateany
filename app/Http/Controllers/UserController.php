@@ -18,11 +18,36 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $users = $this->userService->getAllUsers();
-            return response()->json($users);
+            $userId = request()->user()->id;
+            // Get categoryId from query, if not present, it will be null
+            $profession_id = $request->query('profession_id');
+
+            // Get search from query, if not present, it will be null
+            $search = $request->query('search');
+
+            // Start building the query
+            $query = User::with(['profession']);
+
+            if ($userId) {
+                $query->whereNot('id', $userId);
+            }
+
+            // If categoryId exists in the query, apply the filter
+            if ($profession_id) {
+                $query->where('profession_id', $profession_id);
+            }
+
+            // If search exists in the query, apply the filter
+            if ($search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            }
+
+            // Order by average_rating and paginate the results
+            $users = $query->orderBy('average_rating', 'desc')->paginate(8);
+            return view('user.index', ['users' => $users]);
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
         }

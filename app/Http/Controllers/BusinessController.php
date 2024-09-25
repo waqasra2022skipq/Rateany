@@ -20,22 +20,24 @@ class BusinessController extends Controller
         $topRestaurants = Business::with(['owner'])
             ->where('categoryId', 1)
             ->orderBy('average_rating', 'desc')
-            ->limit(6)
+            ->limit(8)
             ->get();
 
         $topGyms = Business::with(['owner'])
             ->where('categoryId', 4)
             ->orderBy('average_rating', 'desc')
-            ->limit(6)
+            ->limit(8)
             ->get();
 
 
         $topMechanics = User::where('profession_id', 7)
             ->orderBy('average_rating', 'desc')
-            ->limit(6)
+            ->limit(8)
             ->get();
 
-        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics'));
+        $categories = Category::all();
+
+        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics', 'categories'));
     }
     public function create()
     {
@@ -64,6 +66,9 @@ class BusinessController extends Controller
         // Get search from query, if not present, it will be null
         $search = $request->query('search');
 
+        // Get location from query, if not present, it will be null
+        $location = $request->query('location');
+
         // Start building the query
         $query = Business::with(['owner', 'category']);
 
@@ -81,8 +86,13 @@ class BusinessController extends Controller
             $query->where('name', 'LIKE', "%{$search}%");
         }
 
+        // If search exists in the query, apply the filter
+        if ($location) {
+            $query->where('location', 'LIKE', "%{$location}%");
+        }
+
         // Order by average_rating and paginate the results
-        $businesses = $query->orderBy('average_rating', 'desc')->paginate(6);
+        $businesses = $query->orderBy('average_rating', 'desc')->paginate(8);
         return view('business.index', ['businesses' => $businesses]);
     }
 

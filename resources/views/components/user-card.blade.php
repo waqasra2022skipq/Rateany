@@ -1,4 +1,4 @@
-<div class="col-md-4 mb-4">
+<div class="col-md-3 mb-4">
     <div class="card h-100">
         <div class="card-body d-flex flex-row align-items-center">
             <!-- User Profile Picture -->
@@ -23,8 +23,12 @@
 
                 <p class="card-text">
                     <strong>Profession:</strong>
-                    <a href="{{ route('allUsers', ['profession_id' => $user->profession_id]) }}"
-                        class="user-link">{{ $user->profession->name }}</a>
+                    @if ($user->profession)
+                        <a href="{{ route('allUsers', ['profession_id' => $user->profession_id]) }}"
+                            class="user-link">{{ $user->profession->name }}</a>
+                    @else
+                        <span>No profession listed</span>
+                    @endif
                 </p>
 
                 <!-- Edit/Delete Buttons or Write Review -->

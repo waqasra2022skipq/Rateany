@@ -35,9 +35,9 @@
         </button>
     </div>
 
-    <div class="container my-5">
-        <h2 class="mb-4">Top Businesses</h2>
-    </div>
+    @include('components.business-search', ['categories' => $categories])
+
+    <!-- Other Sections -->
 
     @include('components.top-restaurants-card', ['topRestaurants' => $topRestaurants])
 

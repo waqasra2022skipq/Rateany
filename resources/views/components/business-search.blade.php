@@ -1,0 +1,33 @@
+<!-- Business Search Form -->
+<div class="container my-5">
+    <h2 class="mb-4">Search for Businesses</h2>
+    <form action="{{ route('allBusinesses') }}" method="GET" class="row g-3">
+        <!-- Category Select -->
+        <div class="col-md-4">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="categoryId">
+                <option value="" selected>All Categories</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Business Name Search -->
+        <div class="col-md-4">
+            <label for="businessName" class="form-label">Business Name</label>
+            <input type="text" class="form-control" id="businessName" name="search" placeholder="Search by name">
+        </div>
+
+        <!-- Location Search -->
+        <div class="col-md-4">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Search by location">
+        </div>
+
+        <!-- Search Button -->
+        <div class="col-md-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>

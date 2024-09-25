@@ -1,4 +1,4 @@
-<div class="col-md-4 mb-4">
+<div class="col-md-3 mb-4">
     <div class="card h-100">
         <!-- Business Logo -->
         <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
@@ -28,6 +28,11 @@
                 <strong>Owner:</strong>
                 <a href="{{ route('user.show', $business->owner->id) }}"
                     class="business-link">{{ $business->owner->name }}</a>
+            </p>
+
+            <p class="card-text">
+                <strong>Location:</strong>
+                <spanp>{{ $business->location }}</span>
             </p>
 
             @if (auth()->check() && auth()->user()->id == $business->userId)
