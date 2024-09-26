@@ -18,7 +18,8 @@
                     @if ($user->profession)
                         <h2>Profession</h2>
                         <p><strong>
-                                <a href="" class="business-link">{{ $user->profession->name }}</a>
+                                <a href="{{ route('allUsers', ['profession' => $user->profession->id]) }}"
+                                    class="business-link">{{ $user->profession->name }}</a>
                             </strong>
                         </p>
                     @endif

@@ -35,6 +35,11 @@
         </button>
     </div>
 
+
+    <div class="container my-5">
+        <h2 class="mb-4">Top Businesses</h2>
+    </div>
+
     @include('components.business-search', ['categories' => $categories])
 
     <!-- Other Sections -->
@@ -53,6 +58,8 @@
     <div class="container my-5">
         <h2 class="mb-4">Top Professionals</h2>
     </div>
+    @include('components.user-search', ['professions' => $professions])
+
 
     <div class="container my-5">
         <h2 class="text-center mb-4">Mechanics</h2>

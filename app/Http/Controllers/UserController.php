@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Profession;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserController extends Controller
@@ -21,12 +22,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         try {
-            $userId = request()->user()->id;
+            $userId = null;
+            if (FacadesAuth::check()) {
+                $userId = request()->user()->id;
+            }
             // Get categoryId from query, if not present, it will be null
             $profession_id = $request->query('profession_id');
 
             // Get search from query, if not present, it will be null
             $search = $request->query('search');
+
+            // Get location from query, if not present, it will be null
+            $location = $request->query('location');
 
             // Start building the query
             $query = User::with(['profession']);
@@ -45,9 +52,17 @@ class UserController extends Controller
                 $query->where('name', 'LIKE', "%{$search}%");
             }
 
+            // If search exists in the query, apply the filter
+            if ($location) {
+                $query->where('location', 'LIKE', "%{$location}%");
+            }
+
             // Order by average_rating and paginate the results
             $users = $query->orderBy('average_rating', 'desc')->paginate(8);
-            return view('user.index', ['users' => $users]);
+
+            $professions = Profession::all();
+
+            return view('user.index', ['users' => $users, 'professions' => $professions]);
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
         }

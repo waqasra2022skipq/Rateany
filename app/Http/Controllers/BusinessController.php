@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusinessCreateRequest;
+use App\Models\Profession;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 
 class BusinessController extends Controller
@@ -36,8 +38,9 @@ class BusinessController extends Controller
             ->get();
 
         $categories = Category::all();
+        $professions = Profession::all();
 
-        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics', 'categories'));
+        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics', 'categories', 'professions'));
     }
     public function create()
     {
@@ -59,7 +62,10 @@ class BusinessController extends Controller
     }
     public function allBusinesses(Request $request)
     {
-        $userId = request()->user()->id;
+        $userId = null;
+        if (FacadesAuth::check()) {
+            $userId = request()->user()->id;
+        }
         // Get categoryId from query, if not present, it will be null
         $categoryId = $request->query('categoryId');
 
@@ -93,7 +99,10 @@ class BusinessController extends Controller
 
         // Order by average_rating and paginate the results
         $businesses = $query->orderBy('average_rating', 'desc')->paginate(8);
-        return view('business.index', ['businesses' => $businesses]);
+
+        $categories = Category::all();
+
+        return view('business.index', ['businesses' => $businesses, 'categories' => $categories]);
     }
 
     public function myBusinesses()

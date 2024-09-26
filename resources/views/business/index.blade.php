@@ -4,6 +4,8 @@
             <h2>Top Businesses</h2>
         </div>
 
+        @include('components.business-search', ['categories' => $categories])
+
         <div class="row justify-content-center">
             @foreach ($businesses as $business)
                 @include('components.business-card', ['business' => $business])
