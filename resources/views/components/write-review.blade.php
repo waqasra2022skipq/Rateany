@@ -1,26 +1,97 @@
 <x-layout>
-    <form action="{{ route('reviews.store') }}" method="POST">
-        @csrf
-        @if ($business_id)
-            <input type="hidden" name="business_id" value="{{ $business_id }}">
-        @else
-            <input type="hidden" name="user_id" value="{{ $user_id }}">
-        @endif
-        <div class="mb-3">
-            <label for="rating">Rating</label>
-            <select name="rating" class="form-control">
-                <option value="5">5 - Excellent</option>
-                <option value="4">4 - Good</option>
-                <option value="3">3 - Average</option>
-                <option value="2">2 - Poor</option>
-                <option value="1">1 - Terrible</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="comment">Comment</label>
-            <textarea name="comment" class="form-control"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit Review</button>
-    </form>
+    <div class="container">
+        <form action="{{ route('reviews.store') }}" method="POST">
+            @csrf
+            @if ($business_id)
+                <input type="hidden" name="business_id" value="{{ $business_id }}">
+            @else
+                <input type="hidden" name="user_id" value="{{ $user_id }}">
+            @endif
 
+            <div class="mb-3">
+                <label for="rating">Rating</label>
+                <div class="star-rating d-flex">
+                    <i class="star fa fa-star" data-value="1"></i>
+                    <i class="star fa fa-star" data-value="2"></i>
+                    <i class="star fa fa-star" data-value="3"></i>
+                    <i class="star fa fa-star" data-value="4"></i>
+                    <i class="star fa fa-star" data-value="5"></i>
+                </div>
+                <input type="hidden" name="rating" id="rating" value="1"> <!-- Default value -->
+            </div>
+
+            <div class="mb-3">
+                <label for="comment">Comment</label>
+                <textarea name="comment" class="form-control" rows="7" cols="30" placeholder="Share Your Experience"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </div>
+
+    <style>
+        .star {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .star.selected,
+        .star:hover,
+        .star:hover {
+            color: gold;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            let selectedRating = document.getElementById('rating').value;
+
+            stars.forEach((star) => {
+                // Highlight selected stars on page load
+                if (star.dataset.value <= selectedRating) {
+                    star.classList.add('selected');
+                }
+
+                star.addEventListener('click', function() {
+                    const ratingValue = this.getAttribute('data-value');
+                    selectedRating = ratingValue
+
+                    document.getElementById('rating').value = ratingValue;
+
+                    // Highlight the stars up to the clicked one
+                    stars.forEach((s) => {
+                        s.classList.remove('selected');
+
+                        if (s.getAttribute('data-value') <= ratingValue) {
+                            s.classList.add('selected');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseover', function() {
+                    // Highlight stars on hover
+                    stars.forEach((s) => {
+                        s.classList.remove('selected');
+                        if (s.getAttribute('data-value') <= this.getAttribute(
+                                'data-value')) {
+                            s.classList.add('selected');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseout', function() {
+                    // Re-highlight stars based on current rating when mouse leaves
+                    stars.forEach((s) => {
+                        s.classList.remove('selected');
+                        if (s.getAttribute('data-value') <= selectedRating) {
+                            s.classList.add('selected');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </x-layout>
