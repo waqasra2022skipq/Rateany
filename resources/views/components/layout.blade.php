@@ -64,6 +64,7 @@
                 </div>
             </div>
         </nav>
+        @include('components.flash-message')
 
         <main class=" mt-5 mb-5 pb-5">
             {{ $slot }}
@@ -73,14 +74,15 @@
             <div class="container">
                 <div class="d-flex justify-content-center align-items-center">
                     <!-- Links Section -->
-                    <a href="{{ route('allBusinesses') }}" class="text-white mx-3">All Businesses</a>
-                    <a href="{{ route('allUsers') }}" class="text-white mx-3">All Users</a>
+                    <a href="{{ route('allBusinesses') }}" class="text-white mx-3 user-link">All Businesses</a>
+                    <a href="{{ route('allUsers') }}" class="text-white mx-3 user-link">All Users</a>
                     @if (auth()->check())
-                        <a href="{{ route('user.show', auth()->user()->id) }}" class="text-white mx-3">Profile</a>
+                        <a href="{{ route('user.show', auth()->user()->id) }}"
+                            class="user-link text-white mx-3">Profile</a>
                         <!-- Logout Form -->
                         <form action="/auth/logout" method="POST" class="mx-3">
                             @csrf
-                            <button type="submit" class="btn btn-link text-white p-0">Logout</button>
+                            <button type="submit" class="user-link btn btn-link text-white p-0">Logout</button>
                         </form>
                     @endif
                 </div>
@@ -92,7 +94,6 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-        <x-flash-message />
     </body>
 
 </html>

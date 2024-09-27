@@ -1,4 +1,3 @@
-<x-layout>
     <div class="container">
         <form action="{{ route('reviews.store') }}" method="POST">
             @csrf
@@ -94,4 +93,3 @@
             });
         });
     </script>
-</x-layout>

@@ -1,7 +1,8 @@
 @if (session()->has('Message'))
-    <div class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-laravel text-white px-48 py-3">
-        <p>
+    <div class="alert alert-success alert-dismissible fade show text-center w-50 mx-auto" style="left: 0; right: 0;">
+        <p class="mb-0">
             {{ session('Message') }}
         </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
