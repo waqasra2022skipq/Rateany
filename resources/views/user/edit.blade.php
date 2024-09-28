@@ -13,7 +13,7 @@
                         <img src="{{ asset('storage/' . auth()->user()->profile_pic) }}" alt="Profile Picture"
                             class="rounded-circle" width="150" height="150">
                     @else
-                        <img src="{{ asset('default-profile.png') }}" alt="Default Profile Picture"
+                        <img src="{{ asset('default-user-logo.png') }}" alt="Default Profile Picture"
                             class="rounded-circle" width="150" height="150">
                     @endif
                 </div>
@@ -36,6 +36,15 @@
                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                             name="email" value="{{ old('email', $user->email) }}" />
                         @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="location" class="form-control @error('location') is-invalid @enderror" id="location"
+                            name="location" value="{{ old('location', $user->location) }}" />
+                        @error('location')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

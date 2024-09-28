@@ -31,13 +31,11 @@
                     <h4>Rating: <strong>{{ number_format($user->average_rating, 1) }}</strong></h4>
                     <p>Based on {{ $user->reviews_count }} Reviews</p>
                 </div>
-
-                <div>
-                    <a href="{{ route('user.write-review', $user->id) }}" class="btn btn-primary btn-sm">Write
-                        Review</a>
-                </div>
-
             </div>
+
+            <div class="mt-5">
+            @include('components.write-review', ['user_id' => $user->id])
+        </div>
 
             <!-- Reviews Section -->
             <div class="mt-5">

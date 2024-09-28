@@ -28,6 +28,15 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="location" class="form-control @error('location') is-invalid @enderror" id="location"
+                            name="location" value="{{ old('location') }}" />
+                        @error('location')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="profession" class="form-label">Profession</label>
                         <select id="profession" name="profession"
                             class="form-select @error('profession') is-invalid @enderror">

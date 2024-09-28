@@ -1,12 +1,12 @@
 @php
     $starColor = 'success';
 @endphp
-<div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+<div class="container rounded">
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         @foreach ($reviews as $key => $review)
             <div class="carousel-item @if ($key == 0) active @endif">
                 <div class="hero-section text-center p-5">
-                    <h2 class="text-2xl font-bold mb-3">Latest Reviews</h2>
                     <div class="review-card bg-light p-4 rounded shadow-sm">
                         <h3 class="mb-3 h-50">
                             <strong>{{ $review->reviewer->name }}</strong> rated
@@ -72,4 +72,5 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
 </div>

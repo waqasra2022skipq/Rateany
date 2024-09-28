@@ -41,7 +41,7 @@
                                     <li><a class="dropdown-item" href="/businesses/manage">Manage Businesses</a></li>
                                     <li><a class="dropdown-item" href="/reviews/manage">Manage Reviews</a></li>
                                     <li>
-                                        <form method="POST" action="/auth/logout" class="px-3 py-2">
+                                        <form method="POST" action="/auth/logout" class="py-2">
                                             @csrf
                                             <button type="submit" class="btn btn-link dropdown-item">Logout</button>
                                         </form>
@@ -66,11 +66,11 @@
         </nav>
         @include('components.flash-message')
 
-        <main class=" mt-5 mb-5 pb-5">
+        <main class="mt-2 mb-5 pb-5">
             {{ $slot }}
         </main>
 
-        <footer class="fixed-bottom bg-dark text-white text-center py-3">
+        <footer class="bg-dark text-white text-center py-3">
             <div class="container">
                 <div class="d-flex justify-content-center align-items-center">
                     <!-- Links Section -->

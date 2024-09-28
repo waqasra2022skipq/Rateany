@@ -1,20 +1,21 @@
     <div class="container">
         <form action="{{ route('reviews.store') }}" method="POST">
             @csrf
-            @if ($business_id)
+            @isset($business_id)
                 <input type="hidden" name="business_id" value="{{ $business_id }}">
-            @else
-                <input type="hidden" name="user_id" value="{{ $user_id }}">
-            @endif
+            @endisset
 
+            @isset($user_id)
+                <input type="hidden" name="user_id" value="{{ $user_id }}">
+            @endisset
             <div class="mb-3">
                 <label for="rating">Rating</label>
                 <div class="star-rating d-flex">
-                    <i class="star fa fa-star" data-value="1"></i>
-                    <i class="star fa fa-star" data-value="2"></i>
-                    <i class="star fa fa-star" data-value="3"></i>
-                    <i class="star fa fa-star" data-value="4"></i>
-                    <i class="star fa fa-star" data-value="5"></i>
+                    <i class="star fa fa-star rev-star" data-value="1"></i>
+                    <i class="star fa fa-star rev-star" data-value="2"></i>
+                    <i class="star fa fa-star rev-star" data-value="3"></i>
+                    <i class="star fa fa-star rev-star" data-value="4"></i>
+                    <i class="star fa fa-star rev-star" data-value="5"></i>
                 </div>
                 <input type="hidden" name="rating" id="rating" value="1"> <!-- Default value -->
             </div>
@@ -29,23 +30,22 @@
     </div>
 
     <style>
-        .star {
+        .rev-star {
             font-size: 2rem;
             color: #ccc;
             cursor: pointer;
             margin-right: 5px;
         }
 
-        .star.selected,
-        .star:hover,
-        .star:hover {
+        .rev-star.selected,
+        .rev-star:hover{
             color: gold;
         }
     </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const stars = document.querySelectorAll('.star');
+            const stars = document.querySelectorAll('.rev-star');
             let selectedRating = document.getElementById('rating').value;
 
             stars.forEach((star) => {

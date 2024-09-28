@@ -143,11 +143,14 @@ class UserController extends Controller
             'profession' => 'nullable|exists:professions,id',
             'password' => 'nullable|confirmed|min:8',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'location' => 'nullable|string',
         ]);
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->profession_id = $request->input('profession');
+        $user->location = $request->input('location');
+
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
@@ -164,7 +167,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile.show', $user->id)->with('Message', 'Profile updated successfully.');
+        return back()->with('Message', 'Profile updated successfully.');
     }
 
     public function reviewForm($id)
