@@ -4,10 +4,10 @@
         <!-- Category Select -->
         <div class="col-md-4">
             <label for="category" class="form-label">Category</label>
-            <select class="form-select" id="profession" name="profession_id">
+            <select class="form-select" id="profession" name="profession">
                 <option value="" selected>All Professions</option>
                 @foreach ($professions as $profession)
-                    <option value="{{ $profession->id }}">{{ $profession->name }}</option>
+                    <option value="{{ $profession->name }}">{{ $profession->name }}</option>
                 @endforeach
             </select>
         </div>

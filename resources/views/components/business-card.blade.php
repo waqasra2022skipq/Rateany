@@ -6,7 +6,7 @@
 
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('businesses.show', $business->id) }}" class="business-link">
+                <a href="{{ route('businesses.show', $business->name) }}" class="business-link">
                     {{ $business->name }}
                 </a>
             </h5>
@@ -20,7 +20,7 @@
 
             <p class="card-text">
                 <strong>Category:</strong>
-                <a href="{{ route('allBusinesses', ['categoryId' => $business->category->id]) }}"
+                <a href="{{ route('allBusinesses', ['category' => $business->category->name]) }}"
                     class="business-link">{{ $business->category->name }}</a>
             </p>
 

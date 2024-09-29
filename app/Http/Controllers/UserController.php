@@ -27,7 +27,7 @@ class UserController extends Controller
                 $userId = request()->user()->id;
             }
             // Get categoryId from query, if not present, it will be null
-            $profession_id = $request->query('profession_id');
+            $profession = $request->query('profession');
 
             // Get search from query, if not present, it will be null
             $search = $request->query('search');
@@ -43,8 +43,9 @@ class UserController extends Controller
             }
 
             // If categoryId exists in the query, apply the filter
-            if ($profession_id) {
-                $query->where('profession_id', $profession_id);
+            if ($profession) {
+                $profession = Profession::where('name', $profession)->first();
+                $query->where('profession_id', $profession->id);
             }
 
             // If search exists in the query, apply the filter
@@ -80,18 +81,17 @@ class UserController extends Controller
         return view('user.edit', ['user' => $user, 'professions' => $professions]);
     }
 
-    public function show($user_id)
+    public function show($username)
     {
-        $user_id = (int) $user_id;
-        $user = User::with(['profession', 'businesses'])->find($user_id);
-
-        $reviews = $user->reviews()->with('reviewer')->paginate(5);
+        $user = User::with(['profession', 'businesses'])->where('name', $username)->first();
 
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);
         }
 
-        if (! auth()->check() || auth()->user()->id !== $user_id) {
+        $reviews = $user->reviews()->with('reviewer')->paginate(5);
+
+        if (! auth()->check() || auth()->user()->id !== $user->id) {
             return view(
                 'user.show',
                 compact('user', 'reviews')

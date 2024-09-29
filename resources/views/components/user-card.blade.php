@@ -9,7 +9,7 @@
             <!-- User Info -->
             <div>
                 <h5 class="card-title">
-                    <a href="{{ route('user.show', $user->id) }}" class="user-link">
+                    <a href="{{ route('user.show', $user->name) }}" class="user-link">
                         {{ $user->name }}
                     </a>
                 </h5>
@@ -24,7 +24,7 @@
                 <p class="card-text">
                     <strong>Profession:</strong>
                     @if ($user->profession)
-                        <a href="{{ route('allUsers', ['profession_id' => $user->profession_id]) }}"
+                        <a href="{{ route('allUsers', ['profession' => $user->profession->name]) }}"
                             class="user-link">{{ $user->profession->name }}</a>
                     @else
                         <span>No profession listed</span>

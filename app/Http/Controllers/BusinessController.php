@@ -55,7 +55,7 @@ class BusinessController extends Controller
 
     public function show($id)
     {
-        $business = Business::with(['owner', 'category'])->find($id);
+        $business = Business::with(['owner', 'category'])->where('name', $id)->first();
         $reviews = $business->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
 
         return view('business.show', compact('business', 'reviews'));
@@ -67,7 +67,7 @@ class BusinessController extends Controller
             $userId = request()->user()->id;
         }
         // Get categoryId from query, if not present, it will be null
-        $categoryId = $request->query('categoryId');
+        $category = $request->query('category');
 
         // Get search from query, if not present, it will be null
         $search = $request->query('search');
@@ -83,8 +83,9 @@ class BusinessController extends Controller
         }
 
         // If categoryId exists in the query, apply the filter
-        if ($categoryId) {
-            $query->where('categoryId', $categoryId);
+        if ($category) {
+            $category = Category::where('name', $category)->first();
+            $query->where('categoryId', $category->id);
         }
 
         // If search exists in the query, apply the filter

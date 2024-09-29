@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">
-            <a href="{{ route('user.show', $review->reviewer->id) }}" class="user-link">
+            <a href="{{ route('user.show', $review->reviewer->name) }}" class="user-link">
                 {{ $review->reviewer->name }}
             </a>
         </h5>
