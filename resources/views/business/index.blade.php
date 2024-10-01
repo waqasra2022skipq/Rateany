@@ -7,9 +7,11 @@
         @include('components.business-search', ['categories' => $categories])
 
         <div class="row justify-content-center">
-            @foreach ($businesses as $business)
+            @forelse ($businesses as $business)
                 @include('components.business-card', ['business' => $business])
-            @endforeach
+            @empty
+                <p class="text-center">No Businesses Found</p>
+            @endforelse
         </div>
         <!-- Pagination Links -->
         <div class="d-flex justify-content-center">

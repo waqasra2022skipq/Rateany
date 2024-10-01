@@ -7,7 +7,13 @@
             <select class="form-select" id="profession" name="profession">
                 <option value="" selected>All Professions</option>
                 @foreach ($professions as $profession)
-                    <option value="{{ $profession->name }}">{{ $profession->name }}</option>
+                    @php
+                        $selected = 0;
+                        if (request('profession') == $profession->name) {
+                            $selected = 'selected';
+                        }
+                    @endphp
+                    <option value="{{ $profession->name }}" {{ $selected }}>{{ $profession->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -15,13 +21,15 @@
         <!-- Business Name Search -->
         <div class="col-md-4">
             <label for="businessName" class="form-label">Username</label>
-            <input type="text" class="form-control" id="userName" name="search" placeholder="Search by name">
+            <input type="text" class="form-control" id="userName" value="{{ request('search') }}" name="search"
+                placeholder="Search by name">
         </div>
 
         <!-- Location Search -->
         <div class="col-md-4">
             <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Search by location">
+            <input type="text" class="form-control" id="location" name="location" value="{{ request('location') }}"
+                placeholder="Search by location">
         </div>
 
         <!-- Search Button -->
