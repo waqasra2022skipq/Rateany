@@ -13,7 +13,7 @@
         </div>
         <!-- Pagination Links -->
         <div class="d-flex justify-content-center">
-            {{ $users->links() }}
+            {{ $users->withQueryString()->links() }}
         </div>
     </div>
 </x-layout>

@@ -34,8 +34,8 @@
             </div>
 
             <div class="mt-5">
-            @include('components.write-review', ['user_id' => $user->id])
-        </div>
+                @include('components.write-review', ['user_id' => $user->id])
+            </div>
 
             <!-- Reviews Section -->
             <div class="mt-5">
@@ -48,7 +48,7 @@
 
                     <!-- Pagination Links -->
                     <div class="d-flex justify-content-center">
-                        {{ $reviews->links() }}
+                        {{ $reviews->withQueryString()->links() }}
                     </div>
                 @else
                     <p>No reviews yet for this business.</p>

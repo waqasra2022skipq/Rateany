@@ -52,7 +52,7 @@
 
                 <!-- Pagination Links -->
                 <div class="d-flex justify-content-center">
-                    {{ $reviews->links() }}
+                    {{ $reviews->withQueryString()->links() }}
                 </div>
             @else
                 <p>No reviews yet for this business.</p>
