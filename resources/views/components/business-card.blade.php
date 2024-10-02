@@ -6,7 +6,7 @@
 
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('businesses.show', $business->name) }}" class="business-link">
+                <a href="{{ route('businesses.show', $business->slug) }}" class="business-link">
                     {{ $business->name }}
                 </a>
             </h5>
@@ -20,13 +20,13 @@
 
             <p class="card-text">
                 <strong>Category:</strong>
-                <a href="{{ route('allBusinesses', ['category' => $business->category->name]) }}"
+                <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
                     class="business-link">{{ $business->category->name }}</a>
             </p>
 
             <p class="card-text">
                 <strong>Owner:</strong>
-                <a href="{{ route('user.show', $business->owner->id) }}"
+                <a href="{{ route('user.show', $business->owner->username) }}"
                     class="business-link">{{ $business->owner->name }}</a>
             </p>
 
@@ -45,7 +45,7 @@
                         onclick="return confirm('Are you sure?')">Delete</button>
                 </form>
             @else
-                <a href="{{ route('businesses.show', $business->id) }}" class="business-link btn btn-primary btn-sm">
+                <a href="{{ route('businesses.show', $business->slug) }}" class="business-link btn btn-primary btn-sm">
                     Write Review
                 </a>
             @endif

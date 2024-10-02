@@ -77,7 +77,7 @@
                     <a href="{{ route('allBusinesses') }}" class="text-white mx-3 user-link">All Businesses</a>
                     <a href="{{ route('allUsers') }}" class="text-white mx-3 user-link">All Users</a>
                     @if (auth()->check())
-                        <a href="{{ route('user.show', auth()->user()->id) }}"
+                        <a href="{{ route('profile.show', auth()->user()->id) }}"
                             class="user-link text-white mx-3">Profile</a>
                         <!-- Logout Form -->
                         <form action="/auth/logout" method="POST" class="mx-3">

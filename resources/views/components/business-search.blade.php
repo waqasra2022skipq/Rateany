@@ -9,11 +9,11 @@
                 @foreach ($categories as $category)
                     @php
                         $selected = 0;
-                        if (request('category') == $category->name) {
+                        if (request('category') == $category->slug) {
                             $selected = 'selected';
                         }
                     @endphp
-                    <option value="{{ $category->name }}" {{ $selected }}>
+                    <option value="{{ $category->slug }}" {{ $selected }}>
                         {{ $category->name }}
                     </option>
                 @endforeach

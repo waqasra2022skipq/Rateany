@@ -9,7 +9,7 @@
             <!-- User Info -->
             <div>
                 <h5 class="card-title">
-                    <a href="{{ route('user.show', $user->name) }}" class="user-link">
+                    <a href="{{ route('user.show', $user->username) }}" class="user-link">
                         {{ $user->name }}
                     </a>
                 </h5>
@@ -33,9 +33,8 @@
 
                 <!-- Edit/Delete Buttons or Write Review -->
                 @if (auth()->check() && auth()->user()->id == $user->id)
-                    <a href="{{ route('useres.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="{{ route('useres.destroy', $user->id) }}" method="POST"
-                        style="display:inline-block;">
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"

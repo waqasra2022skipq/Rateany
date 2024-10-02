@@ -47,9 +47,9 @@ class ReviewController extends Controller
         $this->updatingCounting($collection, $request->rating);
 
         if ('business' == $type) {
-            return redirect()->route('businesses.show', $request->business_id)->with('Message', 'Review submitted successfully!');
+            return redirect()->route('businesses.show', $collection->slug)->with('Message', 'Review submitted successfully!');
         } else {
-            return redirect()->route('user.show', $request->user_id)->with('Message', 'Review submitted successfully!');
+            return redirect()->route('user.show', $collection->username)->with('Message', 'Review submitted successfully!');
         }
     }
 

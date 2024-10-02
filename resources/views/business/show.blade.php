@@ -15,7 +15,7 @@
                 <div class="ms-3">
                     <h2>{{ $business->name }}</h2>
                     <p>Owned by: <strong>
-                            <a href="{{ route('user.show', $business->owner->id) }}"
+                            <a href="{{ route('user.show', $business->owner->username) }}"
                                 class="user-link">{{ $business->owner->name }}</a></strong></p>
                     <h2>Category</h2>
                     <p><strong>

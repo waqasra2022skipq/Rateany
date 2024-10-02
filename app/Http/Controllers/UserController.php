@@ -44,11 +44,11 @@ class UserController extends Controller
 
             // If categoryId exists in the query, apply the filter
             if ($profession) {
-                $profession = Profession::where('name', $profession)->first();
+                $profession = Profession::where('slug', $profession)->first();
                 $query->where('profession_id', $profession->id);
             }
 
-            // If search exists in the query, apply the filter
+            // If search e  exists in the query, apply the filter
             if ($search) {
                 $query->where('name', 'LIKE', "%{$search}%");
             }
@@ -83,23 +83,37 @@ class UserController extends Controller
 
     public function show($username)
     {
-        $user = User::with(['profession', 'businesses'])->where('name', $username)->first();
+        $user = User::with(['profession', 'businesses'])->where('username', $username)->first();
 
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);
         }
 
-        $reviews = $user->reviews()->with('reviewer')->paginate(5);
+        $reviews = $user->reviews()->with('reviewer')->latest()->paginate(5);
+        $businesses = $user->businesses;
 
-        if (! auth()->check() || auth()->user()->id !== $user->id) {
-            return view(
-                'user.show',
-                compact('user', 'reviews')
-            );
+        return view(
+            'user.show',
+            compact('user', 'reviews', 'businesses')
+        );
+    }
+
+    public function profile($id)
+    {
+        $user = User::find($id);
+
+        // $user = User::with(['profession', 'businesses'])->where('username', $username)->first();
+
+        if (!$user) {
+            return response()->json(["error" => "User Not Found"],  404);
         }
+
+        $reviews = $user->reviews()->with('reviewer')->latest()->paginate(5);
+        $businesses = $user->businesses;
+
         return view(
             'user.profile',
-            ['user' => $user, 'businesses' => $user->businesses]
+            compact('user', 'reviews', 'businesses')
         );
     }
 

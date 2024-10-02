@@ -53,10 +53,11 @@ class BusinessController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $business = Business::with(['owner', 'category'])->where('name', $id)->first();
-        $reviews = $business->reviews()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
+
+        $business = Business::with(['owner', 'category'])->where('slug', $slug)->first();
+        $reviews = $business->reviews()->latest()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
 
         return view('business.show', compact('business', 'reviews'));
     }
@@ -84,7 +85,7 @@ class BusinessController extends Controller
 
         // If categoryId exists in the query, apply the filter
         if ($category) {
-            $category = Category::where('name', $category)->first();
+            $category = Category::where('slug', $category)->first();
             $query->where('categoryId', $category->id);
         }
 

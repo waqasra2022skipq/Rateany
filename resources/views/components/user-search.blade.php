@@ -9,11 +9,11 @@
                 @foreach ($professions as $profession)
                     @php
                         $selected = 0;
-                        if (request('profession') == $profession->name) {
+                        if (request('profession') == $profession->slug) {
                             $selected = 'selected';
                         }
                     @endphp
-                    <option value="{{ $profession->name }}" {{ $selected }}>{{ $profession->name }}</option>
+                    <option value="{{ $profession->slug }}" {{ $selected }}>{{ $profession->name }}</option>
                 @endforeach
             </select>
         </div>

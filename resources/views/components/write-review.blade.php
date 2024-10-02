@@ -1,4 +1,4 @@
-    <div class="container">
+    <div class="row">
         <form action="{{ route('reviews.store') }}" method="POST">
             @csrf
             @isset($business_id)
@@ -38,7 +38,7 @@
         }
 
         .rev-star.selected,
-        .rev-star:hover{
+        .rev-star:hover {
             color: gold;
         }
     </style>
