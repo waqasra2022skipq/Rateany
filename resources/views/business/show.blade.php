@@ -2,7 +2,7 @@
     <div class="container my-4">
         <div class="row">
             <!-- Business Logo and Details -->
-            <div class="col-md-8 d-flex align-items-center">
+            <div class="col-md-4 d-flex align-items-center">
                 <div>
                     @if ($business->business_logo)
                         <img src="{{ asset('storage/' . $business->business_logo) }}" alt="Business Logo" class="rounded"
@@ -19,7 +19,7 @@
                                 class="user-link">{{ $business->owner->name }}</a></strong></p>
                     <h2>Category</h2>
                     <p><strong>
-                            <a href="{{ route('allBusinesses', ['category' => $business->category->name]) }}"
+                            <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
                                 class="business-link">{{ $business->category->name }}</a>
                         </strong>
                     </p>
@@ -28,12 +28,14 @@
                 </div>
             </div>
 
-            <!-- Rating and Reviews -->
-            <div class="col-md-4 text-end">
-                <div class="bg-light p-3 rounded">
-                    <h4>Rating: <strong>{{ number_format($business->average_rating, 1) }}</strong></h4>
-                    <p>Based on {{ $business->reviews_count }} Reviews</p>
-                </div>
+            @include('components.reviews-bar', ['entity' => $business])
+
+            <!-- Edit/Delete Buttons or Write Review -->
+            <div class="col-md-2">
+                @if (auth()->check() && auth()->user()->id == $business->owner->id)
+                    <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn">Update
+                        Business</a>
+                @endif
             </div>
         </div>
 
