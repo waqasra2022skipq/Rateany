@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-6 text-center">
     <div class="bg-light p-3 rounded">
         <h4><strong>{{ number_format($entity->average_rating, 1) }}</strong></h4>
         <p>{{ $entity->reviews_count }} Reviews</p>
@@ -16,7 +16,7 @@
         <div class="rating-breakdown">
             <div class="d-flex align-items-center mb-1">
                 <span>5</span>
-                <div class="progress w-75 ms-2">
+                <div class="progress w-100 ms-2">
                     <div class="progress-bar bg-success" role="progressbar" style="width: {{ $fiveStarPercentage }}%"
                         aria-valuenow="{{ $fiveStarPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="d-flex align-items-center mb-1">
                 <span>4</span>
-                <div class="progress w-75 ms-2">
+                <div class="progress w-100 ms-2">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $fourStarPercentage }}%"
                         aria-valuenow="{{ $fourStarPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="d-flex align-items-center mb-1">
                 <span>3</span>
-                <div class="progress w-75 ms-2">
+                <div class="progress w-100 ms-2">
                     <div class="progress-bar bg-info" role="progressbar" style="width: {{ $threeStarPercentage }}%"
                         aria-valuenow="{{ $threeStarPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="d-flex align-items-center mb-1">
                 <span>2</span>
-                <div class="progress w-75 ms-2">
+                <div class="progress w-100 ms-2">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $twoStarPercentage }}%"
                         aria-valuenow="{{ $twoStarPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="d-flex align-items-center">
                 <span>1</span>
-                <div class="progress w-75 ms-2">
+                <div class="progress w-100 ms-2">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $oneStarPercentage }}%"
                         aria-valuenow="{{ $oneStarPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -56,6 +56,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

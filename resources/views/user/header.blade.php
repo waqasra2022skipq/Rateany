@@ -1,14 +1,14 @@
-<div class="col-md-4 d-flex align-items-center">
-    <div>
+<div class="col-md-4 d-flex flex-column flex-md-row align-items-center">
+    <div class="text-center text-md-start mb-3 mb-md-0">
         @if ($user->profile_pic)
-            <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="User Logo" class="rounded" width="150"
-                height="150">
+            <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="User Logo" class="rounded"
+                style="width: 150px; height: 150px;">
         @else
-            <img src="{{ asset('default-user-logo.png') }}" alt="Default User Logo" class="rounded" width="150"
-                height="150">
+            <img src="{{ asset('default-user-logo.png') }}" alt="Default User Logo" class="rounded"
+                style="width: 150px; height: 150px;">
         @endif
     </div>
-    <div class="ms-3">
+    <div class="ms-md-3 text-center text-md-start">
         <h2>{{ $user->name }}</h2>
         <p class="text-muted">{{ $user->email }}</p>
         @if ($user->profession)
@@ -21,9 +21,10 @@
     </div>
 </div>
 
+
 @include('components.reviews-bar', ['entity' => $user])
 <!-- Edit/Delete Buttons or Write Review -->
-<div class="col-md-2">
+<div class="col-md-2 text-center">
     @if (auth()->check() && auth()->user()->id == $user->id)
         <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary btn mt-3">Update Profile</a>
     @endif

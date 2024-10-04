@@ -2,21 +2,22 @@
     <div class="container my-4">
         <div class="row">
             <!-- Business Logo and Details -->
-            <div class="col-md-4 d-flex align-items-center">
-                <div>
+            <div class="col-md-4 d-flex flex-column flex-md-row align-items-center">
+                <div class="text-center text-md-start mb-3 mb-md-0">
                     @if ($business->business_logo)
                         <img src="{{ asset('storage/' . $business->business_logo) }}" alt="Business Logo" class="rounded"
-                            width="150" height="150">
+                            style="width: 150px; height: 150px;">
                     @else
                         <img src="{{ asset('default-business-logo.png') }}" alt="Default Logo" class="rounded"
-                            width="150" height="150">
+                            style="width: 150px; height: 150px;">
                     @endif
                 </div>
-                <div class="ms-3">
+                <div class="ms-md-3 text-center text-md-start">
                     <h2>{{ $business->name }}</h2>
                     <p>Owned by: <strong>
                             <a href="{{ route('user.show', $business->owner->username) }}"
-                                class="user-link">{{ $business->owner->name }}</a></strong></p>
+                                class="user-link">{{ $business->owner->name }}</a></strong>
+                    </p>
                     <h2>Category</h2>
                     <p><strong>
                             <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
@@ -27,6 +28,7 @@
                     <span>{{ $business->location }}</span>
                 </div>
             </div>
+
 
             @include('components.reviews-bar', ['entity' => $business])
 
