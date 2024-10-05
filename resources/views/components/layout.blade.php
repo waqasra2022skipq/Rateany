@@ -29,6 +29,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contact.show') }}">
+                                <i class="fa-solid fa-comment"></i> Your Suggestions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('allBusinesses') }}"
+                                class="text-white mx-3 user-link">Businesses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('allUsers') }}"
+                                class="text-white mx-3 user-link">Professionals</a>
+                        </li>
                         @auth
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -36,10 +49,9 @@
                                     <i class="fa-solid fa-user-circle"></i> {{ auth()->user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ url('/profile/' . auth()->user()->id) }}">Manage
-                                            Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('/profile/' . auth()->user()->id) }}">
+                                            Manage Profile</a></li>
                                     <li><a class="dropdown-item" href="/businesses/manage">Manage Businesses</a></li>
-                                    <li><a class="dropdown-item" href="/reviews/manage">Manage Reviews</a></li>
                                     <li>
                                         <form method="POST" action="/auth/logout" class="py-2">
                                             @csrf
@@ -49,11 +61,6 @@
                                 </ul>
                             </li>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="/auth/register">
-                                    <i class="fa-solid fa-user-plus"></i> Register
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/auth/login">
                                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
@@ -66,6 +73,10 @@
         </nav>
         @include('components.flash-message')
 
+        <header class="text-center my-4">
+            <h1>Find the Top Rated Professionals and Businesses</h1>
+        </header>
+
         <main class="mt-2 mb-5 pb-5">
             {{ $slot }}
         </main>
@@ -73,24 +84,20 @@
         <footer class="bg-dark text-white text-center py-3">
             <div class="container">
                 <div class="d-flex justify-content-center align-items-center">
-                    <!-- Links Section -->
-                    <a href="{{ route('allBusinesses') }}" class="text-white mx-3 user-link">All Businesses</a>
-                    <a href="{{ route('allUsers') }}" class="text-white mx-3 user-link">All Users</a>
+                    <a href="{{ route('allBusinesses') }}" class="text-white mx-3 user-link">Businesses</a>
+                    <a href="{{ route('allUsers') }}" class="text-white mx-3 user-link">Professionals</a>
                     @if (auth()->check())
                         <a href="{{ route('profile.show', auth()->user()->id) }}"
                             class="user-link text-white mx-3">Profile</a>
-                        <!-- Logout Form -->
                         <form action="/auth/logout" method="POST" class="mx-3">
                             @csrf
                             <button type="submit" class="user-link btn btn-link text-white p-0">Logout</button>
                         </form>
                     @endif
                 </div>
-
                 <p class="mb-0 mt-2">Copyright &copy; 2024, All Rights Reserved</p>
             </div>
         </footer>
-
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>

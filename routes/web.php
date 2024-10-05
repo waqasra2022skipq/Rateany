@@ -52,7 +52,7 @@ Route::controller(BusinessController::class)->group(function () {
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
 
 
-Route::get('/contact', [UserQueryController::class, 'show'])->name('contact.show');
+Route::get('/contact-us', [UserQueryController::class, 'show'])->name('contact.show');
 
 Route::get('/contacts', [UserQueryController::class, 'index'])->name('contacts.index');
 Route::post('/contact-us', [UserQueryController::class, 'store'])->name('user_queries.store');
