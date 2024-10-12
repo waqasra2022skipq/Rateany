@@ -13,37 +13,49 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
 
-        $currentUserId = $request->user()->id;
+        $currentUser = $request->user();
 
         $validated = $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id',
-            'business_id' => 'nullable|exists:businesses,id',
+            'business_id' => 'required_if:user_id,null|exists:businesses,id',
+            'reviewer_id' => 'nullable|exists:users,id',
+            'reviewer_name' => 'required_if:reviewer_id,null|string',
+            'reviewer_email' => 'required_if:reviewer_id,null|email',
         ]);
         $type = 'business';
 
         if ($request->business_id) {
             $collection = Business::find($request->business_id);
 
-            if ($collection->owner->id == $currentUserId) {
+            if ($currentUser && $collection->owner->id == $currentUser->id) {
                 return redirect()->back()->with('Message', 'You cannot rate your own business');
             }
         } else {
             $collection = User::find($request->user_id);
-            if ($collection->id == $currentUserId) {
+            if ($currentUser && $collection->id == $currentUser->id) {
                 return redirect()->back()->with('Message', 'You cannot rate yourself');
             }
             $type = 'user';
         }
-
-        Review::create([
+        $reviewData = [
             'user_id' => $request->user_id,
             'business_id' => $request->business_id,
-            'reviewer_id' => $currentUserId,
             'rating' => $request->rating,
             'comments' => $request->comment,
-        ]);
+        ];
+
+        if ($request->reviewer_id) {
+            $reviewData['reviewer_id'] = $currentUser->reviewer_id;
+            $reviewData['reviewer_name'] = $currentUser->name;
+            $reviewData['reviewer_email'] = $currentUser->email;
+        } else {
+            $reviewData['reviewer_name'] = $validated['reviewer_name'];
+            $reviewData['reviewer_email'] = $validated['reviewer_email'];
+        }
+
+        Review::create($reviewData);
         $this->updatingCounting($collection, $request->rating);
 
         if ('business' == $type) {

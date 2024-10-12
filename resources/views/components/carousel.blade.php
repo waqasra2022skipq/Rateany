@@ -9,7 +9,11 @@
                     <div class="hero-section text-center p-5">
                         <div class="review-card bg-light p-4 rounded shadow-sm">
                             <h3 class="mb-3 h-50">
-                                <strong>{{ $review->reviewer->name }}</strong> rated
+                                @if (!$review->reviewer_name && $review->reviewer_id)
+                                    <strong>{{ $review->reviewer->name }}</strong>
+                                @endif
+                                <strong>{{ $review->reviewer_name }}</strong>
+                                rated
                                 @if ($review->business_id)
                                     <a href="{{ route('businesses.show', $review->business->id) }}"
                                         class="business-link">{{ $review->business->slug }}</a>
