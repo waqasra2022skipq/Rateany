@@ -24,7 +24,24 @@
                 <label for="comment">Comment</label>
                 <textarea name="comment" class="form-control" rows="7" cols="30" placeholder="Share Your Experience"></textarea>
             </div>
-
+            <div class="mb-3">
+                @auth
+                    <input type="hidden" name="reviewer_id" value="{{ auth()->user()->id }}">
+                @else
+                    <div class="row">
+                        <!-- Name Field -->
+                        <div class="form-group col-md-6">
+                            <label for="reviewer_name">Your Name</label>
+                            <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" required>
+                        </div>
+                        <!-- Email Field -->
+                        <div class="form-group col-md-6">
+                            <label for="reviewer_email">Your Email</label>
+                            <input type="email" name="reviewer_email" id="reviewer_email" class="form-control" required>
+                        </div>
+                    </div>
+                @endauth
+            </div>
             <button type="submit" class="btn btn-primary">Submit Review</button>
         </form>
     </div>

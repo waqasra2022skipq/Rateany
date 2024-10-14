@@ -49,7 +49,7 @@ Route::controller(BusinessController::class)->group(function () {
     });
 });
 
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 
 Route::get('/contact-us', [UserQueryController::class, 'show'])->name('contact.show');

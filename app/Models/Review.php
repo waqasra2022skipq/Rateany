@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'business_id', 'reviewer_id', 'rating', 'comments'];
+    protected $fillable = ['user_id', 'business_id', 'reviewer_id', 'rating', 'comments', 'reviewer_name', 'reviewer_email'];
 
     // Review written for a user
     public function user()

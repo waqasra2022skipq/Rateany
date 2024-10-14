@@ -1,7 +1,10 @@
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">
-            @include('user.user-link')
+            @if (!$review->reviewer_name && $review->reviewer_id)
+                <p>{{ $review->reviewer->name }}</p>
+            @endif
+            <p>{{ $review->reviewer_name }}</p>
         </h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ $review->created_at->format('F j, Y') }}</h6>
         <div class="mb-2">
