@@ -41,7 +41,7 @@
                             onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 @else
-                    <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary btn-sm user-link">
+                    <a href="{{ route('user.show', $user->username) }}" class="btn btn-primary btn-sm user-link">
                         Write Review
                     </a>
                 @endif
