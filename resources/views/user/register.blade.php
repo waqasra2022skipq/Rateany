@@ -29,21 +29,21 @@
 
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="location" class="form-control @error('location') is-invalid @enderror" id="location"
-                            name="location" value="{{ old('location') }}" />
+                        <input type="location" class="form-control @error('location') is-invalid @enderror"
+                            id="location" name="location" value="{{ old('location') }}" />
                         @error('location')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="profession" class="form-label">Profession</label>
-                        <select id="profession" name="profession"
-                            class="form-select @error('profession') is-invalid @enderror">
+                        <label for="profession_id" class="form-label">Profession</label>
+                        <select id="profession_id" name="profession_id"
+                            class="form-select @error('profession_id') is-invalid @enderror">
                             <option value="">Select Profession</option>
                             @foreach ($professions as $profession)
                                 <option value="{{ $profession->id }}"
-                                    {{ old('profession') == $profession->id ? 'selected' : '' }}>
+                                    {{ old('profession_id') == $profession->id ? 'selected' : '' }}>
                                     {{ $profession->name }}
                                 </option>
                             @endforeach
