@@ -31,20 +31,9 @@
                     @endif
                 </p>
 
-                <!-- Edit/Delete Buttons or Write Review -->
-                @if (auth()->check() && auth()->user()->id == $user->id)
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                @else
-                    <a href="{{ route('user.show', $user->username) }}" class="btn btn-primary btn-sm user-link">
-                        Write Review
-                    </a>
-                @endif
+                <a href="{{ route('user.show', $user->username) }}" class="btn btn-primary btn-sm user-link">
+                    Write Review
+                </a>
             </div>
         </div>
     </div>
