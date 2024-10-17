@@ -3,7 +3,7 @@
     <form action="{{ route('allUsers') }}" method="GET" class="row g-3">
         <!-- Category Select -->
         <div class="col-md-4">
-            <label for="category" class="form-label">Category</label>
+            <label for="category" class="form-label">Profession</label>
             <select class="form-select" id="profession" name="profession">
                 <option value="" selected>All Professions</option>
                 @foreach ($professions as $profession)
