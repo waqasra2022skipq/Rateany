@@ -28,6 +28,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="bio">Bio</label>
+                        <textarea name="bio" id="bio" class="form-control" rows="4">{{ old('bio') }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
                         <input type="location" class="form-control @error('location') is-invalid @enderror"
                             id="location" name="location" value="{{ old('location') }}" />

@@ -38,9 +38,13 @@
         </div>
 
         <div class="mt-5">
-            @include('components.write-review', ['business_id' => $business->id])
+            <h4>Bio</h4>
+            <p>{{ $business->description ?? 'No bio available.' }}</p>
         </div>
 
+        <div class="mt-5">
+            @include('components.write-review', ['business_id' => $business->id])
+        </div>
         <!-- Reviews Section -->
         <div class="mt-5">
             <h3>Customer Reviews</h3>

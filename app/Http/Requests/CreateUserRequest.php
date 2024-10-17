@@ -26,7 +26,8 @@ class CreateUserRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users'],
             'profession_id' => ['integer', 'nullable'],
             'password' => ['required', 'string', 'min:6'],
-            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'bio' => 'nullable|string|max:1000'
         ];
     }
 }

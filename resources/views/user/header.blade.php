@@ -30,3 +30,8 @@
         <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary btn mt-3">Update Profile</a>
     @endif
 </div>
+
+<div class="profile-bio">
+    <h4>Bio</h4>
+    <p>{{ $user->bio ?? 'No bio available.' }}</p>
+</div>

@@ -158,12 +158,14 @@ class UserController extends Controller
             'password' => 'nullable|confirmed|min:8',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'location' => 'nullable|string',
+            'bio' => 'nullable|string|max:1000'
         ]);
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->profession_id = $request->input('profession');
         $user->location = $request->input('location');
+        $user->bio = $request->input('bio');
 
 
         if ($request->filled('password')) {
