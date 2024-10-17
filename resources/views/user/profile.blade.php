@@ -31,7 +31,7 @@
                     {{ $reviews->withQueryString()->links() }}
                 </div>
             @else
-                <p>No reviews yet for this business.</p>
+                <p>No reviews yet for {{ $user->name }}</p>
             @endif
         </div>
     </div>

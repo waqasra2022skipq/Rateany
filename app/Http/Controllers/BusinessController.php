@@ -19,28 +19,38 @@ class BusinessController extends Controller
         // / Get the last 20 reviews, sorted by the most recent.
         $reviews = Review::with(['reviewer', 'user', 'business'])->latest()->take(20)->get();
 
-        $topRestaurants = Business::with(['owner'])
-            ->where('categoryId', 1)
+        // $topRestaurants = Business::with(['owner'])
+        //     ->where('categoryId', 1)
+        //     ->orderBy('average_rating', 'desc')
+        //     ->limit(8)
+        //     ->get();
+
+        // $topGyms = Business::with(['owner'])
+        //     ->where('categoryId', 4)
+        //     ->orderBy('average_rating', 'desc')
+        //     ->limit(8)
+        //     ->get();
+
+
+        // $topMechanics = User::where('profession_id', 7)
+        //     ->orderBy('average_rating', 'desc')
+        //     ->limit(8)
+        //     ->get();
+
+        $topBusinesses = Business::with(['owner'])
             ->orderBy('average_rating', 'desc')
             ->limit(8)
             ->get();
 
-        $topGyms = Business::with(['owner'])
-            ->where('categoryId', 4)
+        $topProfessionals = User::where('profession_id', "!=", 'null')
             ->orderBy('average_rating', 'desc')
-            ->limit(8)
-            ->get();
-
-
-        $topMechanics = User::where('profession_id', 7)
-            ->orderBy('average_rating', 'desc')
-            ->limit(8)
+            ->limit(20)
             ->get();
 
         $categories = Category::all();
         $professions = Profession::all();
 
-        return view('home', compact('reviews', 'topRestaurants', 'topGyms', 'topMechanics', 'categories', 'professions'));
+        return view('home', compact('reviews', 'topBusinesses', 'topProfessionals', 'categories', 'professions'));
     }
     public function create()
     {

@@ -14,16 +14,12 @@
                 </div>
                 <div class="ms-md-3 text-center text-md-start">
                     <h2>{{ $business->name }}</h2>
-                    <p>Owned by: <strong>
-                            <a href="{{ route('user.show', $business->owner->username) }}"
-                                class="user-link">{{ $business->owner->name }}</a></strong>
-                    </p>
-                    <h2>Category</h2>
-                    <p><strong>
-                            <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
-                                class="business-link">{{ $business->category->name }}</a>
-                        </strong>
-                    </p>
+                    <strong>Category:</strong>
+                    <strong>
+                        <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
+                            class="business-link">{{ $business->category->name }}</a>
+                    </strong>
+                    <br>
                     <strong>Location:</strong>
                     <span>{{ $business->location }}</span>
                 </div>
@@ -59,7 +55,7 @@
                     {{ $reviews->withQueryString()->links() }}
                 </div>
             @else
-                <p>No reviews yet for this business.</p>
+                <p>No reviews yet for {{ $business->name }}.</p>
             @endif
         </div>
     </div>

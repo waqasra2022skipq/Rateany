@@ -24,7 +24,7 @@
                 <p class="card-text">
                     <strong>Profession:</strong>
                     @if ($user->profession)
-                        <a href="{{ route('allUsers', ['profession' => $user->profession->name]) }}"
+                        <a href="{{ route('allUsers', ['profession' => $user->profession->slug]) }}"
                             class="user-link">{{ $user->profession->name }}</a>
                     @else
                         <span>No profession listed</span>

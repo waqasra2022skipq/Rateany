@@ -10,14 +10,15 @@
     </div>
     <div class="ms-md-3 text-center text-md-start">
         <h2>{{ $user->name }}</h2>
-        <p class="text-muted">{{ $user->email }}</p>
-        @if ($user->profession)
-            <h2>Profession</h2>
-            <p><strong>
-                    <a href="{{ route('allUsers', ['profession' => $user->profession->slug]) }}"
-                        class="business-link">{{ $user->profession->name }}</a>
-                </strong></p>
-        @endif
+        <p class="card-text">
+            <strong>Profession:</strong>
+            @if ($user->profession)
+                <a href="{{ route('allUsers', ['profession' => $user->profession->slug]) }}"
+                    class="user-link">{{ $user->profession->name }}</a>
+            @else
+                <span>No profession listed</span>
+            @endif
+        </p>
     </div>
 </div>
 

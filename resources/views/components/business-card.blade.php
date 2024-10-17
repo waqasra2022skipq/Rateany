@@ -25,12 +25,6 @@
             </p>
 
             <p class="card-text">
-                <strong>Owner:</strong>
-                <a href="{{ route('user.show', $business->owner->username) }}"
-                    class="business-link">{{ $business->owner->name }}</a>
-            </p>
-
-            <p class="card-text">
                 <strong>Location:</strong>
                 <spanp>{{ $business->location }}</span>
             </p>
