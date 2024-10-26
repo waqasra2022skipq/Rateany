@@ -7,9 +7,17 @@ use App\Http\Requests\WriteReviewRequest;
 use App\Models\Review;
 use App\Models\Business;
 use App\Models\User;
+use App\Services\CaptchaService;
 
 class ReviewController extends Controller
 {
+    protected $captchaService;
+
+    public function __construct()
+    {
+        $this->captchaService = new CaptchaService();
+    }
+
     public function store(Request $request)
     {
 
@@ -24,18 +32,24 @@ class ReviewController extends Controller
             'reviewer_name' => 'required_if:reviewer_id,null|string',
             'reviewer_email' => 'required_if:reviewer_id,null|email',
         ]);
+
+        $verifyCaptcha = $this->captchaService->verifyCaptcha($request);
+
+        if (isset($verifyCaptcha['error'])) {
+            return redirect()->back()->with('errorMessage', $verifyCaptcha['captchaErrorMessage']);
+        }
         $type = 'business';
 
         if ($request->business_id) {
             $collection = Business::find($request->business_id);
 
             if ($currentUser && $collection->owner->id == $currentUser->id) {
-                return redirect()->back()->with('Message', 'You cannot rate your own business');
+                return redirect()->back()->with('errorMessage', 'You cannot rate your own business');
             }
         } else {
             $collection = User::find($request->user_id);
             if ($currentUser && $collection->id == $currentUser->id) {
-                return redirect()->back()->with('Message', 'You cannot rate yourself');
+                return redirect()->back()->with('errorMessage', 'You cannot rate yourself');
             }
             $type = 'user';
         }

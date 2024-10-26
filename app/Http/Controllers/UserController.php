@@ -8,16 +8,18 @@ use App\Models\User;
 use App\Models\Profession;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use App\Services\CaptchaService;
 
 class UserController extends Controller
 {
     protected $userService;
+    protected $captchaService;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+        $this->captchaService = new CaptchaService();
     }
     public function index(Request $request)
     {
@@ -121,6 +123,12 @@ class UserController extends Controller
     {
         try {
             $validatedData = $request->validated();
+
+            $verifyCaptcha = $this->captchaService->verifyCaptcha($request);
+
+            if (isset($verifyCaptcha['error'])) {
+                return redirect()->back()->with('errorMessage', $verifyCaptcha['captchaErrorMessage']);
+            }
 
             if ($request->hasFile('profile_pic')) {
                 $imagePath = $request->file('profile_pic')->store('profile_pics', 'public');

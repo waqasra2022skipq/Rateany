@@ -85,6 +85,10 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <!-- Google Recaptcha Widget-->
+                        <div class="g-recaptcha mt-4" data-sitekey={{ config('services.recaptcha.key') }}></div>
+                    </div>
 
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary w-100">Sign Up</button>

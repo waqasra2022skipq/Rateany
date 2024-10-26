@@ -13,6 +13,7 @@
         <title>Rateany | Rate Anything and Anyone</title>
         @vite(['resources/js/app.js'])
         @vite(['resources/sass/app.scss'])
+        <script async src="https://www.google.com/recaptcha/api.js"></script>
     </head>
 
     <body class="mb-48">

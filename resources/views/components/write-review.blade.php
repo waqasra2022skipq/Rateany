@@ -33,11 +33,22 @@
                         <div class="form-group col-md-6">
                             <label for="reviewer_name">Your Name</label>
                             <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" required>
+                            @error('reviewer_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!-- Email Field -->
                         <div class="form-group col-md-6">
                             <label for="reviewer_email">Your Email</label>
                             <input type="email" name="reviewer_email" id="reviewer_email" class="form-control" required>
+                            @error('reviewer_email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <!-- Google Recaptcha Widget-->
+                            <div class="g-recaptcha mt-4" data-sitekey={{ config('services.recaptcha.key') }}></div>
                         </div>
                     </div>
                 @endauth
