@@ -15,8 +15,8 @@
                                 <strong>{{ $review->reviewer_name }}</strong>
                                 rated
                                 @if ($review->business_id)
-                                    <a href="{{ route('businesses.show', $review->business->id) }}"
-                                        class="business-link">{{ $review->business->slug }}</a>
+                                    <a href="{{ route('businesses.show', $review->business->slug) }}"
+                                        class="business-link">{{ $review->business->name }}</a>
                                 @elseif ($review->user_id)
                                     <a href="{{ route('user.show', $review->user->username) }}"
                                         class="user-link">{{ $review->user->name }}</a>
