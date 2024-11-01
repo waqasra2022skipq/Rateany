@@ -173,7 +173,6 @@ class BusinessController extends Controller
                 $imagePath = $request->file('business_logo')->store('business_logos', 'public');
                 $validatedData['business_logo'] = $imagePath;
             }
-
             $business->update($validatedData);
             // return $this->apiSuccess("New Business Created", $business, 201);
 
