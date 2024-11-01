@@ -10,47 +10,31 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BusinessCreateRequest;
 use App\Models\Profession;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use App\Services\BusinessService;
+use App\Services\UserService;
+
 
 
 class BusinessController extends Controller
 {
+    protected $businessService;
+    protected $userService;
+
+    public function __construct()
+    {
+        $this->businessService = new BusinessService();
+        $this->userService = new UserService();
+    }
     public function home()
     {
         // / Get the last 20 reviews, sorted by the most recent.
         $reviews = Review::with(['reviewer', 'user', 'business'])->latest()->take(20)->get();
 
-        // $topRestaurants = Business::with(['owner'])
-        //     ->where('categoryId', 1)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
-
-        // $topGyms = Business::with(['owner'])
-        //     ->where('categoryId', 4)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
-
-
-        // $topMechanics = User::where('profession_id', 7)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
-
-        $topBusinesses = Business::with(['owner'])
-            ->orderBy('average_rating', 'desc')
-            ->orderBy('reviews_count', 'desc')
-            ->limit(8)
-            ->get();
-
-        $topProfessionals = User::where('profession_id', "!=", 'null')
-            ->orderBy('average_rating', 'desc')
-            ->orderBy('reviews_count', 'desc')
-            ->limit(20)
-            ->get();
-
         $categories = Category::all();
         $professions = Profession::all();
+
+        $topBusinesses = $this->businessService->getTopBusinesses();
+        $topProfessionals = $this->userService->getTopProfessionals();
 
         return view('home', compact('reviews', 'topBusinesses', 'topProfessionals', 'categories', 'professions'));
     }

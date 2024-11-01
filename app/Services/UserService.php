@@ -32,4 +32,13 @@ class UserService
         }
         return $user;
     }
+
+    public function getTopProfessionals($limit = 20)
+    {
+        return User::whereNotNull('profession_id')
+            ->selectRaw('*, (average_rating * 0.7) + (reviews_count * 0.3) as smart_score')
+            ->orderBy('smart_score', 'desc')
+            ->limit($limit)
+            ->get();
+    }
 }
