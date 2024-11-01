@@ -45,4 +45,32 @@ class Business extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        // Filter by userId if provided
+        if (isset($filters['userId'])) {
+            $query->whereNot('userId', $filters['userId']);
+        }
+
+        // Filter by category if provided
+        if (isset($filters['category'])) {
+            $category = Category::where('slug', $filters['category'])->first();
+            if ($category) {
+                $query->where('categoryId', $category->id);
+            }
+        }
+
+        // Filter by search term if provided
+        if (isset($filters['search'])) {
+            $query->where('name', 'LIKE', "%{$filters['search']}%");
+        }
+
+        // Filter by location if provided
+        if (isset($filters['location'])) {
+            $query->where('location', 'LIKE', "%{$filters['location']}%");
+        }
+
+        return $query;
+    }
 }

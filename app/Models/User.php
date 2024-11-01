@@ -89,4 +89,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        // Exclude specific user if provided
+        if (isset($filters['userId'])) {
+            $query->whereNot('id', $filters['userId']);
+        }
+
+        // Filter by profession if provided
+        if (isset($filters['profession'])) {
+            $profession = Profession::where('slug', $filters['profession'])->first();
+            if ($profession) {
+                $query->where('profession_id', $profession->id);
+            }
+        }
+
+        // Filter by search term if provided
+        if (isset($filters['search'])) {
+            $query->where('name', 'LIKE', "%{$filters['search']}%");
+        }
+
+        // Filter by location if provided
+        if (isset($filters['location'])) {
+            $query->where('location', 'LIKE', "%{$filters['location']}%");
+        }
+
+        return $query;
+    }
 }

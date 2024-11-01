@@ -1,9 +1,10 @@
 <div class="col-md-3 mb-4">
     <div class="card h-100">
         <!-- Business Logo -->
-        <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
-            alt="{{ $business->name }} Logo" class="card-img-top img-fluid" style="height: 100px; object-fit: cover;">
-
+        <a href="{{ route('businesses.show', $business->slug) }}" class="business-link">
+            <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
+                alt="{{ $business->name }} Logo" class="card-img-top img-fluid" style="height: 100px; object-fit: cover;">
+        </a>
         <div class="card-body">
             <h5 class="card-title">
                 <a href="{{ route('businesses.show', $business->slug) }}" class="business-link">
