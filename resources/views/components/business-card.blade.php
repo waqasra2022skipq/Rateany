@@ -14,7 +14,8 @@
             <p class="card-text">
                 <strong>Ratings:</strong>
                 <span>
-                    {{ number_format($business->average_rating, 1) }} / 5
+                    {{ number_format($business->average_rating, 2) }} / 5
+                    ({{ $business->reviews_count }} reviews)
                 </span>
             </p>
 

@@ -39,11 +39,13 @@ class BusinessController extends Controller
 
         $topBusinesses = Business::with(['owner'])
             ->orderBy('average_rating', 'desc')
+            ->orderBy('reviews_count', 'desc')
             ->limit(8)
             ->get();
 
         $topProfessionals = User::where('profession_id', "!=", 'null')
             ->orderBy('average_rating', 'desc')
+            ->orderBy('reviews_count', 'desc')
             ->limit(20)
             ->get();
 
