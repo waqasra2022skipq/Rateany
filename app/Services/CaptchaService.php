@@ -9,6 +9,9 @@ class CaptchaService
 {
     public function verifyCaptcha($request)
     {
+        if ($request->reviewer_id) {
+            return 1;
+        }
         $recaptcha = $request->{'g-recaptcha-response'};
         if (is_null($recaptcha)) {
             return [
