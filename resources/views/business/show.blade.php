@@ -72,7 +72,7 @@
       "url": "{{ url()->current() }}",
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "{{ number_format($user->average_rating, 1) }}",
+        "ratingValue": "{{ number_format($business->average_rating, 1) }}",
         "reviewCount": "{{ $business->reviews_count }}"
       }
     }
