@@ -63,4 +63,18 @@
             @endif
         </div>
     </div>
+    <!-- Structured Data for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "{{ $business->name }}",
+      "url": "{{ url()->current() }}",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ number_format($user->average_rating, 1) }}",
+        "reviewCount": "{{ $business->reviews_count }}"
+      }
+    }
+    </script>
 </x-layout>

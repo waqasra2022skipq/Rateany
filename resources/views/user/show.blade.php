@@ -44,4 +44,18 @@
             {{ $businesses->links() }}
         </div> --}}
     </div>
+    <!-- Structured Data for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ $user->name }}",
+      "url": "{{ url()->current() }}",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ number_format($user->average_rating, 1) }}",
+        "reviewCount": "{{ $user->reviews_count }}"
+      }
+    }
+    </script>
 </x-layout>
