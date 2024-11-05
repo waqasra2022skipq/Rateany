@@ -19,6 +19,7 @@
                 <span>No profession listed</span>
             @endif
         </p>
+        <p><strong>Location:</strong> {{ $user->location }}</p>
     </div>
 </div>
 

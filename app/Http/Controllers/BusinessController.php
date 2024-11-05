@@ -9,46 +9,36 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusinessCreateRequest;
 use App\Models\Profession;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
+use App\Services\BusinessService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Cache;
+
 
 
 class BusinessController extends Controller
 {
+    protected $businessService;
+    protected $userService;
+
+    public function __construct()
+    {
+        $this->businessService = new BusinessService();
+        $this->userService = new UserService();
+    }
     public function home()
     {
         // / Get the last 20 reviews, sorted by the most recent.
         $reviews = Review::with(['reviewer', 'user', 'business'])->latest()->take(20)->get();
 
-        // $topRestaurants = Business::with(['owner'])
-        //     ->where('categoryId', 1)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
+        $categories = Cache::remember('categories', 60 * 60, function () {
+            return Category::all();
+        });
+        $professions = Cache::remember('professions', 60 * 60, function () {
+            return Profession::all();
+        });
 
-        // $topGyms = Business::with(['owner'])
-        //     ->where('categoryId', 4)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
-
-
-        // $topMechanics = User::where('profession_id', 7)
-        //     ->orderBy('average_rating', 'desc')
-        //     ->limit(8)
-        //     ->get();
-
-        $topBusinesses = Business::with(['owner'])
-            ->orderBy('average_rating', 'desc')
-            ->limit(8)
-            ->get();
-
-        $topProfessionals = User::where('profession_id', "!=", 'null')
-            ->orderBy('average_rating', 'desc')
-            ->limit(20)
-            ->get();
-
-        $categories = Category::all();
-        $professions = Profession::all();
+        $topBusinesses = $this->businessService->getTopBusinesses();
+        $topProfessionals = $this->userService->getTopProfessionals();
 
         return view('home', compact('reviews', 'topBusinesses', 'topProfessionals', 'categories', 'professions'));
     }
@@ -57,7 +47,9 @@ class BusinessController extends Controller
         if (!auth()->check()) {
             return view('user.login');
         }
-        $categories = Category::all();
+        $categories = Cache::remember('categories', 60 * 60, function () {
+            return Category::all();
+        });
         return view("business.create", [
             'categories' => $categories
         ]);
@@ -73,46 +65,11 @@ class BusinessController extends Controller
     }
     public function allBusinesses(Request $request)
     {
-        $userId = null;
-        if (FacadesAuth::check()) {
-            $userId = request()->user()->id;
-        }
-        // Get categoryId from query, if not present, it will be null
-        $category = $request->query('category');
+        $businesses = $this->businessService->getAllBusinesses($request);
+        $categories = Cache::remember('categories', 60 * 60, function () {
+            return Category::all();
+        });
 
-        // Get search from query, if not present, it will be null
-        $search = $request->query('search');
-
-        // Get location from query, if not present, it will be null
-        $location = $request->query('location');
-
-        // Start building the query
-        $query = Business::with(['owner', 'category']);
-
-        if ($userId) {
-            $query->whereNot('userId', $userId);
-        }
-
-        // If categoryId exists in the query, apply the filter
-        if ($category) {
-            $category = Category::where('slug', $category)->first();
-            $query->where('categoryId', $category->id);
-        }
-
-        // If search exists in the query, apply the filter
-        if ($search) {
-            $query->where('name', 'LIKE', "%{$search}%");
-        }
-
-        // If search exists in the query, apply the filter
-        if ($location) {
-            $query->where('location', 'LIKE', "%{$location}%");
-        }
-
-        // Order by average_rating and paginate the results
-        $businesses = $query->orderBy('average_rating', 'desc')->paginate(8);
-
-        $categories = Category::all();
 
         return view('business.index', ['businesses' => $businesses, 'categories' => $categories]);
     }
@@ -152,7 +109,9 @@ class BusinessController extends Controller
     public function edit($id)
     {
         $business = Business::find($id);
-        $categories = Category::all();
+        $categories = Cache::remember('categories', 60 * 60, function () {
+            return Category::all();
+        });
         return view("business.edit", [
             'categories' => $categories,
             'business' => $business
@@ -173,7 +132,6 @@ class BusinessController extends Controller
                 $imagePath = $request->file('business_logo')->store('business_logos', 'public');
                 $validatedData['business_logo'] = $imagePath;
             }
-
             $business->update($validatedData);
             // return $this->apiSuccess("New Business Created", $business, 201);
 

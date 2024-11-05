@@ -4,16 +4,29 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Profession;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserService
 {
     /**
      * Create a new class instance.
      */
-    public function __construct() {}
-    public function getAllUsers()
+
+    public function getAllUsers($request)
     {
-        $users = User::with('profession', 'businesses')->get();
+        $filters = [
+            'userId' => FacadesAuth::id(),
+            'profession' => $request->query('profession'),
+            'search' => $request->query('search'),
+            'location' => $request->query('location'),
+        ];
+
+        // Get users with applied filters, ordered by rating, and paginate
+        $users = User::with(['profession:id,name,slug']) // Load only necessary fields
+            ->filter($filters)
+            ->orderBy('average_rating', 'desc')
+            ->paginate(8);
+
         return $users;
     }
 
@@ -31,5 +44,14 @@ class UserService
             ]);
         }
         return $user;
+    }
+
+    public function getTopProfessionals($limit = 20)
+    {
+        return User::whereNotNull('profession_id')
+            ->selectRaw('*, (average_rating * 0.7) + (reviews_count * 0.3) as smart_score')
+            ->orderBy('smart_score', 'desc')
+            ->limit($limit)
+            ->get();
     }
 }

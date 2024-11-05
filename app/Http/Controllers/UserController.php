@@ -10,6 +10,8 @@ use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Services\CaptchaService;
+use Illuminate\Support\Facades\Cache;
+
 
 class UserController extends Controller
 {
@@ -24,57 +26,29 @@ class UserController extends Controller
     public function index(Request $request)
     {
         try {
-            $userId = null;
-            if (FacadesAuth::check()) {
-                $userId = request()->user()->id;
-            }
-            // Get categoryId from query, if not present, it will be null
-            $profession = $request->query('profession');
+            $users = $this->userService->getAllUsers($request);
 
-            // Get search from query, if not present, it will be null
-            $search = $request->query('search');
+            // Cache professions for efficiency
+            $professions = Cache::remember('professions', 60 * 60, function () {
+                return Profession::all();
+            });
 
-            // Get location from query, if not present, it will be null
-            $location = $request->query('location');
-
-            // Start building the query
-            $query = User::with(['profession']);
-
-            if ($userId) {
-                $query->whereNot('id', $userId);
-            }
-
-            // If categoryId exists in the query, apply the filter
-            if ($profession) {
-                $profession = Profession::where('slug', $profession)->first();
-                $query->where('profession_id', $profession->id);
-            }
-
-            // If search e  exists in the query, apply the filter
-            if ($search) {
-                $query->where('name', 'LIKE', "%{$search}%");
-            }
-
-            // If search exists in the query, apply the filter
-            if ($location) {
-                $query->where('location', 'LIKE', "%{$location}%");
-            }
-
-            // Order by average_rating and paginate the results
-            $users = $query->orderBy('average_rating', 'desc')->paginate(8);
-
-            $professions = Profession::all();
-
-            return view('user.index', ['users' => $users, 'professions' => $professions]);
+            return view('user.index', [
+                'users' => $users,
+                'professions' => $professions,
+            ]);
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
         }
     }
 
+
     public function edit($user_id)
     {
         $user = User::find($user_id);
-        $professions = Profession::all();
+        $professions = Cache::remember('professions', 60 * 60, function () {
+            return Profession::all();
+        });
 
         if (!$user) {
             return response()->json(["error" => "User Not Found"],  404);

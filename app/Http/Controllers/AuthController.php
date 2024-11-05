@@ -6,6 +6,8 @@ use App\Models\Profession;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Cache;
+
 
 
 class AuthController extends Controller
@@ -17,7 +19,9 @@ class AuthController extends Controller
 
     public function createForm()
     {
-        $professions = Profession::all();
+        $professions = Cache::remember('professions', 60 * 60, function () {
+            return Profession::all();
+        });
         return view('user.register', [
             'professions' => $professions
         ]);
