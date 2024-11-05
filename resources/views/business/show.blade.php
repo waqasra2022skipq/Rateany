@@ -69,6 +69,7 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "{{ $business->name }}",
+      "address": "{{ $business->location }}",
       "url": "{{ url()->current() }}",
       "aggregateRating": {
         "@type": "AggregateRating",

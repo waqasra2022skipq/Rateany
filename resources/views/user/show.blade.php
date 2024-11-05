@@ -48,7 +48,7 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
+      "@type": "Product",
       "name": "{{ $user->name }}",
       "url": "{{ url()->current() }}",
       "aggregateRating": {
