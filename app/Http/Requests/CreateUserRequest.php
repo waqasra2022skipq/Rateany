@@ -27,7 +27,8 @@ class CreateUserRequest extends FormRequest
             'profession_id' => ['integer', 'nullable'],
             'password' => ['required', 'string', 'min:6'],
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'bio' => 'nullable|string|max:1000'
+            'bio' => 'nullable|string|max:1000',
+            'location' => ['nullable', 'string'],
         ];
     }
 }
