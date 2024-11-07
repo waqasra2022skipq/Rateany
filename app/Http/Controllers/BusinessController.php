@@ -70,8 +70,15 @@ class BusinessController extends Controller
             return Category::all();
         });
 
+        $topMessage = "Businesses";
+        if (!empty($request->category)) {
+            $topMessage = ucfirst($request->category) . "s";
+        }
 
-        return view('business.index', ['businesses' => $businesses, 'categories' => $categories]);
+        if (!empty($request->location)) {
+            $topMessage .= " in " . $request->location;
+        }
+        return view('business.index', ['businesses' => $businesses, 'categories' => $categories, "topMessage" => $topMessage]);
     }
 
     public function myBusinesses()

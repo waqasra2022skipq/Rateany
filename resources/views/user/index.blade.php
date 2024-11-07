@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-4">
-            <h2>Top Professionals</h2>
+            <h2>Top {{ $topMessage }}</h2>
         </div>
 
         @include('components.user-search', ['professions' => $professions])

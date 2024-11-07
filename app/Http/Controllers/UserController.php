@@ -33,9 +33,19 @@ class UserController extends Controller
                 return Profession::all();
             });
 
+            $topMessage = "Professionals";
+            if (!empty($request->profession)) {
+                $topMessage = ucfirst($request->profession) . "s";
+            }
+
+            if (!empty($request->location)) {
+                $topMessage .= " in " . $request->location;
+            }
+
             return view('user.index', [
                 'users' => $users,
                 'professions' => $professions,
+                "topMessage" => $topMessage
             ]);
         } catch (\Throwable $th) {
             return $this->apiError($th->getMessage(), [], 500);
