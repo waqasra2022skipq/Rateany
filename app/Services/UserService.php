@@ -24,7 +24,8 @@ class UserService
         // Get users with applied filters, ordered by rating, and paginate
         $users = User::with(['profession:id,name,slug']) // Load only necessary fields
             ->filter($filters)
-            ->orderBy('average_rating', 'desc')
+            ->selectRaw('*, (average_rating * 0.7) + (reviews_count * 0.3) as smart_score')
+            ->orderBy('smart_score', 'desc')
             ->paginate(8);
 
         return $users;

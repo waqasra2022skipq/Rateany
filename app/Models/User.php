@@ -93,6 +93,8 @@ class User extends Authenticatable
     public function scopeFilter($query, $filters)
     {
         // Exclude specific user if provided
+
+        $query->whereNotNull('profession_id');
         if (isset($filters['userId'])) {
             $query->whereNot('id', $filters['userId']);
         }
