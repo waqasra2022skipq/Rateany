@@ -31,7 +31,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact.show') }}">
-                                <i class="fa-solid fa-comment"></i> Your Suggestions
+                                <i class="fa-solid fa-comment"></i> Contact Us
                             </a>
                         </li>
                         <li class="nav-item">

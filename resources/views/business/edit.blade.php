@@ -31,6 +31,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        <span>Could find the your suited category ? <a class="user-link"
+                                href={{ route('contact.show') }}>Write to
+                                us</a></span>
                         @error('categoryId')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
