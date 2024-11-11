@@ -35,12 +35,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('allBusinesses') }}"
-                                class="text-white mx-3 user-link">Businesses</a>
+                            <a class="nav-link" href="{{ route('allBusinesses') }}"><i
+                                    class="user-link fa-solid fa-building"></i> Businesses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('allUsers') }}"
-                                class="text-white mx-3 user-link">Professionals</a>
+                            <a class="nav-link" href="{{ route('allUsers') }}" class="text-white mx-3 user-link">
+                                <i class="user-link fa-solid fa-user-md"></i> Professionals</a>
                         </li>
                         @auth
                             <li class="nav-item dropdown">
