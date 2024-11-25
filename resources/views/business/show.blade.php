@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :pageTitle="$pageTitle" :metaDescription="$metaDescription">
     <div class="container my-4">
         <div class="row">
             <!-- Business Logo and Details -->

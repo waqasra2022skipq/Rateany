@@ -1,7 +1,10 @@
-<x-layout>
+<?php
+$metaDescription = "Top rated $topMessage";
+?>
+<x-layout pageTitle="Top rated businesses" :metaDescription="$metaDescription">
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-4">
-            <h2>Top {{ $topMessage }}</h2>
+            <h2>{{ $metaDescription }}</h2>
         </div>
 
         @include('components.business-search', ['categories' => $categories])

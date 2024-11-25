@@ -78,9 +78,12 @@ class UserController extends Controller
         $reviews = $user->reviews()->with('reviewer')->latest()->paginate(5);
         $businesses = $user->businesses;
 
+        $pageTitle = $user->name;
+        $metaDescription = $user->bio;
+
         return view(
             'user.show',
-            compact('user', 'reviews', 'businesses')
+            compact('user', 'reviews', 'businesses', 'metaDescription', 'pageTitle')
         );
     }
 

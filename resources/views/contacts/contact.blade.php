@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout pageTitle="Contact Us" metaDescription="Share your suggestions and queries">
     <div class="container my-5">
         <h1>Contact Us</h1>
 

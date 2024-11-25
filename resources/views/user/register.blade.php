@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout pageTitle="Register" metaDescription="Sign Up now to create businesses and build your professional profile">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">

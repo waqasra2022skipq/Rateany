@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout pageTitle="Login" metaDescription="Login to create businesses and optimize your professional profile">
     <div class="container mt-5">
         <header class="text-center mb-4">
             <h2 class="text-2xl font-bold">Login</h2>

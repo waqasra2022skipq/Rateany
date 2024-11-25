@@ -10,7 +10,8 @@
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-        <title>Rateany | Rate Anything and Anyone</title>
+        <meta name="description" content="{{ $metaDescription ?? 'Find the top rated businesses and professionals' }}">
+        <title>Rateany | {{ $pageTitle ?? 'Rate Anything and Anyone' }}</title>
         @vite(['resources/js/app.js'])
         @vite(['resources/sass/app.scss'])
         <script async src="https://www.google.com/recaptcha/api.js"></script>
@@ -72,10 +73,6 @@
             </div>
         </nav>
         @include('components.flash-message')
-
-        <header class="text-center my-4">
-            <h1>Find the Top Rated Professionals and Businesses</h1>
-        </header>
 
         <main class="mt-2 mb-5 pb-5">
             {{ $slot }}
