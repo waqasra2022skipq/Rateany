@@ -11,7 +11,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
         <meta name="description" content="{{ $metaDescription ?? 'Find the top rated businesses and professionals' }}">
-        <title>Rateany | {{ $pageTitle ?? 'Rate Anything and Anyone' }}</title>
+        <title>Rateany | {{ $pageTitle ?? 'Rate professionals and businesses' }}</title>
         @vite(['resources/js/app.js'])
         @vite(['resources/sass/app.scss'])
         <script async src="https://www.google.com/recaptcha/api.js"></script>
