@@ -61,7 +61,10 @@ class BusinessController extends Controller
         $business = Business::with(['owner', 'category'])->where('slug', $slug)->first();
         $reviews = $business->reviews()->latest()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
 
-        return view('business.show', compact('business', 'reviews'));
+        $pageTitle = $business->name;
+        $metaDescription = $business->description;
+
+        return view('business.show', compact('business', 'reviews', 'metaDescription', 'pageTitle'));
     }
     public function allBusinesses(Request $request)
     {
