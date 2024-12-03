@@ -1,21 +1,28 @@
-<div class="d-flex flex-column flex-md-row gap-4">
-    <div>
-        <strong>Email:</strong> {{ $business->contact_email ?? 'Not provided' }}
-    </div>
-    <div>
-        <strong>Phone:</strong>
-        @if($business->contact_phone)
-            <a href="tel:{{ $business->contact_phone }}" class="user-link">{{ $business->contact_phone }}</a>
-        @else
-            Not provided
+<div class="col">
+    @if (auth()->check())
+        @if($type == 'business' && auth()->user()->id == $entity->owner->id)
+            <a href="{{ route('businesses.edit', $entity->id) }}" class="btn btn-outline-primary mb-2 w-100">Update</a>
         @endif
-    </div>
-    <div>
-        <strong>Website:</strong>
-        @if($business->contact_website)
-            <a href="{{ $business->contact_website }}" target="_blank" rel="noopener noreferrer" class="user-link">{{ $business->contact_website }}</a>
-        @else
-            Not provided
+        @if($type == 'user' && auth()->user()->id == $entity->id)
+            <a href="{{ route('profile.edit', $entity->id) }}" class="btn btn-outline-primary mb-2 w-100">Update</a>
         @endif
-    </div>
+    @else
+        @if($entity->contact_website)
+            <a href="{{ $entity->contact_website }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary mb-2 w-100">
+                <i class="fas fa-globe"></i> Website
+            </a>
+            <br>
+        @endif
+        
+        @if($entity->contact_phone)
+            <a href="tel:{{ $entity->contact_phone }}" class="btn btn-outline-success w-100">
+                <i class="fas fa-phone"></i> Call
+            </a>
+        @endif
+        @if($entity->contact_email)
+            <a href="mailto:{{ $entity->contact_email }}" class="btn btn-outline-info mt-2 w-100">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        @endif
+    @endif
 </div>

@@ -25,6 +25,8 @@
 
 
 @include('components.reviews-bar', ['entity' => $user])
+
+@include('components.sharing', ['entity' => $user, 'type' => 'user'])
 <!-- Edit/Delete Buttons or Write Review -->
 <div class="col-md-2 text-center">
     @if (auth()->check() && auth()->user()->id == $user->id)

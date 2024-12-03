@@ -29,22 +29,12 @@
             @include('components.reviews-bar', ['entity' => $business])
 
             <!-- Edit/Delete Buttons or Write Review -->
-            <div class="col-md-2">
-                @if (auth()->check() && auth()->user()->id == $business->owner->id)
-                    <a href="{{ route('businesses.edit', $business->id) }}" class="btn btn-primary btn">Update
-                        Business</a>
-                @endif
-            </div>
+            @include('components.sharing', ['entity' => $business, 'type' => 'business'])
         </div>
 
         <div class="mt-5">
             <h4>Bio</h4>
             <p>{{ $business->description ?? 'No bio available.' }}</p>
-        </div>
-
-        <div class="mt-5">
-            <h4>Contact Information</h4>
-            @include('components.contact-info', ['business' => $business])
         </div>
 
         <div class="mt-5">
@@ -82,5 +72,22 @@
         "reviewCount": "{{ $business->reviews_count }}"
       }
     }
+    </script>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Find the copy link button and update its text
+                const copyButton = document.querySelector('.copy-link-btn');
+                if (copyButton) {
+                    copyButton.textContent = 'Link Copied';
+                    // Optionally revert back after a few seconds
+                    setTimeout(() => {
+                        // copyButton.textContent = 'Copy Link';
+                    }, 2000);
+                }
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+            });
+        }
     </script>
 </x-layout>
