@@ -29,6 +29,8 @@ class CreateUserRequest extends FormRequest
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'bio' => 'nullable|string|max:1000',
             'location' => ['nullable', 'string'],
+            'contact_phone' => ['nullable', 'string', 'max:20'],
+            'contact_website' => ['nullable', 'url', 'max:255'],
         ];
     }
 }

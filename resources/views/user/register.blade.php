@@ -61,6 +61,27 @@
                         @enderror
                     </div>
 
+                    <!-- Contact Phone -->
+                    <div class="mb-3">
+                        <label for="contact_phone" class="form-label">Contact Phone</label>
+                        <input type="tel" class="form-control @error('contact_phone') is-invalid @enderror" 
+                            id="contact_phone" name="contact_phone" value="{{ old('contact_phone') }}">
+                        @error('contact_phone')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Contact Website -->
+                    <div class="mb-3">
+                        <label for="contact_website" class="form-label">Website</label>
+                        <input type="url" class="form-control @error('contact_website') is-invalid @enderror" 
+                            id="contact_website" name="contact_website" value="{{ old('contact_website') }}"
+                            placeholder="https://example.com">
+                        @error('contact_website')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control @error('password') is-invalid @enderror"

@@ -75,6 +75,25 @@
                         @enderror
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="contact_phone">Contact Phone</label>
+                        <input type="tel" name="contact_phone" id="contact_phone" class="form-control"
+                            value="{{ old('contact_phone', $user->contact_phone) }}">
+                        @error('contact_phone')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="contact_website">Website</label>
+                        <input type="url" name="contact_website" id="contact_website" class="form-control"
+                            value="{{ old('contact_website', $user->contact_website) }}"
+                            placeholder="https://example.com">
+                        @error('contact_website')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="password" class="form-label">New Password (Leave blank if you don't want to
                             change)</label>

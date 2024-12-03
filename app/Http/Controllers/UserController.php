@@ -155,7 +155,9 @@ class UserController extends Controller
             'password' => 'nullable|confirmed|min:8',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'location' => 'nullable|string',
-            'bio' => 'nullable|string|max:1000'
+            'bio' => 'nullable|string|max:1000',
+            'contact_phone' => 'nullable|string|max:20',
+            'contact_website' => 'nullable|url|max:255',
         ]);
 
         $user->name = $request->input('name');
@@ -163,6 +165,8 @@ class UserController extends Controller
         $user->profession_id = $request->input('profession');
         $user->location = $request->input('location');
         $user->bio = $request->input('bio');
+        $user->contact_phone = $request->input('contact_phone');
+        $user->contact_website = $request->input('contact_website');
 
 
         if ($request->filled('password')) {
