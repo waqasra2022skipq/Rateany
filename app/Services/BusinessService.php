@@ -9,32 +9,32 @@ class BusinessService
 {
     public function getTopBusinesses($limit = 8)
     {
-        return Business::selectRaw('*, (average_rating * 0.7) + (reviews_count * 0.3) as smart_score')
+        return Business::withSmartScore()
+            ->has('reviews') // Only include businesses with reviews
             ->orderBy('smart_score', 'desc')
+            ->with(['owner:id,name', 'category:id,name,slug'])
             ->limit($limit)
             ->get();
     }
 
     public function getAllBusinesses($request)
     {
-        $userId = FacadesAuth::id();
+        $filters = $this->prepareFilters($request);
+        
+        return Business::withSmartScore()
+            ->with(['owner:id,name', 'category:id,name,slug'])
+            ->filter($filters)
+            ->orderBy('smart_score', 'desc')
+            ->paginate(20);
+    }
 
-        // Collect filters in an array
-        $filters = [
-            'userId' => $userId,
+    private function prepareFilters($request)
+    {
+        return [
+            'userId' => auth()->id(),
             'category' => $request->query('category'),
             'search' => $request->query('search'),
             'location' => $request->query('location'),
         ];
-
-
-        // Get businesses with applied filters and ordered by rating
-        $businesses = Business::with(['owner:id,name', 'category:id,name,slug']) // Load only necessary columns
-            ->filter($filters)
-            ->selectRaw('*, (average_rating * 0.7) + (reviews_count * 0.3) as smart_score')
-            ->orderBy('smart_score', 'desc')
-            ->paginate(20);
-
-        return $businesses;
     }
 }

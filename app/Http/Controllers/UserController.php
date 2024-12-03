@@ -11,6 +11,8 @@ use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Services\CaptchaService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+
 
 
 class UserController extends Controller
@@ -35,7 +37,7 @@ class UserController extends Controller
 
             $topMessage = "Professionals";
             if (!empty($request->profession)) {
-                $topMessage = ucfirst($request->profession) . "s";
+                $topMessage = ucfirst(Str::plural(str_replace('-', ' ', $request->profession)));
             }
 
             if (!empty($request->location)) {

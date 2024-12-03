@@ -12,6 +12,7 @@ use App\Models\Profession;
 use App\Services\BusinessService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 
 
@@ -57,14 +58,21 @@ class BusinessController extends Controller
 
     public function show($slug)
     {
-
-        $business = Business::with(['owner', 'category'])->where('slug', $slug)->first();
-        $reviews = $business->reviews()->latest()->with('reviewer')->paginate(5); // Paginate reviews (5 per page)
-
-        $pageTitle = $business->name;
-        $metaDescription = $business->description;
-
-        return view('business.show', compact('business', 'reviews', 'metaDescription', 'pageTitle'));
+        $business = Business::with(['owner', 'category'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+            
+        $reviews = $business->reviews()
+            ->latest()
+            ->with('reviewer')
+            ->paginate(5);
+            
+        return view('business.show', [
+            'business' => $business,
+            'reviews' => $reviews,
+            'metaDescription' => $business->description,
+            'pageTitle' => $business->name
+        ]);
     }
     public function allBusinesses(Request $request)
     {
@@ -75,7 +83,7 @@ class BusinessController extends Controller
 
         $topMessage = "Businesses";
         if (!empty($request->category)) {
-            $topMessage = ucfirst($request->category) . "s";
+            $topMessage = ucfirst(Str::plural(str_replace('-', ' ', $request->category)));
         }
 
         if (!empty($request->location)) {
@@ -87,7 +95,7 @@ class BusinessController extends Controller
     public function myBusinesses()
     {
         try {
-            $businesses = Business::with(['owner', 'category'])
+            $businesses = Business::with(['category'])
                 ->where('userId', request()->user()->id)
                 ->get();
             return view('business.manage', ['businesses' => $businesses]);
@@ -101,19 +109,27 @@ class BusinessController extends Controller
     {
         try {
             $validatedData = $request->validated();
-
+            
             if ($request->hasFile('business_logo')) {
-                $imagePath = $request->file('business_logo')->store('business_logos', 'public');
-                $validatedData['business_logo'] = $imagePath;
+                $validatedData['business_logo'] = $this->handleLogoUpload($request->file('business_logo'));
             }
-            Business::create($validatedData);
-
-            $businesses = $request->user()->businesses;
-            // return $this->apiSuccess("New Business Created", $business, 201);
-            return view('business.manage', ['businesses' => $businesses]);
-        } catch (\Throwable $th) {
-            return $this->apiError('error', $th->getMessage(), 500);
+            
+            $business = Business::create($validatedData);
+            
+            return redirect()
+                ->route('business.manage')
+                ->with('success', 'Business created successfully');
+                
+        } catch (\Exception $e) {
+            return back()
+                ->with('error', 'Failed to create business')
+                ->withInput();
         }
+    }
+
+    private function handleLogoUpload($file)
+    {
+        return $file->store('business_logos', 'public');
     }
 
     public function edit($id)
