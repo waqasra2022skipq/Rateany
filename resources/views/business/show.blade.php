@@ -43,6 +43,11 @@
         </div>
 
         <div class="mt-5">
+            <h4>Contact Information</h4>
+            @include('components.contact-info', ['business' => $business])
+        </div>
+
+        <div class="mt-5">
             @include('components.write-review', ['business_id' => $business->id])
         </div>
         <!-- Reviews Section -->

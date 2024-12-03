@@ -56,6 +56,34 @@
                         @enderror
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="contact_email">Contact Email</label>
+                        <input type="email" name="contact_email" id="contact_email" class="form-control"
+                            value="{{ old('contact_email', $business->contact_email) }}">
+                        @error('contact_email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="contact_phone">Contact Phone</label>
+                        <input type="tel" name="contact_phone" id="contact_phone" class="form-control"
+                            value="{{ old('contact_phone', $business->contact_phone) }}">
+                        @error('contact_phone')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="contact_website">Website</label>
+                        <input type="url" name="contact_website" id="contact_website" class="form-control"
+                            value="{{ old('contact_website', $business->contact_website) }}"
+                            placeholder="https://example.com">
+                        @error('contact_website')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="business_logo" class="form-label">Business Logo</label>
                         <input type="file" name="business_logo" id="business_logo"

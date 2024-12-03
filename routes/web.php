@@ -37,7 +37,7 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
         Route::get('/', 'allBusinesses')->name('allBusinesses');
-        Route::get('/manage', 'myBusinesses');
+        Route::get('/manage', 'myBusinesses')->name('businesses.manage');
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
         Route::get('/{id}/edit', 'edit')->name('businesses.edit');

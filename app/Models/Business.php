@@ -10,7 +10,7 @@ class Business extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['userId', 'categoryId', 'name', 'description', 'location', 'business_logo'];
+    protected $fillable = ['userId', 'categoryId', 'name', 'description', 'location', 'business_logo', 'contact_email', 'contact_phone', 'contact_website'];
 
     // Add constants for rating calculations
     const RATING_WEIGHT = 0.7;

@@ -29,7 +29,10 @@ class BusinessCreateRequest extends FormRequest
             'categoryId' => ['required', 'exists:categories,id'],
             'location' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'business_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'business_logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'contact_email' => ['nullable', 'email', 'max:255'],
+            'contact_phone' => ['nullable', 'string', 'max:20'],
+            'contact_website' => ['nullable', 'url', 'max:255'],
         ];
     }
 }

@@ -117,8 +117,8 @@ class BusinessController extends Controller
             $business = Business::create($validatedData);
             
             return redirect()
-                ->route('business.manage')
-                ->with('success', 'Business created successfully');
+                ->route('businesses.manage')
+                ->with('Message', 'Business created successfully');
                 
         } catch (\Exception $e) {
             return back()
@@ -162,7 +162,7 @@ class BusinessController extends Controller
             // return $this->apiSuccess("New Business Created", $business, 201);
 
             $user = $request->user();
-            return redirect()->route('profile.show', $user->id)->with('Message', 'Business Deleted successfully.');
+            return redirect()->route('profile.show', $user->id)->with('Message', 'Business Updated successfully.');
 
             // return $this->apiSuccess("New Business Created", $business, 201);
         } catch (\Throwable $th) {
