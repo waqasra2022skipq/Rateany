@@ -42,21 +42,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="profession_id" class="form-label">Profession</label>
-                        <select id="profession_id" name="profession_id"
-                            class="form-select @error('profession_id') is-invalid @enderror">
-                            <option value="">Select Profession</option>
+                        <label for="profession" class="form-label">Profession</label>
+                        <input list="professions" class="form-control" id="profession" name="profession_slug"
+                            value="{{ old('profession_slug') }}" placeholder="Search Profession...">
+                        <datalist id="professions" class="custom-select">
+                            <option value="All Professions"></option>
                             @foreach ($professions as $profession)
-                                <option value="{{ $profession->id }}"
-                                    {{ old('profession_id') == $profession->id ? 'selected' : '' }}>
-                                    {{ $profession->name }}
-                                </option>
+                                <option value="{{ $profession->slug }}">{{ $profession->name }}</option>
                             @endforeach
-                        </select>
+                        </datalist>
+
                         <span>Could find the your suited profession ? <a class="user-link"
                                 href={{ route('contact.show') }}>Write to
                                 us</a></span>
-                        @error('profession')
+                        @error('profession_slug')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -64,7 +63,7 @@
                     <!-- Contact Phone -->
                     <div class="mb-3">
                         <label for="contact_phone" class="form-label">Contact Phone</label>
-                        <input type="tel" class="form-control @error('contact_phone') is-invalid @enderror" 
+                        <input type="tel" class="form-control @error('contact_phone') is-invalid @enderror"
                             id="contact_phone" name="contact_phone" value="{{ old('contact_phone') }}">
                         @error('contact_phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -74,7 +73,7 @@
                     <!-- Contact Website -->
                     <div class="mb-3">
                         <label for="contact_website" class="form-label">Website</label>
-                        <input type="url" class="form-control @error('contact_website') is-invalid @enderror" 
+                        <input type="url" class="form-control @error('contact_website') is-invalid @enderror"
                             id="contact_website" name="contact_website" value="{{ old('contact_website') }}"
                             placeholder="https://example.com">
                         @error('contact_website')

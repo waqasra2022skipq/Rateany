@@ -26,7 +26,7 @@ class BusinessCreateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:100'],
             'userId' => ['required', 'exists:users,id'],
-            'categoryId' => ['required', 'exists:categories,id'],
+            'category_slug' => ['required', 'string'],
             'location' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'business_logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],

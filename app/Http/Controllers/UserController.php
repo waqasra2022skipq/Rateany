@@ -123,12 +123,18 @@ class UserController extends Controller
                 $imagePath = $request->file('profile_pic')->store('profile_pics', 'public');
                 $validatedData['profile_pic'] = $imagePath;
             }
+            if (isset($validatedData['profession_slug'])) {
+                $profession = Profession::where('slug', $validatedData['profession_slug'])->first();
+                $validatedData['profession_id'] = $profession->id;
+            }
             $user = $this->userService->createUser($validatedData);
             FacadesAuth::login($user);
             // return response()->json($user, 200);
             return redirect('/')->with("You have successfully register with us");
         } catch (\Throwable $th) {
-            return $this->apiError($th->getMessage(), [], 500);
+            return back()
+                ->with('error', 'Failed to create business')
+                ->withInput();
         }
     }
 
@@ -151,7 +157,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'profession' => 'nullable|exists:professions,id',
+            'profession_slug' => 'nullable|string',
             'password' => 'nullable|confirmed|min:8',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'location' => 'nullable|string',
@@ -167,6 +173,11 @@ class UserController extends Controller
         $user->bio = $request->input('bio');
         $user->contact_phone = $request->input('contact_phone');
         $user->contact_website = $request->input('contact_website');
+
+        if ($request->filled('profession_slug')) {
+            $profession = Profession::where('slug', $request->input('profession_slug'))->first();
+            $user->profession_id = $profession->id;
+        }
 
 
         if ($request->filled('password')) {

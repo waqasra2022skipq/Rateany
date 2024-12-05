@@ -21,21 +21,20 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="categoryId">Category</label>
-                        <select name="categoryId" id="categoryId" class="form-control" required>
-                            <option value="">Select Category</option>
+                        <label for="category" class="form-label">Select a Category:</label>
+                        <input list="categories" class="form-control" id="category" name="category_slug"
+                            value="{{ $business->category->name }}" placeholder="Search Category...">
+                        <datalist id="categories" class="custom-select">
+                            <option value="All Categories"></option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ $category->id == old('categoryId', $business->categoryId) ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
+                                <option value="{{ $category->slug }}">{{ $category->name }}</option>
                             @endforeach
-                        </select>
+                        </datalist>
                         <span>Could find the your suited category ? <a class="user-link"
                                 href={{ route('contact.show') }}>Write to
                                 us</a></span>
-                        @error('categoryId')
-                            <div class="text-danger">{{ $message }}</div>
+                        @error('category_slug')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 

@@ -56,21 +56,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="profession" class="form-label">Profession</label>
-                        <select id="profession" name="profession"
-                            class="form-select @error('profession') is-invalid @enderror">
-                            <option value="">Select Profession</option>
+                        <label for="profession_slug" class="form-label">Profession</label>
+                        <input list="professions" class="form-control" id="profession_slug" name="profession_slug"
+                            value="{{ $user->profession->name }}" placeholder="Search Profession...">
+                        <datalist id="professions" class="custom-select">
+                            <option value="All Professions"></option>
                             @foreach ($professions as $profession)
-                                <option value="{{ $profession->id }}"
-                                    {{ $profession->id == old('profession', $user->profession_id) ? 'selected' : '' }}>
-                                    {{ $profession->name }}
-                                </option>
+                                <option value="{{ $profession->slug }}">{{ $profession->name }}</option>
                             @endforeach
-                        </select>
+                        </datalist>
+
                         <span>Could find the your suited profession ? <a class="user-link"
                                 href={{ route('contact.show') }}>Write to
                                 us</a></span>
-                        @error('profession')
+                        @error('profession_slug')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

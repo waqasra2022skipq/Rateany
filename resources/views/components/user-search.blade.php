@@ -3,22 +3,18 @@
     <form action="{{ route('allUsers') }}" method="GET" class="row g-3">
         <!-- Category Select -->
         <div class="col-md-4">
-            <label for="category" class="form-label">Profession</label>
-            <select class="form-select" id="profession" name="profession">
-                <option value="" selected>All Professions</option>
+            <label for="profession" class="form-label">Select a Profession:</label>
+            <input list="professions" class="form-control" id="profession" name="profession"
+                value="{{ request('profession') }}" placeholder="Search Profession...">
+            <datalist id="professions" class="custom-select">
+                <option value="All Professions"></option>
                 @foreach ($professions as $profession)
-                    @php
-                        $selected = 0;
-                        if (request('profession') == $profession->slug) {
-                            $selected = 'selected';
-                        }
-                    @endphp
-                    <option value="{{ $profession->slug }}" {{ $selected }}>{{ $profession->name }}</option>
+                    <option value="{{ $profession->slug }}">{{ $profession->name }}</option>
                 @endforeach
-            </select>
+            </datalist>
         </div>
 
-        <!-- Business Name Search -->
+        <!-- User Name Search -->
         <div class="col-md-4">
             <label for="businessName" class="form-label">Username</label>
             <input type="text" class="form-control" id="userName" value="{{ request('search') }}" name="search"

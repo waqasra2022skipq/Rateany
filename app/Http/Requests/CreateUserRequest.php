@@ -9,10 +9,10 @@ class CreateUserRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    // public function authorize(): bool
-    // {
-    //     return false;
-    // }
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +24,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users'],
-            'profession_id' => ['integer', 'nullable'],
+            'profession_slug' => ['nullable', 'string'],
             'password' => ['required', 'string', 'min:6'],
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'bio' => 'nullable|string|max:1000',

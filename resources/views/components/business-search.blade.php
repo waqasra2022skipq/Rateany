@@ -3,21 +3,16 @@
     <form action="{{ route('allBusinesses') }}" method="GET" class="row g-3">
         <!-- Category Select -->
         <div class="col-md-4">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select" id="category" name="category">
-                <option value="" selected>All Categories</option>
+            <label for="category" class="form-label">Select a Category:</label>
+            <input list="categories" class="form-control" id="category" name="category" value="{{ request('category') }}"
+                placeholder="Search Category...">
+            <datalist id="categories" class="custom-select">
+                <option value="All Categories"></option>
                 @foreach ($categories as $category)
-                    @php
-                        $selected = 0;
-                        if (request('category') == $category->slug) {
-                            $selected = 'selected';
-                        }
-                    @endphp
-                    <option value="{{ $category->slug }}" {{ $selected }}>
-                        {{ $category->name }}
-                    </option>
+                    <option value="{{ $category->slug }}">{{ $category->name }}</option>
                 @endforeach
-            </select>
+            </datalist>
+
         </div>
 
         <!-- Business Name Search -->

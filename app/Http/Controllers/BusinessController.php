@@ -61,12 +61,12 @@ class BusinessController extends Controller
         $business = Business::with(['owner', 'category'])
             ->where('slug', $slug)
             ->firstOrFail();
-            
+
         $reviews = $business->reviews()
             ->latest()
             ->with('reviewer')
             ->paginate(5);
-            
+
         return view('business.show', [
             'business' => $business,
             'reviews' => $reviews,
@@ -109,17 +109,21 @@ class BusinessController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            
+
             if ($request->hasFile('business_logo')) {
                 $validatedData['business_logo'] = $this->handleLogoUpload($request->file('business_logo'));
             }
-            
+
+            if ($request->filled('category_slug')) {
+                $category = Category::where('slug', $request->input('category_slug'))->first();
+                $validatedData['categoryId'] = $category->id;
+            }
+
             $business = Business::create($validatedData);
-            
+
             return redirect()
                 ->route('businesses.manage')
                 ->with('Message', 'Business created successfully');
-                
         } catch (\Exception $e) {
             return back()
                 ->with('error', 'Failed to create business')
@@ -157,6 +161,11 @@ class BusinessController extends Controller
                 }
                 $imagePath = $request->file('business_logo')->store('business_logos', 'public');
                 $validatedData['business_logo'] = $imagePath;
+            }
+
+            if ($request->filled('category_slug')) {
+                $category = Category::where('slug', $request->input('category_slug'))->first();
+                $validatedData['categoryId'] = $category->id;
             }
             $business->update($validatedData);
             // return $this->apiSuccess("New Business Created", $business, 201);
