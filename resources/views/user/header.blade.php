@@ -28,11 +28,6 @@
 
 @include('components.sharing', ['entity' => $user, 'type' => 'user'])
 <!-- Edit/Delete Buttons or Write Review -->
-<div class="col-md-2 text-center">
-    @if (auth()->check() && auth()->user()->id == $user->id)
-        <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary btn mt-3">Update Profile</a>
-    @endif
-</div>
 
 <div class="profile-bio">
     <h4>Bio</h4>
