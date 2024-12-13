@@ -16,6 +16,9 @@
                 @include('components.business-card', ['business' => $business])
             @endforeach
         </div>
+        <div class="col-md-12 text-center mt-4">
+            <a href="{{ route('allBusinesses') }}" class="btn btn-primary">Browse all Businesses</a>
+        </div>
     </div>
 
 
@@ -32,6 +35,9 @@
             @foreach ($topProfessionals as $Professional)
                 @include('components.user-card', ['user' => $Professional])
             @endforeach
+        </div>
+        <div class="col-md-12 text-center mt-4">
+            <a href="{{ route('allUsers') }}" class="btn btn-primary center">Browse all Professionals</a>
         </div>
     </div>
 
