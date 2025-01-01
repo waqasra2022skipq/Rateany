@@ -159,7 +159,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'profession_slug' => 'nullable|string',
             'password' => 'nullable|confirmed|min:8',
-            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'location' => 'nullable|string',
             'bio' => 'nullable|string|max:1000',
             'contact_phone' => 'nullable|string|max:20',
@@ -168,14 +168,14 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->profession_id = $request->input('profession');
+        // $user->profession_id = $request->input('profession');
         $user->location = $request->input('location');
         $user->bio = $request->input('bio');
         $user->contact_phone = $request->input('contact_phone');
         $user->contact_website = $request->input('contact_website');
 
         if ($request->filled('profession_slug')) {
-            $profession = Profession::where('slug', $request->input('profession_slug'))->first();
+            $profession = Profession::where('slug', $request->input('profession_slug'))->orWhere('name', $request->input('profession_slug'))->first();
             $user->profession_id = $profession->id;
         }
 
@@ -189,6 +189,7 @@ class UserController extends Controller
             if ($user->profile_pic && \Storage::exists('public/' . $user->profile_pic)) {
                 \Storage::delete('public/' . $user->profile_pic);
             }
+
             $imagePath = $request->file('profile_pic')->store('profile_pics', 'public');
             $user->profile_pic = $imagePath;
         }

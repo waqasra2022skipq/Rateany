@@ -164,7 +164,7 @@ class BusinessController extends Controller
             }
 
             if ($request->filled('category_slug')) {
-                $category = Category::where('slug', $request->input('category_slug'))->first();
+                $category = Category::where('slug', $request->input('category_slug'))->orWhere('name', $request->input('category_slug'))->first();
                 $validatedData['categoryId'] = $category->id;
             }
             $business->update($validatedData);
