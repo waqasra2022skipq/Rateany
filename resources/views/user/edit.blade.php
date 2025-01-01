@@ -58,7 +58,7 @@
                     <div class="mb-3">
                         <label for="profession_slug" class="form-label">Profession</label>
                         <input list="professions" class="form-control" id="profession_slug" name="profession_slug"
-                            value="{{ $user->profession->name }}" placeholder="Search Profession...">
+                            value="{{ $user->profession?->name }}" placeholder="Search Profession...">
                         <datalist id="professions" class="custom-select">
                             <option value="All Professions"></option>
                             @foreach ($professions as $profession)
