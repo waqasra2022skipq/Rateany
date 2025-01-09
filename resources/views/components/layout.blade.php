@@ -14,6 +14,7 @@
         @vite(['resources/js/app.js'])
         @vite(['resources/sass/app.scss'])
         <script async src="https://www.google.com/recaptcha/api.js"></script>
+        @livewireStyles
     </head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKJ14JPDD9"></script>
@@ -109,6 +110,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        @livewireScripts
     </body>
 
 </html>

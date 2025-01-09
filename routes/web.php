@@ -4,9 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ReviewController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserQueryController;
+use App\Livewire\Home;
+use App\Livewire\Profile\Profile;
 
 
 Route::get('/', [BusinessController::class, 'home']);
@@ -56,3 +57,11 @@ Route::get('/contact-us', [UserQueryController::class, 'show'])->name('contact.s
 
 Route::get('/contacts', [UserQueryController::class, 'index'])->name('contacts.index');
 Route::post('/contact-us', [UserQueryController::class, 'store'])->name('user_queries.store');
+
+// Livewire updates
+
+Route::get('/home', Home::class)->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', Profile::class)->name('profile.profile');
+});
