@@ -14,14 +14,14 @@
             <h2 class="text-2xl font-bold mb-6">Top Rated Businesses</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach ($topBusinesses as $business)
-                    <div class="border p-4 rounded-lg shadow">
+                    @livewire('business-card', ['business' => $business])
+                    {{-- <div class="border p-4 rounded-lg shadow">
                         <h3 class="text-lg font-semibold">{{ $business->name }}</h3>
                         <p class="text-gray-600">{{ $business->category->name }}</p>
-                        <div class="mt-2">
-                            <span class="text-yellow-500">★ {{ $business->average_rating }}</span>
-                        </div>
-                        <a href="/business/{{ $business->id }}" class="text-blue-500 mt-4 inline-block">View Details</a>
-                    </div>
+                        @livewire('review-stars', ['entity' => $business])
+                        <a href="/business/{{ $business->id }}" class="text-blue-500 mt-4 inline-block">View
+                            Details</a>
+                    </div> --}}
                 @endforeach
             </div>
         </div>
@@ -39,28 +39,12 @@
         </div>
     </section>
     {{-- Latest Reviews --}}
-    <section class="py-10 bg-gray-50">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-6">Latest Reviews</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach ($reviews as $review)
-                    <div class="border p-4 rounded-lg shadow">
-                        <h3 class="text-lg font-semibold">{{ $review->business?->name }}</h3>
-                        <p class="text-gray-600">{{ $review->reviewer?->name }}</p>
-                        <div class="mt-2">
-                            <span class="text-yellow-500">★ {{ $review->rating }}</span>
-                        </div>
-                        <p class="mt-4">{{ $review->comments }}</p>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+
     <section class="py-10 bg-gray-50">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold mb-6">Latest Reviews</h2>
             <div
-                class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800">
+                class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-3 bg-white dark:bg-gray-800">
                 @foreach ($reviews as $review)
                     <figure
                         class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
@@ -101,13 +85,12 @@
                                 @endswitch
                                 <i class="star fa fa-star text-{{ $starColor }}-500"></i>
                             @endfor
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $review->rating }}
                             </h3>
-                            <p class="my-4">{{ $review->comments }}</p>
+                            <p class="my-2"> {{ Str::limit($review->comments, 125) }}</p>
                         </blockquote>
                         <figcaption class="flex items-center justify-center ">
                             <div class="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-                                <div>{{ $review->reviewer?->name }}</div>
+                                <div>{{ $review?->reviewer_name }}</div>
                             </div>
                         </figcaption>
                     </figure>
