@@ -95,24 +95,30 @@
 
 
     {{-- Hero section END --}}
-    <section class="py-10 bg-white">
+
+    {{-- Top Rated Businesses --}}
+    <section class="py-10 bg-gray-50">
         <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-6">Top Rated Businesses</h2>
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-extrabold text-gray-800">Top Rated Businesses</h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    Discover the most loved and highly rated businesses around you, trusted by thousands of customers.
+                </p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 @foreach ($topBusinesses as $business)
                     @livewire('business-card', ['business' => $business])
                 @endforeach
             </div>
             <!-- Browse All Businesses Button -->
-            <div class="mt-8 text-center">
+            <div class="mt-10 text-center">
                 <a href="{{ route('allBusinesses') }}"
-                    class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                     Browse All Businesses
                 </a>
             </div>
         </div>
     </section>
-
     <section class="py-10 bg-gray-50">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold mb-6">Browse by Category</h2>
@@ -127,86 +133,33 @@
     </section>
 
     {{-- Top Rated Professional --}}
-
-    <section class="py-10 bg-white mb-10">
+    <section class="py-10 bg-gray-50 mb-10">
         <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-6">Top Rated Professional</h2>
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-extrabold text-gray-800">Top Rated Professionals</h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    Meet the top-rated professionals, trusted by clients for their exceptional skills and expertise.
+                </p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 @foreach ($topProfessionals as $professional)
                     @livewire('professionals.professional-card', ['professional' => $professional])
                 @endforeach
             </div>
-            <div class="mt-8 text-center">
+            <div class="mt-10 text-center">
                 <a href="{{ route('allUsers') }}"
-                    class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                     Browse All Professionals
                 </a>
             </div>
         </div>
     </section>
+    {{-- Top Rated Professional End --}}
+
+
     {{-- Latest Reviews --}}
+    {{-- @component('components.latest-reviews', ['reviews' => $reviews]) --}}
+    @include('components.latest-reviews')
 
-    <section class="py-10 bg-green-50">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-bold mb-6">Latest Reviews</h2>
-            <div
-                class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-3 bg-white dark:bg-gray-800">
-                @foreach ($reviews as $review)
-                    <figure
-                        class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
-                        <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
-                            @for ($i = 1; $i <= $review->rating; $i++)
-                                @switch($review->rating)
-                                    @case(1)
-                                        @php
-                                            $starColor = 'red';
-                                        @endphp
-                                    @break
-
-                                    @case(2)
-                                        @php
-                                            $starColor = 'yellow';
-                                        @endphp
-                                    @break
-
-                                    @case(3)
-                                        @php
-                                            $starColor = 'blue';
-                                        @endphp
-                                    @break
-
-                                    @case(4)
-                                        @php
-                                            $starColor = 'blue';
-                                        @endphp
-                                    @break
-
-                                    @case(5)
-                                        @php
-                                            $starColor = 'green';
-                                        @endphp
-                                    @break
-
-                                    @default
-                                @endswitch
-                                <i class="star fa fa-star text-{{ $starColor }}-500"></i>
-                            @endfor
-                            </h3>
-                            <p class="my-2"> {{ Str::limit($review->comments, 125) }}</p>
-                        </blockquote>
-                        <figcaption class="flex items-center justify-center ">
-                            <div class="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-                                <div>{{ $review?->reviewer_name }}</div>
-                            </div>
-                        </figcaption>
-                    </figure>
-                @endforeach
-
-
-
-            </div>
-        </div>
-
-    </section>
 
 </div>

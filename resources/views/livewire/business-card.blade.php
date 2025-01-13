@@ -1,5 +1,5 @@
 <div
-    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 business-card">
+    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 business-card transform transition-transform hover:scale-105">
     <a href="#">
         <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
             alt="{{ $business->name }} Logo" class="rounded-t-lg cover w-full h-40">
@@ -17,7 +17,8 @@
         </a>
         @livewire('review-stars', ['entity' => $business])
     </div>
-    <div class="p-5 pb-2">
+
+    <div class="p-5">
         <a href="{{ route('businesses.show', $business->slug) }}"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             View Details
