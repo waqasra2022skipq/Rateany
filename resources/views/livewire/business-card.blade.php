@@ -5,7 +5,7 @@
             alt="{{ $business->name }} Logo" class="rounded-t-lg cover w-full h-40">
     </a>
     <div class="p-5 business-card-content">
-        <a href="{{ route('businesses.show', $business->id) }}">
+        <a href="{{ route('businesses.show', $business->slug) }}">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white business-card-title">
                 {{ Str::limit($business->name, 25) }}
             </h5>
