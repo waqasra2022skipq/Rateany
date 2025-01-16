@@ -33,7 +33,12 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}/write-review', 'reviewForm')->name('user.write-review');
 });
 
-
+Route::prefix('/professionals')->group(function () {
+    Route::prefix('/professions')->group(function () {
+        // Route::get('/', 'allBusinesses')->name('allCategories');
+        // Route::get('/{slug}', 'allBusinesses')->name('category');
+    });
+});
 
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
@@ -47,6 +52,12 @@ Route::controller(BusinessController::class)->group(function () {
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 
         Route::get('/{id}/write-review', 'reviewForm')->name('businesses.write-review');
+
+
+        Route::prefix('/categories')->group(function () {
+            Route::get('/', 'allBusinesses')->name('allCategories');
+            Route::get('/{slug}', 'allBusinesses')->name('category');
+        });
     });
 });
 

@@ -1,11 +1,11 @@
 {{-- Latest Reviews --}}
-<section class="py-10">
+<section class="p-10 bg-white">
     <div class="container mx-auto">
         <!-- Section Header -->
         <div class="text-center mb-10">
             <h2 class="text-4xl font-extrabold text-gray-800 underline">Latest Customer Reviews</h2>
             <p class="mt-4 text-lg text-gray-600">
-                See what customers are saying about top-rated businesses and professionals.a
+                See what customers are saying about top-rated businesses and professionals.
             </p>
         </div>
 
