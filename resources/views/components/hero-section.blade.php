@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 hero-section text-white">
+<div class="mx-auto sm:px-6 lg:px-8 hero-section text-white">
     <div class="relative px-6 py-10 overflow-hidden text-center  isolate sm:px-16 sm:shadow-sm dark:bg-transparent">
 
         <p class="max-w-2xl mx-auto text-3xl font-bold tracking-tight  dark:text-gray-200 sm:text-4xl">
