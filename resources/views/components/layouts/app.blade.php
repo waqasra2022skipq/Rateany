@@ -10,6 +10,7 @@
         <title>Rateany | {{ $pageTitle ?? 'Top rated businesses and professionals' }}</title>
 
         @vite('resources/css/app.css')
+        @livewireStyles
     </head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKJ14JPDD9"></script>
@@ -24,13 +25,15 @@
         gtag('config', 'G-PKJ14JPDD9');
     </script>
 
-    <body>
+    <body class="antialiased">
         @livewire('navbar')
 
         {{ $slot }}
         @include('components.footer')
 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+        @vite('resources/js/app.js')
+        @livewireScripts
     </body>
 
 </html>

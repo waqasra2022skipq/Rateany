@@ -6,8 +6,10 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserQueryController;
+use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
+use App\Livewire\Businesses\CategoryPage;
 
 
 Route::get('/', [BusinessController::class, 'home']);
@@ -52,12 +54,6 @@ Route::controller(BusinessController::class)->group(function () {
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 
         Route::get('/{id}/write-review', 'reviewForm')->name('businesses.write-review');
-
-
-        Route::prefix('/categories')->group(function () {
-            Route::get('/', 'allBusinesses')->name('allCategories');
-            Route::get('/{slug}', 'allBusinesses')->name('category');
-        });
     });
 });
 
@@ -75,4 +71,10 @@ Route::get('/home', Home::class)->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile.profile');
+});
+Route::prefix('/businesses')->group(function () {
+    Route::prefix('/categories')->group(function () {
+        Route::get('/categories', Categories::class)->name('categories');
+        Route::get('/{slug}', CategoryPage::class)->name('categoryPage');
+    });
 });

@@ -1,4 +1,4 @@
-<div
+<div wire:key="item-{{ $business->id }}"
     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
     <!-- Business Logo -->
     <a href="{{ route('businesses.show', $business->slug) }}">
@@ -16,14 +16,32 @@
         </a>
 
         <!-- Business Category -->
-        <a href="{{ route('category', ['slug' => $business->category->slug]) }}">
+        <a href="{{ route('categoryPage', ['slug' => $business->category->slug]) }}">
             <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400 truncate">
                 {{ $business->category->name }}
             </p>
         </a>
 
-        <!-- Review Stars -->
-        @livewire('review-stars', ['entity' => $business])
+        <!-- Business Location -->
+        <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400 truncate">
+            {{ $business->location }}
+        </p>
+
+        <div class="mt-5">
+            <div class="mt-2">
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <= $business->average_rating)
+                        <i class="fas fa-star text-yellow-500"></i>
+                    @elseif($i - 0.5 <= $business->average_rating)
+                        <i class="fas fa-star-half-alt text-yellow-500"></i>
+                    @else
+                        <i class="far fa-star text-yellow-500"></i>
+                    @endif
+                @endfor
+                <strong>{{ number_format($business->average_rating, 1) }}
+                    ({{ $business->reviews_count }})</strong>
+            </div>
+        </div>
 
         <!-- Action Button -->
         <div class="mt-4">

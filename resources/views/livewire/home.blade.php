@@ -41,7 +41,7 @@
                                 @if ($loop->index < 10)
                                     {{-- Display only top 10 categories --}}
                                     <li>
-                                        <a href="{{ route('category', $category->slug) }}"
+                                        <a href="{{ route('categoryPage', $category->slug) }}"
                                             class="text-blue-600 hover:underline font-medium">
                                             {{ $category->name }}
                                         </a>
@@ -50,7 +50,7 @@
                             @endforeach
                         </ul>
                         <div class="mt-5">
-                            <a href="{{ route('allCategories') }}"
+                            <a href="{{ route('categories') }}"
                                 class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 Explore All Categories
                             </a>
@@ -98,7 +98,7 @@
                                 @if ($loop->index < 10)
                                     {{-- Display only top 10 categories --}}
                                     <li>
-                                        <a href="{{ route('category', $profession->slug) }}"
+                                        <a href="{{ route('categoryPage', $profession->slug) }}"
                                             class="text-blue-600 hover:underline font-medium">
                                             {{ $profession->name }}
                                         </a>
@@ -107,7 +107,7 @@
                             @endforeach
                         </ul>
                         <div class="mt-5">
-                            <a href="{{ route('allCategories') }}"
+                            <a href="#"
                                 class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 Explore All Professionals
                             </a>
