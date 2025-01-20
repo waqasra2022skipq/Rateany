@@ -8,7 +8,7 @@
                 <nav class="text-sm">
                     <a href="/" class="text-blue-600 hover:underline">Home</a>
                     <span class="mx-2">/</span>
-                    <a href="/categories" class="text-blue-600 hover:underline">Categories</a>
+                    <a href="{{ route('categories') }}" class="text-blue-600 hover:underline">Categories</a>
                     <span class="mx-2">/</span>
                     <span class="text-gray-700">{{ $category->name }}</span>
                 </nav>
@@ -85,7 +85,7 @@
                 @endforeach
             </div>
             <div class="mt-10 text-center">
-                {{ $businesses->links('pagination::tailwind') }}
+                {{ $businesses->links() }}
             </div>
 
         </div>

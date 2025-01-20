@@ -32,7 +32,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="mt-4">
+    <div class="mt-4 mb-2">
         {{ $categories->links() }}
     </div>
 </section>
