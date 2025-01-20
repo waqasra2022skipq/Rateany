@@ -84,7 +84,7 @@
                     <div class="mt-10 text-center">
                         <a href="{{ route('allBusinesses') }}"
                             class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                            Browse All Businesses
+                            Browse All Professionals
                         </a>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                                 @if ($loop->index < 10)
                                     {{-- Display only top 10 categories --}}
                                     <li>
-                                        <a href="{{ route('categoryPage', $profession->slug) }}"
+                                        <a href="{{ route('professionPage', $profession->slug) }}"
                                             class="text-blue-600 hover:underline font-medium">
                                             {{ $profession->name }}
                                         </a>
@@ -107,7 +107,7 @@
                             @endforeach
                         </ul>
                         <div class="mt-5">
-                            <a href="#"
+                            <a href="{{ route('professions') }}"
                                 class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 Explore All Professionals
                             </a>
