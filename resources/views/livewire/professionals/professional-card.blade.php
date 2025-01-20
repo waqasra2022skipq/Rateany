@@ -17,7 +17,8 @@
 
         <!-- Profession -->
         <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400 truncate">
-            {{ $professional->profession->name }}
+            <a
+                href="{{ route('professionPage', ['slug' => $professional->profession->slug]) }}">{{ $professional->profession->name }}</a>
         </p>
 
         <!-- Review Stars -->

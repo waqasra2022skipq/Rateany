@@ -10,7 +10,8 @@ use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
 use App\Livewire\Businesses\CategoryPage;
-
+use App\Livewire\Professionals\ProfessionPage;
+use App\Livewire\Professionals\Professions;
 
 Route::get('/', [BusinessController::class, 'home']);
 
@@ -35,12 +36,6 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}/write-review', 'reviewForm')->name('user.write-review');
 });
 
-Route::prefix('/professionals')->group(function () {
-    Route::prefix('/professions')->group(function () {
-        // Route::get('/', 'allBusinesses')->name('allCategories');
-        // Route::get('/{slug}', 'allBusinesses')->name('category');
-    });
-});
 
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
@@ -73,8 +68,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile.profile');
 });
 Route::prefix('/businesses')->group(function () {
-    Route::prefix('/categories')->group(function () {
-        Route::get('/categories', Categories::class)->name('categories');
+    Route::prefix('/business-categories')->group(function () {
+        Route::get('/all', Categories::class)->name('categories');
         Route::get('/{slug}', CategoryPage::class)->name('categoryPage');
     });
+});
+
+
+Route::prefix('/professionals')->group(function () {
+
+    Route::get('/user-professions/all', Professions::class)->name('professions');
+    Route::get('/user-professions/{slug}', ProfessionPage::class)->name('professionPage');
 });

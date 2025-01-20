@@ -13,6 +13,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    // Add constants for rating calculations
+    const RATING_WEIGHT = 0.7;
+    const REVIEW_COUNT_WEIGHT = 0.3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -121,5 +125,14 @@ class User extends Authenticatable
         }
 
         return $query;
+    }
+
+    // Add a scope for smart score calculation
+    public function scopeWithSmartScore($query)
+    {
+        return $query->selectRaw(
+            '*, (average_rating * ? + reviews_count * ?) as smart_score',
+            [self::RATING_WEIGHT, self::REVIEW_COUNT_WEIGHT]
+        );
     }
 }
