@@ -9,6 +9,8 @@ use App\Models\Category;
 class CategoryPage extends Component
 {
     use WithPagination;
+    public $pageTitle;
+    public $metaDescription;
 
     public $category;
     public $relatedCategories;
@@ -19,6 +21,10 @@ class CategoryPage extends Component
     public function mount($slug)
     {
         $this->category = Category::where('slug', $slug)->firstOrFail();
+        $slug = str_replace('-', ' ', $slug);
+        $this->pageTitle = ucwords($slug);
+
+        $this->metaDescription = "Find the {$this->pageTitle} on RateAny.co. Read reviews, compare ratings, and choose trusted businesses today.";
 
         // Fetch related categories
         $this->relatedCategories = Category::where('id', '!=', $this->category->id)
@@ -51,6 +57,6 @@ class CategoryPage extends Component
             'category' => $this->category,
             'businesses' => $businesses,
             'relatedCategories' => $this->relatedCategories,
-        ]);
+        ])->layout('components.layouts.app', ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription]);
     }
 }

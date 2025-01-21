@@ -21,7 +21,7 @@
                     class="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
                         <!-- Replace with category icon or dynamic content -->
-                        <i class="fas fa-tag"></i>
+                        <i class="fas fa-user"></i>
                     </div>
                     <h3 class="text-sm font-medium text-gray-800 text-center">
                         {{ $profession->name }}

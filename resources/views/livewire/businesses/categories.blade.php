@@ -2,9 +2,9 @@
     <!-- Header -->
     <div class="bg-blue-50 py-8">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold text-gray-800">Browse Categories</h1>
+            <h1 class="text-4xl font-bold text-gray-800">{{ $pageTitle }}</h1>
             <p class="mt-4 text-lg text-gray-600">
-                Explore all categories to find businesses that suit your needs.
+                Explore a wide range of categories to find the best-rated businesses.
             </p>
             <div class="mt-6">
                 <input type="text" wire:model="search" wire:input='$refresh' placeholder="Search categories..."

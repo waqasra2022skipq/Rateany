@@ -10,6 +10,9 @@ use App\Models\Profession;
 class Professions extends Component
 {
     use WithPagination;
+    public $pageTitle = "Top Rated Professions on Rateany";
+    public $metaDescription = "Explore a directory of top-rated professionals on RateAny.co. Connect with lawyers, doctors, and other experts today.";
+
 
     public $search = '';
 
@@ -28,6 +31,13 @@ class Professions extends Component
                 $query->where('name', 'like', '%' . $this->search . '%');
             })
             ->paginate(12);
-        return view('livewire.professionals.professions', ['professions' => $professions]);
+        return view('livewire.professionals.professions', ['professions' => $professions])
+            ->layout(
+                'components.layouts.app',
+                [
+                    'pageTitle' => $this->pageTitle,
+                    'metaDescription' => $this->metaDescription
+                ]
+            );
     }
 }

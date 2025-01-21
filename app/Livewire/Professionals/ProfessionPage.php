@@ -9,6 +9,8 @@ use App\Models\Profession;
 class ProfessionPage extends Component
 {
     use WithPagination;
+    public $pageTitle;
+    public $metaDescription;
 
     public $profession;
     public $relatedProfessions;
@@ -19,6 +21,9 @@ class ProfessionPage extends Component
     public function mount($slug)
     {
         $this->profession = Profession::where('slug', $slug)->firstOrFail();
+        $slug = str_replace('-', ' ', $slug);
+        $this->pageTitle = ucwords($slug);
+        $this->metaDescription = "Discover the {$this->pageTitle} on RateAny.co. Compare reviews, ratings, and find trusted legal professionals on RateAny.co";
 
         // Fetch related categories
         $this->relatedProfessions = Profession::where('id', '!=', $this->profession->id)
@@ -31,6 +36,12 @@ class ProfessionPage extends Component
     {
         // Reset pagination when a filter or search term is updated
         $this->resetPage();
+    }
+
+    public function updatedLocation($location)
+    {
+        // Reset pagination when location is updated
+        $this->location =  $location;
     }
 
     public function render()
@@ -51,6 +62,12 @@ class ProfessionPage extends Component
             'profession' => $this->profession,
             'professionals' => $professionals,
             'relatedProfessions' => $this->relatedProfessions,
-        ]);
+        ])->layout(
+            'components.layouts.app',
+            [
+                'pageTitle' => $this->pageTitle,
+                'metaDescription' => $this->metaDescription
+            ]
+        );
     }
 }
