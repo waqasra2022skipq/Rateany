@@ -67,16 +67,12 @@ Route::get('/home', Home::class)->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile.profile');
 });
-Route::prefix('/businesses')->group(function () {
-    Route::prefix('/business-categories')->group(function () {
-        Route::get('/all', Categories::class)->name('categories');
-        Route::get('/{slug}', CategoryPage::class)->name('categoryPage');
-    });
+Route::prefix('/categories')->group(function () {
+    Route::get('/', Categories::class)->name('categories');
+    Route::get('/{slug}', CategoryPage::class)->name('categoryPage');
 });
 
-
-Route::prefix('/professionals')->group(function () {
-
-    Route::get('/user-professions/all', Professions::class)->name('professions');
-    Route::get('/user-professions/{slug}', ProfessionPage::class)->name('professionPage');
+Route::prefix('/professions')->group(function () {
+    Route::get('/', Professions::class)->name('professions');
+    Route::get('/{slug}', ProfessionPage::class)->name('professionPage');
 });

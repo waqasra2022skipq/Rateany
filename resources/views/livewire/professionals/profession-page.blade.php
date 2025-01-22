@@ -3,16 +3,8 @@
     <div class="bg-blue-50 py-8">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold text-gray-800">{{ $profession->name }}</h1>
-            <p class="mt-4 text-lg text-gray-600">{{ $profession->description }}</p>
-            <div class="mt-6">
-                <nav class="text-sm">
-                    <a href="{{ route('home') }}" class="text-blue-600 hover:underline">Home</a>
-                    <span class="mx-2">/</span>
-                    <a href="{{ route('professions') }}" class="text-blue-600 hover:underline">Professions</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-gray-700">{{ $profession->name }}</span>
-                </nav>
-            </div>
+            <p class="mt-4 text-lg text-gray-600">{{ $metaDescription }}</p>
+
         </div>
     </div>
 
@@ -28,12 +20,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 @foreach ($professionals as $professional)
                     <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
+                        class="mx-1 bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
                         <!-- Professional Profile Picture -->
                         <a href="{{ route('user.show', $professional->username) }}">
                             <img src="{{ $professional->profile_pic ? asset('storage/' . $professional->profile_pic) : asset('default-user-logo.png') }}"
                                 alt="{{ $professional->name }} Profile Picture"
-                                class="rounded-t-lg w-full h-20 object-cover">
+                                class="rounded-t-lg w-full h-40 object-cover">
                         </a>
 
                         <!-- Card Content -->
@@ -45,14 +37,29 @@
                                 </h5>
                             </a>
 
-                            <!-- Profession -->
+                            <!-- Professional Location -->
                             <p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400 truncate">
-                                <a
-                                    href="{{ route('professionPage', ['slug' => $professional->profession->slug]) }}">{{ $professional->profession->name }}</a>
+                                {{ $professional->location }}
                             </p>
 
                             <!-- Review Stars -->
-                            @livewire('review-stars', ['entity' => $professional])
+                            {{-- @livewire('review-stars', ['entity' => $professional]) --}}
+
+                            <div class="mt-5">
+                                <div class="mt-2">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $professional->average_rating)
+                                            <i class="fas fa-star text-yellow-500"></i>
+                                        @elseif($i - 0.5 <= $professional->average_rating)
+                                            <i class="fas fa-star-half-alt text-yellow-500"></i>
+                                        @else
+                                            <i class="far fa-star text-yellow-500"></i>
+                                        @endif
+                                    @endfor
+                                    <strong>{{ number_format($professional->average_rating, 1) }}
+                                        ({{ $professional->reviews_count }})</strong>
+                                </div>
+                            </div>
 
                             <!-- Action Button -->
                             <div class="mt-4">

@@ -82,7 +82,7 @@
                     </div>
                     <!-- Browse All Businesses Button -->
                     <div class="mt-10 text-center">
-                        <a href="{{ route('allBusinesses') }}"
+                        <a href="{{ route('allUsers') }}"
                             class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Browse All Professionals
                         </a>
@@ -109,7 +109,7 @@
                         <div class="mt-5">
                             <a href="{{ route('professions') }}"
                                 class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                                Explore All Professionals
+                                Explore All Professions
                             </a>
                         </div>
                     </div>

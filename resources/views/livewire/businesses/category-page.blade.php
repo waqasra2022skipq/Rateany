@@ -3,16 +3,7 @@
     <div class="bg-blue-50 py-8">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold text-gray-800">{{ $category->name }}</h1>
-            <p class="mt-4 text-lg text-gray-600">{{ $category->description }}</p>
-            <div class="mt-6">
-                <nav class="text-sm">
-                    <a href="{{ route('home') }}" class="text-blue-600 hover:underline">Home</a>
-                    <span class="mx-2">/</span>
-                    <a href="{{ route('categories') }}" class="text-blue-600 hover:underline">Categories</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-gray-700">{{ $category->name }}</span>
-                </nav>
-            </div>
+            <p class="mt-4 text-lg text-gray-600">{{ $metaDescription }}</p>
         </div>
     </div>
 

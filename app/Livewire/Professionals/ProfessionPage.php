@@ -25,7 +25,7 @@ class ProfessionPage extends Component
         $this->profession = Profession::where('slug', $slug)->firstOrFail();
         $slug = str_replace('-', ' ', $slug);
         $this->pageTitle = ucwords($slug);
-        $this->metaDescription = "Discover the {$this->pageTitle} on RateAny.co. Compare reviews, ratings, and find trusted legal professionals on RateAny.co";
+        $this->metaDescription = "Discover the {$this->pageTitle} on RateAny.co. Compare reviews, ratings, and find trusted legal professionals.";
 
         // Fetch related categories
         $this->relatedProfessions = Profession::where('id', '!=', $this->profession->id)
