@@ -17,6 +17,7 @@ class CategoryPage extends Component
 
     public $search = '';
     public $location = '';
+    protected $queryString = ['search', 'location'];
 
     public function mount($slug)
     {

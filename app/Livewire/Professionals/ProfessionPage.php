@@ -18,6 +18,8 @@ class ProfessionPage extends Component
     public $search = '';
     public $location = '';
 
+    protected $queryString = ['search', 'location'];
+
     public function mount($slug)
     {
         $this->profession = Profession::where('slug', $slug)->firstOrFail();
