@@ -4,10 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ReviewController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserQueryController;
-
+use App\Livewire\Businesses\Categories;
+use App\Livewire\Home;
+use App\Livewire\Profile\Profile;
+use App\Livewire\Businesses\CategoryPage;
+use App\Livewire\Professionals\ProfessionPage;
+use App\Livewire\Professionals\Professions;
 
 Route::get('/', [BusinessController::class, 'home']);
 
@@ -33,7 +37,6 @@ Route::controller(UserController::class)->group(function () {
 });
 
 
-
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
         Route::get('/', 'allBusinesses')->name('allBusinesses');
@@ -56,3 +59,20 @@ Route::get('/contact-us', [UserQueryController::class, 'show'])->name('contact.s
 
 Route::get('/contacts', [UserQueryController::class, 'index'])->name('contacts.index');
 Route::post('/contact-us', [UserQueryController::class, 'store'])->name('user_queries.store');
+
+// Livewire updates
+
+Route::get('/home', Home::class)->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', Profile::class)->name('profile.profile');
+});
+Route::prefix('/categories')->group(function () {
+    Route::get('/', Categories::class)->name('categories');
+    Route::get('/{slug}', CategoryPage::class)->name('categoryPage');
+});
+
+Route::prefix('/professions')->group(function () {
+    Route::get('/', Professions::class)->name('professions');
+    Route::get('/{slug}', ProfessionPage::class)->name('professionPage');
+});
