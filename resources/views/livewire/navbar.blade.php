@@ -1,9 +1,7 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900 p-6">
-    <div class="flex flex-wrap items-center justify-between mx-auto">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/logo.webp') }}" alt="Rateany Logo" class="logo rounded" width="80" height="80">
-            <span
-                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ config('app.name') }}</span>
         </a>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             @auth
@@ -70,18 +68,18 @@
                 <li>
                     <a class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
                         href="{{ route('contact.show') }}">
-                        <i class="fa-solid fa-comment"></i> Contact Us
+                        Contact Us
                     </a>
                 </li>
                 <li>
                     <a class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
-                        href="{{ route('allBusinesses') }}"><i class="user-link fa-solid fa-building"></i>
+                        href="{{ route('allBusinesses') }}">
                         Businesses</a>
                 </li>
                 <li>
                     <a class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
                         href="{{ route('allUsers') }}" class="text-white mx-3 user-link">
-                        <i class="user-link fa-solid fa-user-md"></i> Professionals</a>
+                        Professionals</a>
                 </li>
 
             </ul>
