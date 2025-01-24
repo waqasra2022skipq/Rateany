@@ -13,9 +13,6 @@ use App\Livewire\Businesses\CategoryPage;
 use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
 
-Route::get('/', [BusinessController::class, 'home']);
-
-
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
     Route::get('/register', [AuthController::class, 'createForm'])->name("register")->middleware('guest');
@@ -62,6 +59,7 @@ Route::post('/contact-us', [UserQueryController::class, 'store'])->name('user_qu
 
 // Livewire updates
 
+Route::get('/', Home::class)->name('home');
 Route::get('/home', Home::class)->name('home');
 
 Route::middleware('auth')->group(function () {
