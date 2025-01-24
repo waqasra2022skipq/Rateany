@@ -1,4 +1,4 @@
-<div>
+<div class="p-10">
     <!-- Hero Section -->
     <div class="bg-blue-50 py-8">
         <div class="container mx-auto text-center">

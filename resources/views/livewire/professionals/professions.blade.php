@@ -1,4 +1,4 @@
-<section>
+<section class="p-10">
     <!-- Header -->
     <div class="bg-blue-50 py-8">
         <div class="container mx-auto text-center">
@@ -6,7 +6,7 @@
             <p class="mt-4 text-lg text-gray-600">
                 Explore all Professions to find Professionals that suit your needs.
             </p>
-            <div class="mt-6">
+            <div class="mt-6 p-2">
                 <input type="text" wire:model="search" wire:input='$refresh' placeholder="Search professions..."
                     class="w-full max-w-md px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
             </div>

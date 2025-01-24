@@ -9,7 +9,7 @@
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
         ),
-        url("/public/images/hero-background.webp");
+        url("/public/images/hero-background_11zon.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -29,7 +29,6 @@
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0)
         );
-        backdrop-filter: blur(20px);
         z-index: 1;
     }
 }
