@@ -26,7 +26,7 @@
                     <!-- Browse All Businesses Button -->
                     <div class="mt-10 text-center">
                         <a href="{{ route('allBusinesses') }}"
-                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Browse All Businesses
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                         </ul>
                         <div class="mt-5">
                             <a href="{{ route('categories') }}"
-                                class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                                class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg  focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 Explore All Categories
                             </a>
                         </div>
@@ -83,7 +83,7 @@
                     <!-- Browse All Businesses Button -->
                     <div class="mt-10 text-center">
                         <a href="{{ route('allUsers') }}"
-                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Browse All Professionals
                         </a>
                     </div>
@@ -108,7 +108,7 @@
                         </ul>
                         <div class="mt-5">
                             <a href="{{ route('professions') }}"
-                                class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                                class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 Explore All Professions
                             </a>
                         </div>
