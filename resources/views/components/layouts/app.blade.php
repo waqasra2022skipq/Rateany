@@ -26,6 +26,7 @@
     </script>
 
     <body class="antialiased">
+
         @livewire('navbar')
 
         {{ $slot }}
