@@ -42,7 +42,7 @@
                                     {{-- Display only top 10 categories --}}
                                     <li>
                                         <a href="{{ route('categoryPage', $category->slug) }}"
-                                            class="text-blue-600 hover:underline font-medium">
+                                            class="text-orange-600 hover:underline font-medium">
                                             {{ $category->name }}
                                         </a>
                                     </li>
@@ -99,7 +99,7 @@
                                     {{-- Display only top 10 categories --}}
                                     <li>
                                         <a href="{{ route('professionPage', $profession->slug) }}"
-                                            class="text-blue-600 hover:underline font-medium">
+                                            class="text-orange-400 hover:underline font-medium">
                                             {{ $profession->name }}
                                         </a>
                                     </li>
