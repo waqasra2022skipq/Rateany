@@ -11,6 +11,7 @@ use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
 use App\Livewire\Businesses\CategoryPage;
+use App\Livewire\Professionals\ProfessionalsList;
 use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
 
@@ -22,7 +23,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/professionals', 'index')->name('allUsers');
+    // Route::get('/professionals', 'index')->name('allUsers');
     Route::get('/profile/{id}/edit', 'edit')->name("profile.edit")->middleware('auth');
     Route::get('/profile/{slug}', 'profile')->name("profile.show")->middleware('auth');
     Route::put('/profile/{id}', 'updateUser')->name("users.update")->middleware('auth');
@@ -76,6 +77,10 @@ Route::prefix('/professions')->group(function () {
     Route::get('/{slug}', ProfessionPage::class)->name('professionPage');
 });
 
-Route::prefix('businesses')->group(function () {
+Route::prefix('/businesses')->group(function () {
     Route::get('/', BusinessesList::class)->name('allBusinesses');
+});
+
+Route::prefix('/professionals')->group(function () {
+    Route::get('/', ProfessionalsList::class)->name('allUsers');
 });
