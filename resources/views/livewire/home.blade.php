@@ -67,7 +67,7 @@
     <section class="p-10 bg-blue-50">
         <div class="container mx-auto">
             <div class="text-center mb-10">
-                <h2 class="text-4xl font-extrabold text-gray-800">Top Rated Professional</h2>
+                <h2 class="text-4xl font-extrabold text-gray-800">Top Rated Professionals</h2>
                 <p class="mt-4 text-lg text-gray-600">
                     Meet the top-rated professionals, trusted by clients for their exceptional skills and expertise.
                 </p>

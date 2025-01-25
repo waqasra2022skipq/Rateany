@@ -1,6 +1,6 @@
 <section class="p-10">
     <!-- Header -->
-    <div class="bg-blue-50 py-8">
+    <div class="py-8">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold text-gray-800">Browse Professions</h1>
             <p class="mt-4 text-lg text-gray-600">

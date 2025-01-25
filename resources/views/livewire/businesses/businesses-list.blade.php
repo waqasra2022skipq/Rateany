@@ -1,6 +1,6 @@
 <div class="p-6">
     <!-- Hero Section -->
-    <div class="bg-blue-50 py-8">
+    <div class="py-8">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold text-gray-800">Top-Rated Businesses</h1>
             <p class="mt-4 text-lg text-gray-600">
