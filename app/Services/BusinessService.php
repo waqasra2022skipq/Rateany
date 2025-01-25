@@ -20,7 +20,7 @@ class BusinessService
     public function getAllBusinesses($request)
     {
         $filters = $this->prepareFilters($request);
-        
+
         return Business::withSmartScore()
             ->with(['owner:id,name', 'category:id,name,slug'])
             ->filter($filters)

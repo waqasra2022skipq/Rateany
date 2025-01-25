@@ -15,7 +15,7 @@ class Business extends Model
     // Add constants for rating calculations
     const RATING_WEIGHT = 0.7;
     const REVIEW_COUNT_WEIGHT = 0.3;
-    
+
     // Add validation rules as a static property
     public static $rules = [
         'name' => 'required|min:3|max:255',
@@ -23,7 +23,7 @@ class Business extends Model
         'location' => 'required|max:255',
         'business_logo' => 'nullable|image|max:2048'
     ];
-    
+
     public static function boot()
     {
         parent::boot();
@@ -89,7 +89,9 @@ class Business extends Model
     // Add a scope for smart score calculation
     public function scopeWithSmartScore($query)
     {
-        return $query->selectRaw('*, (average_rating * ? + reviews_count * ?) as smart_score', 
-            [self::RATING_WEIGHT, self::REVIEW_COUNT_WEIGHT]);
+        return $query->selectRaw(
+            '*, (average_rating * ? + reviews_count * ?) as smart_score',
+            [self::RATING_WEIGHT, self::REVIEW_COUNT_WEIGHT]
+        );
     }
 }

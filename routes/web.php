@@ -6,6 +6,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserQueryController;
+use App\Livewire\Businesses\BusinessesList;
 use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
@@ -36,7 +37,7 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(BusinessController::class)->group(function () {
     Route::prefix('businesses')->group(function () {
-        Route::get('/', 'allBusinesses')->name('allBusinesses');
+        // Route::get('/', 'allBusinesses')->name('allBusinesses');
         Route::get('/manage', 'myBusinesses')->name('businesses.manage');
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
@@ -73,4 +74,8 @@ Route::prefix('/categories')->group(function () {
 Route::prefix('/professions')->group(function () {
     Route::get('/', Professions::class)->name('professions');
     Route::get('/{slug}', ProfessionPage::class)->name('professionPage');
+});
+
+Route::prefix('businesses')->group(function () {
+    Route::get('/', BusinessesList::class)->name('allBusinesses');
 });
