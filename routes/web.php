@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserQueryController;
 use App\Livewire\Businesses\BusinessesList;
+use App\Livewire\Businesses\BusinessPage;
 use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
@@ -43,7 +44,7 @@ Route::controller(BusinessController::class)->group(function () {
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
         Route::get('/{id}/edit', 'edit')->name('businesses.edit');
-        Route::get('/{id}', 'show')->name('businesses.show');
+        // Route::get('/{id}', 'show')->name('businesses.show');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 
@@ -79,6 +80,7 @@ Route::prefix('/professions')->group(function () {
 
 Route::prefix('/businesses')->group(function () {
     Route::get('/', BusinessesList::class)->name('allBusinesses');
+    Route::get('/{slug}', BusinessPage::class)->name('businesses.show');
 });
 
 Route::prefix('/professionals')->group(function () {
