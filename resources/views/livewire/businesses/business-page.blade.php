@@ -38,11 +38,38 @@
 
         <!-- Tab Content -->
         <div class="mt-8 p-10">
+            <!-- Reviews Section -->
             @if ($activeTab === 'reviews')
-                <!-- Reviews Content -->
                 <div>
-                    <h2 class="text-2xl font-bold mb-4">Customer Reviews</h2>
-                    <!-- Display reviews here -->
+                    <!-- Sorting Options -->
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <button wire:click="sortReviews('newest')"
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'newest' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            Newest
+                        </button>
+                        <button wire:click="sortReviews('highest_rated')"
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'highest_rated' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            Highest Rated
+                        </button>
+                        <button wire:click="sortReviews('most_helpful')"
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'most_helpful' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            Most Helpful
+                        </button>
+                    </div>
+
+                    <!-- Review List -->
+                    <div
+                        class="space-y-6 grid gap-6 md:gap-8 md:grid-cols-3 mb-8 rounded-lg shadow-sm  bg-white dark:bg-gray-800 p-6">
+                        @foreach ($reviews as $review)
+                            @component('components.single-review', ['review' => $review])
+                            @endcomponent
+                        @endforeach
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-8">
+                        {{ $reviews->links() }}
+                    </div>
                 </div>
             @elseif ($activeTab === 'about')
                 <!-- About Content -->

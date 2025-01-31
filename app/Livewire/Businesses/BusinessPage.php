@@ -4,11 +4,13 @@ namespace App\Livewire\Businesses;
 
 use Livewire\Component;
 use App\Models\Business;
+use App\Models\Review;
 
 class BusinessPage extends Component
 {
     public $business;
     public $activeTab = 'reviews'; // Default active tab
+    public $sortBy = 'newest'; // Default sorting
 
     public function mount($slug)
     {
@@ -23,6 +25,7 @@ class BusinessPage extends Component
         return view('livewire.businesses.business-page', [
             'business' => $this->business,
             'ratingBreakdown' => $this->getRatingBreakdown(),
+            'reviews' => $this->getReviews()
         ]);
     }
 
@@ -49,5 +52,25 @@ class BusinessPage extends Component
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
+    }
+
+    public function sortReviews($sortBy)
+    {
+        $this->sortBy = $sortBy;
+    }
+
+    public function getReviews()
+    {
+        return Review::where('business_id', $this->business->id)
+            ->when($this->sortBy === 'newest', function ($query) {
+                $query->orderBy('created_at', 'desc');
+            })
+            ->when($this->sortBy === 'highest_rated', function ($query) {
+                $query->orderBy('rating', 'desc');
+            })
+            ->when($this->sortBy === 'most_helpful', function ($query) {
+                $query->orderBy('helpful_count', 'desc');
+            })
+            ->paginate(10); // 10 reviews per page
     }
 }
