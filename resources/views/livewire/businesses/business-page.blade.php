@@ -43,11 +43,12 @@
                         <div class="flex items-center mb-2"
                             title='{{ $rating }}-star {{ $business->{"${rating}_star_count"} }} reviews'>
                             <span class="w-8">{{ $rating }}</span>
-                            <div class="flex-1 bg-gray-300 h-2 rounded mx-2">
-                                <div class="bg-yellow-400 h-2 rounded" style="width: {{ $ratingBreakdown[$rating] }}%;">
-                                </div>
+                            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="bg-yellow-400 text-xs font-medium text-black text-center p-0.5 leading-none rounded-full"
+                                    style="width: {{ $ratingBreakdown[$rating] }}%;">
+                                    {{ number_format($ratingBreakdown[$rating], 1) }}%</div>
                             </div>
-                            <span class="w-12">{{ number_format($ratingBreakdown[$rating], 1) }}%</span>
+
                         </div>
                     @endforeach
                 </div>
