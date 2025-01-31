@@ -8,6 +8,7 @@ use App\Models\Business;
 class BusinessPage extends Component
 {
     public $business;
+    public $activeTab = 'reviews'; // Default active tab
 
     public function mount($slug)
     {
@@ -43,5 +44,10 @@ class BusinessPage extends Component
         }
 
         return $breakdown;
+    }
+
+    public function switchTab($tab)
+    {
+        $this->activeTab = $tab;
     }
 }
