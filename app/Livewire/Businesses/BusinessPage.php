@@ -5,11 +5,14 @@ namespace App\Livewire\Businesses;
 use Livewire\Component;
 use App\Models\Business;
 use App\Models\Review;
+use Livewire\WithPagination;
 
 class BusinessPage extends Component
 {
+    use WithPagination;
+
     public $business;
-    public $activeTab = 'reviews'; // Default active tab
+    public $activeTab = 'contact'; // Default active tab
     public $sortBy = 'newest'; // Default sorting
 
     public function mount($slug)
@@ -18,6 +21,11 @@ class BusinessPage extends Component
 
         $this->business = Business::where('slug', $slug)->with('reviews')->first();
         // dd($this->business);
+    }
+    public function updated($propertyName)
+    {
+        // Reset pagination when a filter or search term is updated
+        $this->resetPage();
     }
 
     public function render()
@@ -57,6 +65,7 @@ class BusinessPage extends Component
     public function sortReviews($sortBy)
     {
         $this->sortBy = $sortBy;
+        $this->updated('sortBy');
     }
 
     public function getReviews()
@@ -68,9 +77,9 @@ class BusinessPage extends Component
             ->when($this->sortBy === 'highest_rated', function ($query) {
                 $query->orderBy('rating', 'desc');
             })
-            ->when($this->sortBy === 'most_helpful', function ($query) {
-                $query->orderBy('helpful_count', 'desc');
+            ->when($this->sortBy === 'lowest_rated', function ($query) {
+                $query->orderBy('rating', 'asc');
             })
-            ->paginate(10); // 10 reviews per page
+            ->paginate(4); // 10 reviews per page
     }
 }
