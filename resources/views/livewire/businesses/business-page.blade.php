@@ -44,15 +44,15 @@
                     <!-- Sorting Options -->
                     <div class="flex gap-2 mb-6">
                         <button wire:click="sortReviews('newest')"
-                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'newest' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'newest' ? 'bg-orange-600 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
                             Newest
                         </button>
                         <button wire:click="sortReviews('highest_rated')"
-                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'highest_rated' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'highest_rated' ? 'bg-orange-600 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
                             Highest Rated
                         </button>
                         <button wire:click="sortReviews('lowest_rated')"
-                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'lowest_rated' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
+                            class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'lowest_rated' ? 'bg-orange-600 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
                             Lowest Rated
                         </button>
                     </div>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="mt-4">
                     <strong>Category:</strong>
-                    <a href="{{ route('allBusinesses', ['category' => $business->category->slug]) }}"
+                    <a href="{{ route('categoryPage', ['slug' => $business->category->slug]) }}"
                         class="text-orange-500">{{ $business->category->name }}</a>
                 </div>
             @elseif ($activeTab === 'contact')

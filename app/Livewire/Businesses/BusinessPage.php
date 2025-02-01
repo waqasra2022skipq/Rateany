@@ -19,7 +19,7 @@ class BusinessPage extends Component
     {
         // Fetch business data
 
-        $this->business = Business::where('slug', $slug)->with('reviews')->first();
+        $this->business = Business::where('slug', $slug)->first();
         // dd($this->business);
     }
     public function updated($propertyName)
@@ -40,7 +40,6 @@ class BusinessPage extends Component
     protected function getRatingBreakdown()
     {
         // Calculate rating breakdown (1-5 stars)
-        $reviews = $this->business->reviews;
         $totalReviews = $this->business->reviews_count;
         $breakdown = [
             1 => $this->business->{'1_star_count'},
