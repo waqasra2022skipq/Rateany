@@ -80,6 +80,6 @@ class BusinessPage extends Component
             ->when($this->sortBy === 'lowest_rated', function ($query) {
                 $query->orderBy('rating', 'asc');
             })
-            ->paginate(4); // 10 reviews per page
+            ->paginate(10); // 10 reviews per page
     }
 }

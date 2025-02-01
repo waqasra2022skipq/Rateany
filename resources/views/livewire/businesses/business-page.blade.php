@@ -94,9 +94,11 @@
                             @endif
                         </p>
                         <p>
-                            <a href="tel:{{ $business->contact_phone }}" class="btn btn-outline-success w-100">
-                                📞 {{ $business->contact_phone }}
-                            </a>
+                            @if ($business->contact_phone)
+                                <a href="tel:{{ $business->contact_phone }}" class="btn btn-outline-success w-100">
+                                    📞 {{ $business->contact_phone }}
+                                </a>
+                            @endif
                         </p>
                         <p>
                             @if ($business->contact_email)

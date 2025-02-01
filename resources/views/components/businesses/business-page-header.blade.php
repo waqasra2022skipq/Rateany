@@ -7,10 +7,12 @@
                 <h1 class="text-4xl font-bold mb-2">{{ $business->name }}</h1>
                 {{-- <p class="text-lg mb-4">{{ Str::limit($business->description, 100) }}</p> --}}
                 <div class="flex gap-4 justify-center lg:justify-start">
-                    <a href="{{ $business->contact_website }}" target="_blank"
-                        class="bg-button hover:bg-button-hover text-white px-6 py-2 rounded">
-                        Visit Now
-                    </a>
+                    @if ($business->contact_website)
+                        <a href="{{ $business->contact_website }}" target="_blank"
+                            class="bg-button hover:bg-button-hover text-white px-6 py-2 rounded">
+                            Visit Now
+                        </a>
+                    @endif
                     <button class="bg-orange-600 hover:bg-orange-800 text-white px-6 py-2 rounded">
                         Write Review
                     </button>
