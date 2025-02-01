@@ -1,5 +1,5 @@
 <div class="business-header"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('storage/' . $business->business_logo) }}');">
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('storage/' . $bgPicture) }}');">
     <div class="container mx-auto px-4 py-8 text-white">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Column 1: Business Info -->

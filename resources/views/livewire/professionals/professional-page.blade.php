@@ -3,6 +3,7 @@
     @component('components.businesses.business-page-header', [
         'business' => $professional,
         'ratingBreakdown' => $ratingBreakdown,
+        'bgPicture' => $professional->profile_pic,
     ])
     @endcomponent
     {{-- professional Page Header End --}}
