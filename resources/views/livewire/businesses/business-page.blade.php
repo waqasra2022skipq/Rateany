@@ -37,12 +37,12 @@
         </div>
 
         <!-- Tab Content -->
-        <div class="mt-8">
+        <div class="mt-8 px-2">
             <!-- Reviews Section -->
             @if ($activeTab === 'reviews')
                 <div>
                     <!-- Sorting Options -->
-                    <div class="flex gap-4 mb-6">
+                    <div class="flex gap-2 mb-6">
                         <button wire:click="sortReviews('newest')"
                             class="px-4 py-2 text-sm font-medium rounded {{ $sortBy === 'newest' ? 'bg-gray-900 text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-100' }}">
                             Newest

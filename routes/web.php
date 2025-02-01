@@ -80,7 +80,7 @@ Route::prefix('/professions')->group(function () {
 
 Route::prefix('/businesses')->group(function () {
     Route::get('/', BusinessesList::class)->name('allBusinesses');
-    Route::get('/single/{slug}', BusinessPage::class)->name('businesses.show');
+    Route::get('/single/{slug}', BusinessPage::class)->name('singleBusiness');
 });
 
 Route::prefix('/professionals')->group(function () {

@@ -12,7 +12,7 @@ class BusinessPage extends Component
     use WithPagination;
 
     public $business;
-    public $activeTab = 'contact'; // Default active tab
+    public $activeTab = 'reviews'; // Default active tab
     public $sortBy = 'newest'; // Default sorting
 
     public function mount($slug)
