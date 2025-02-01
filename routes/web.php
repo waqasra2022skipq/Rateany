@@ -12,6 +12,7 @@ use App\Livewire\Businesses\Categories;
 use App\Livewire\Home;
 use App\Livewire\Profile\Profile;
 use App\Livewire\Businesses\CategoryPage;
+use App\Livewire\Professionals\ProfessionalPage;
 use App\Livewire\Professionals\ProfessionalsList;
 use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
@@ -85,4 +86,5 @@ Route::prefix('/businesses')->group(function () {
 
 Route::prefix('/professionals')->group(function () {
     Route::get('/', ProfessionalsList::class)->name('allUsers');
+    Route::get('/single/{slug}', ProfessionalPage::class)->name('singleBusiness');
 });
