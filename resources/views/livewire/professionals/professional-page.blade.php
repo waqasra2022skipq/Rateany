@@ -75,7 +75,7 @@
                 <!-- About Content -->
                 <div>
                     <h2 class="text-2xl font-bold mb-4">About {{ $professional->name }}</h2>
-                    <p>{{ $professional->description }}</p>
+                    <p>{{ $professional->bio }}</p>
                 </div>
                 <div class="mt-4">
                     <strong>Profession:</strong>
@@ -90,7 +90,7 @@
                     <div class="flex gap-5 mt-4">
                         <p>
                             @if ($professional->contact_website)
-                                <a href="mailto:{{ $professional->contact_website }}" class="">
+                                <a href="{{ $professional->contact_website }}" target="_blank">
                                     <i class="fas fa-globe"></i> Visit Now
                                 </a>
                             @endif

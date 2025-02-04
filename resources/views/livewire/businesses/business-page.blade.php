@@ -90,7 +90,7 @@
                     <div class="flex gap-5 mt-4">
                         <p>
                             @if ($business->contact_website)
-                                <a href="mailto:{{ $business->contact_website }}" class="">
+                                <a href="{{ $business->contact_website }}" target="_blank">
                                     <i class="fas fa-globe"></i> Visit Now
                                 </a>
                             @endif
