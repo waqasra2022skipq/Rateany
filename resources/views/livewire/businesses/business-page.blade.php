@@ -41,7 +41,8 @@
         <div class="mt-8 px-2">
             <!-- Reviews Section -->
             @if ($activeTab === 'reviews')
-                <div>
+                <div wire:loading.class="animate-pulse">
+
                     <!-- Sorting Options -->
                     <div class="flex gap-2 mb-6">
                         <button wire:click="sortReviews('newest')"
