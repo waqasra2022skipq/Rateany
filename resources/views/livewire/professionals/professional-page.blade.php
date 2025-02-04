@@ -9,7 +9,7 @@
     {{-- professional Page Header End --}}
 
 
-    <section class="container py-8 mx-auto">
+    <section class="container py-8 mx-auto" id="business-details">
         <!-- Tabs Container -->
         <div class="flex flex-wrap justify-center gap-2 ">
             <!-- Reviews Tab -->
