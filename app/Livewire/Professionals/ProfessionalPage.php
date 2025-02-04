@@ -14,13 +14,17 @@ class ProfessionalPage extends Component
     public $professional;
     public $activeTab = 'reviews'; // Default active tab
     public $sortBy = 'newest'; // Default sorting
+    public $pageTitle;
+    public $metaDescription;
 
     public function mount($slug)
     {
         // Fetch professional data
 
         $this->professional = User::where('username', $slug)->first();
-        // dd($this->professional);
+
+        $this->pageTitle = $this->professional->name;
+        $this->metaDescription = $this->professional->bio;
     }
     public function updated($propertyName)
     {
@@ -34,7 +38,10 @@ class ProfessionalPage extends Component
             'professional' => $this->professional,
             'ratingBreakdown' => $this->getRatingBreakdown(),
             'reviews' => $this->getReviews()
-        ]);
+        ])->layout(
+            'components.layouts.app',
+            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription]
+        );
     }
 
     protected function getRatingBreakdown()

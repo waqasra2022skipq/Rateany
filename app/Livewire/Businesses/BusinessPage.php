@@ -14,13 +14,17 @@ class BusinessPage extends Component
     public $business;
     public $activeTab = 'reviews'; // Default active tab
     public $sortBy = 'newest'; // Default sorting
+    public $pageTitle;
+    public $metaDescription;
 
     public function mount($slug)
     {
         // Fetch business data
 
         $this->business = Business::where('slug', $slug)->first();
-        // dd($this->business);
+
+        $this->pageTitle = $this->business->name;
+        $this->metaDescription = $this->business->description;
     }
     public function updated($propertyName)
     {
@@ -34,7 +38,10 @@ class BusinessPage extends Component
             'business' => $this->business,
             'ratingBreakdown' => $this->getRatingBreakdown(),
             'reviews' => $this->getReviews()
-        ]);
+        ])->layout(
+            'components.layouts.app',
+            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription]
+        );
     }
 
     protected function getRatingBreakdown()
