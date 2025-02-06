@@ -1,5 +1,5 @@
-<nav class="bg-[#0000002d] border-gray-200 dark:bg-gray-900 p-6">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+<nav class="bg-[#0000002d] border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between container mx-auto py-4">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/logo.webp') }}" alt="Rateany Logo" class="logo rounded" width="80" height="80">
         </a>
