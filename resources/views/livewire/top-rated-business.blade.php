@@ -9,7 +9,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Right: Top Rated Businesses -->
             <div class="md:col-span-2 order-1 md:order-none">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10" wire:loading.class="opacity-50">
                     @forelse ($topBusinesses as $business)
                         <div wire:key="item-{{ $business->id }}"
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
