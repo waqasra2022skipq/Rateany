@@ -49,14 +49,14 @@
                     </div>
                 </form> --}}
             </div>
-            <div class="mt-6 flex flex-wrap justify-center gap-2">
+            <div class="mt-6 flex justify-center gap-2">
                 <a href="#top-rated-section"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Explore
-                    Top Rated</a>
+                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Top
+                    Rated <i class="fas fa-arrow-down"></i> </a>
 
                 <a href="#latest-reviews"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">See
-                    Latest Reviews</a>
+                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Latest
+                    Reviews <i class="fas fa-arrow-down"></i></a>
                 {{-- <a href="{{ route('allBusinesses') }}"
                     class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Rate
                     a Business</a> --}}
