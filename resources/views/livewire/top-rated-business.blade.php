@@ -6,7 +6,7 @@
                 Discover the most loved and highly rated businesses around you, trusted by thousands of customers.
             </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Right: Top Rated Businesses -->
             <div class="md:col-span-2 order-1 md:order-none">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10">
@@ -92,12 +92,8 @@
                         @foreach ($categories as $category)
                             @if ($loop->index < 10)
                                 <li>
-                                    <a wire:click="updateCategory({{ $category->id }})"
-                                        class="text-orange-600 hover:underline font-medium hidden md:block cursor-pointer">
-                                        {{ $category->name }}
-                                    </a>
                                     <a href="#top-rated-section" wire:click="updateCategory({{ $category->id }})"
-                                        class="text-orange-600 hover:underline font-medium md:hidden cursor-pointer">
+                                        class="text-orange-600 hover:underline font-medium cursor-pointer">
                                         {{ $category->name }}
                                     </a>
                                 </li>
