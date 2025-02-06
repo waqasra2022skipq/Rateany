@@ -6,7 +6,7 @@
                 Discover the most loved and highly rated businesses around you, trusted by thousands of customers.
             </p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Right: Top Rated Businesses -->
             <div class="md:col-span-2 order-1 md:order-none">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10">
