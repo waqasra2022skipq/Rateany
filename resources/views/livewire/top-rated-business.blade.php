@@ -10,7 +10,7 @@
             <!-- Right: Top Rated Businesses -->
             <div class="md:col-span-2 order-1 md:order-none">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10">
-                    @foreach ($topBusinesses as $business)
+                    @forelse ($topBusinesses as $business)
                         <div wire:key="item-{{ $business->id }}"
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
                             <!-- Business Logo -->
@@ -52,7 +52,8 @@
                                             @endif
                                         @endfor
                                         <strong>{{ number_format($business->average_rating, 1) }}
-                                            ({{ $business->reviews_count }})</strong>
+                                            ({{ $business->reviews_count }})
+                                        </strong>
                                     </div>
                                 </div>
 
@@ -70,7 +71,10 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-center col-span-3">No Businesses Found, Try adjusting the category, or hit below
+                            button to explore all businesses</p>
+                    @endforelse
                 </div>
                 <!-- Browse All Businesses Button -->
                 <div class="mt-10 text-center">
