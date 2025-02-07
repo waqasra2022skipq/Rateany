@@ -61,7 +61,7 @@
                                     <i class="fa-solid fa-user-circle"></i> {{ auth()->user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ url('/profile/' . auth()->user()->id) }}">
+                                    <li><a class="dropdown-item" href="{{ route('me') }}">
                                             Manage Profile</a></li>
                                     <li><a class="dropdown-item" href="/businesses/manage">Manage Businesses</a></li>
                                     <li>
@@ -95,8 +95,7 @@
                     <a href="{{ route('allBusinesses') }}" class="text-white mx-3 user-link">Businesses</a>
                     <a href="{{ route('allUsers') }}" class="text-white mx-3 user-link">Professionals</a>
                     @if (auth()->check())
-                        <a href="{{ route('profile.show', auth()->user()->id) }}"
-                            class="user-link text-white mx-3">Profile</a>
+                        <a href="{{ route('me') }}" class="user-link text-white mx-3">Profile</a>
                         <form action="/auth/logout" method="POST" class="mx-3">
                             @csrf
                             <button type="submit" class="user-link btn btn-link text-white p-0">Logout</button>

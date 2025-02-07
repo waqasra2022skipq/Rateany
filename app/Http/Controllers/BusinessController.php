@@ -171,7 +171,7 @@ class BusinessController extends Controller
             // return $this->apiSuccess("New Business Created", $business, 201);
 
             $user = $request->user();
-            return redirect()->route('profile.show', $user->id)->with('Message', 'Business Updated successfully.');
+            return redirect()->route('me')->with('Message', 'Business Updated successfully.');
 
             // return $this->apiSuccess("New Business Created", $business, 201);
         } catch (\Throwable $th) {

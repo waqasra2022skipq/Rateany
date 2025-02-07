@@ -16,9 +16,11 @@ use App\Livewire\Professionals\ProfessionalPage;
 use App\Livewire\Professionals\ProfessionalsList;
 use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
+use App\Livewire\Auth\Login;
 
 Route::prefix('auth')->group(function () {
-    Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
+    // Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
+    Route::get('/login', Login::class)->name('login')->middleware(['guest', 'throttle:5,1']);
     Route::get('/register', [AuthController::class, 'createForm'])->name("register")->middleware('guest');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/authenticate', [AuthController::class, 'login']);
@@ -27,7 +29,7 @@ Route::prefix('auth')->group(function () {
 Route::controller(UserController::class)->group(function () {
     // Route::get('/professionals', 'index')->name('allUsers');
     Route::get('/profile/{id}/edit', 'edit')->name("profile.edit")->middleware('auth');
-    Route::get('/profile/{slug}', 'profile')->name("profile.show")->middleware('auth');
+    Route::get('/me', 'profile')->name("me")->middleware('auth');
     Route::put('/profile/{id}', 'updateUser')->name("users.update")->middleware('auth');
     Route::put('/profile/update-image', 'updateProfileImage')->name("profile.updateImage")->middleware('auth');
     Route::get('/professionals/{slug}', 'show')->name('user.show');

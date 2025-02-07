@@ -89,9 +89,9 @@ class UserController extends Controller
         );
     }
 
-    public function profile($id)
+    public function profile()
     {
-        $user = User::find($id);
+        $user = FacadesAuth::user();
 
         // $user = User::with(['profession', 'businesses'])->where('username', $username)->first();
 
