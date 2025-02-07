@@ -17,11 +17,13 @@ use App\Livewire\Professionals\ProfessionalsList;
 use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
 use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
 
 Route::prefix('auth')->group(function () {
     // Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
     Route::get('/login', Login::class)->name('login')->middleware(['guest', 'throttle:5,1']);
-    Route::get('/register', [AuthController::class, 'createForm'])->name("register")->middleware('guest');
+    Route::get('/register', Register::class)->name('register')->middleware(['guest', 'throttle:5,1']);
+    // Route::get('/register', [AuthController::class, 'createForm'])->name("register")->middleware('guest');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/authenticate', [AuthController::class, 'login']);
 });
