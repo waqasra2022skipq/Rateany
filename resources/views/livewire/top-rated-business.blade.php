@@ -16,7 +16,8 @@
                             <!-- Business Logo -->
                             <a href="{{ route('businesses.show', $business->slug) }}">
                                 <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
-                                    alt="{{ $business->name }} Logo" class="rounded-t-lg w-full h-20 object-cover">
+                                    alt="{{ $business->name }} Logo" class="rounded-t-lg w-full h-20 object-cover"
+                                    title="{{ $business->name }} logo">
                             </a>
 
                             <!-- Card Content -->
