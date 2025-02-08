@@ -10,7 +10,7 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <img src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : asset('default-user-logo.png') }}"
+                    <img src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : asset('images/default-user.png') }}"
                         alt="{{ $user->name }} Profile Picture" class="w-8 h-8 rounded-full">
                 </button>
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
