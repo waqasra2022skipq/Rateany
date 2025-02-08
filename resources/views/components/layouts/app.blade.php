@@ -22,7 +22,7 @@
         <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
         <title>{{ $pageTitle ?? 'Top rated businesses and professionals' }} | Rateany</title>
         <meta name="description"
-            content="{{ $metaDescription ?? 'Discover and review top-rated businesses across various industries. Find the best restaurants, doctors, books, technicians and services near you based on real customer ratings.' }}">
+            content="{{ $metaDescription ?? 'Discover and review top-rated businesses across various industries. Find the best restaurants, doctors, books, technicians based on real customer ratings.' }}">
         @vite('resources/css/app.css')
         @livewireStyles
     </head>
