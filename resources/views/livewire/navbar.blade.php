@@ -21,22 +21,21 @@
                             class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email }}</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li><a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        <li><a class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-600 dark:text-gray-200 dark:hover:bg-primary-600"
                                 href="{{ route('me') }}">
                                 Manage Profile</a></li>
-                        <li><a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        <li><a class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-600 dark:text-gray-200 dark:hover:bg-primary-600"
                                 href="/businesses/manage">Manage Businesses</a></li>
                         <li>
                             <a href="#" wire:click="logout"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-600 dark:text-gray-200 dark:hover:bg-primary-600">Logout</a>
                         </li>
                     </ul>
                 </div>
             @endauth
-            <!-- Dropdown menu -->
 
             <button data-collapse-toggle="navbar-user" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-primary-600 dark:focus:ring-gray-600"
                 aria-controls="navbar-user" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -48,14 +47,14 @@
         </div>
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul
-                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
+                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
                         href="{{ route('allBusinesses') }}">
-                        Businesses</a>
+                        Rate Now</a>
                 </li>
                 <li>
-                    <a class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
+                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
                         href="{{ route('contact.show') }}">
                         Contact Us
                     </a>
@@ -63,14 +62,12 @@
                 @guest
                     <li>
                         <a href="{{ route('login') }}"
-                            class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('login') }}">
+                            class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('login') }}">
                             Login
 
                         </a>
                     </li>
-
                 @endguest
-
             </ul>
         </div>
     </div>
