@@ -109,7 +109,7 @@
                             <!-- Action Button -->
                             <div class="mt-4">
                                 <a href="{{ route('user.show', $professional->username) }}"
-                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-button rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900">
+                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900">
                                     View
                                     <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

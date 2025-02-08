@@ -21,7 +21,7 @@
                             class="flex-1 w-full px-6 py-2 bg-white rounded-md outline-none dark:bg-gray-50"
                             required="">
                         <button type="submit"
-                            class="relative w-full px-6 py-3 overflow-hidden text-white transition-all duration-100 bg-button hover:bg-button-hover md:w-auto fill-white active:scale-95 will-change-transform rounded-xl">
+                            class="relative w-full px-6 py-3 overflow-hidden text-white transition-all duration-100 bg-primary-500 hover:bg-primary-600 md:w-auto fill-white active:scale-95 will-change-transform rounded-xl">
                             <span class="flex items-center transition-all opacity-1">
                                 <span class="mx-auto text-sm font-semibold truncate whitespace-nowrap">
                                     Search Now
@@ -39,7 +39,7 @@
                             class="flex-1 w-full px-6 py-2 bg-white rounded-md outline-none dark:bg-gray-50"
                             required="">
                         <button type="submit"
-                            class="relative w-full px-6 py-3 overflow-hidden text-white transition-all duration-100 bg-button hover:bg-button-hover md:w-auto fill-white active:scale-95 will-change-transform rounded-xl">
+                            class="relative w-full px-6 py-3 overflow-hidden text-white transition-all duration-100 bg-primary-500 hover:bg-primary-600 md:w-auto fill-white active:scale-95 will-change-transform rounded-xl">
                             <span class="flex items-center transition-all opacity-1">
                                 <span class="mx-auto text-sm font-semibold truncate whitespace-nowrap">
                                     Search Professionals
@@ -51,17 +51,17 @@
             </div>
             <div class="mt-6 flex justify-center gap-2">
                 <a href="#top-rated-section"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Top
+                    class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Top
                     Rated <i class="fas fa-arrow-down"></i> </a>
 
                 <a href="#latest-reviews"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Latest
+                    class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Latest
                     Reviews <i class="fas fa-arrow-down"></i></a>
                 {{-- <a href="{{ route('allBusinesses') }}"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Rate
+                    class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Rate
                     a Business</a> --}}
                 {{-- <a href="{{ route('allUsers') }}"
-                    class="text-white bg-button hover:bg-button-hover focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Rate
+                    class="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Rate
                     a Professional</a> --}}
             </div>
         </div>

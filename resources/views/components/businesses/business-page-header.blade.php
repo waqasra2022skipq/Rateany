@@ -9,7 +9,7 @@
                 <div class="flex gap-4 justify-center lg:justify-start">
                     @if ($business->contact_website)
                         <a href="{{ $business->contact_website }}" target="_blank"
-                            class="bg-button hover:bg-button-hover text-white px-6 py-2 rounded">
+                            class="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2 rounded">
                             Visit Now
                         </a>
                     @endif

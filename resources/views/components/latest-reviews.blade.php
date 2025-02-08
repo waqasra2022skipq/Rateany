@@ -19,30 +19,7 @@
                         <!-- Stars -->
                         <div class="mb-2">
                             @for ($i = 1; $i <= $review->rating; $i++)
-                                @switch($review->rating)
-                                    @case(1)
-                                        @php $starColor = 'red'; @endphp
-                                    @break
-
-                                    @case(2)
-                                        @php $starColor = 'yellow'; @endphp
-                                    @break
-
-                                    @case(3)
-                                        @php $starColor = 'blue'; @endphp
-                                    @break
-
-                                    @case(4)
-                                        @php $starColor = 'blue'; @endphp
-                                    @break
-
-                                    @case(5)
-                                        @php $starColor = 'green'; @endphp
-                                    @break
-
-                                    @default
-                                @endswitch
-                                <i class="fa fa-star text-{{ $starColor }}-500"></i>
+                                <i class="fa fa-star text-primary-500"></i>
                             @endfor
                         </div>
                         <!-- Review Text -->

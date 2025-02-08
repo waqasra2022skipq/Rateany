@@ -60,7 +60,7 @@
                                 <!-- Action Button -->
                                 <div class="mt-4">
                                     <a href="{{ route('businesses.show', $business->slug) }}"
-                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-button rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900">
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900">
                                         View
                                         <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -79,7 +79,7 @@
                 <!-- Browse All Businesses Button -->
                 <div class="mt-10 text-center">
                     <a href="{{ route('allBusinesses') }}"
-                        class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
                         Browse More
                     </a>
                 </div>
@@ -93,7 +93,7 @@
                             @if ($loop->index < 10)
                                 <li>
                                     <a href="#top-rated-section" wire:click="updateCategory({{ $category->id }})"
-                                        class="text-orange-600 hover:underline font-medium cursor-pointer">
+                                        class="text-primary-700 hover:underline font-medium cursor-pointer">
                                         {{ $category->name }}
                                     </a>
                                 </li>
@@ -102,7 +102,7 @@
                     </ul>
                     <div class="mt-5">
                         <a href="{{ route('categories') }}"
-                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-button rounded-lg shadow-lg  focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg shadow-lg  focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Explore All Categories
                         </a>
                     </div>
