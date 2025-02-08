@@ -3,9 +3,9 @@
         class="relative px-6 py-10 overflow-hidden text-center  isolate sm:px-16 sm:shadow-sm dark:bg-transparent bg-[#70696907]">
 
         <div class="flex flex-col justify-between mt-10">
-            <p class="max-w-2xl mx-auto text-3xl font-bold tracking-tight  dark:text-gray-200 sm:text-4xl">
+            <h1 class="max-w-2xl mx-auto text-3xl font-bold tracking-tight  dark:text-gray-200 sm:text-4xl">
                 Discover Top-Rated Businesses, Professionals and many more!
-            </p>
+            </h1>
 
             <p class="max-w-xl mx-auto mt-6 text-lg leading-8 dark:text-gray-300">
                 Explore reviews, ratings, and recommendations to make informed decisions.

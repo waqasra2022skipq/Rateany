@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="scroll-smooth">
+<html class="scroll-smooth" lang = "en">
 
     <head>
         <meta charset="utf-8">
