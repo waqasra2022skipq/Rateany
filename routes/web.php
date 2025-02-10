@@ -49,7 +49,7 @@ Route::controller(BusinessController::class)->group(function () {
         Route::get('/create', 'create')->name('businesses.create');
         Route::post('/store', 'createBusiness')->name('businesses.store');
         Route::get('/{id}/edit', 'edit')->name('businesses.edit');
-        Route::get('/{id}', 'show')->name('businesses.show');
+        Route::get('/{id}/review', 'show')->name('reviewBusiness');
         Route::put('/{id}', 'updateBusiness')->name('businesses.update');
         Route::delete('/{id}', 'destroy')->name('businesses.destroy');
 
@@ -85,10 +85,10 @@ Route::prefix('/professions')->group(function () {
 
 Route::prefix('/businesses')->group(function () {
     Route::get('/', BusinessesList::class)->name('allBusinesses');
-    Route::get('/single/{slug}', BusinessPage::class)->name('singleBusiness');
+    Route::get('/{slug}', BusinessPage::class)->name('businesses.show');
 });
 
 Route::prefix('/professionals')->group(function () {
     Route::get('/', ProfessionalsList::class)->name('allUsers');
-    Route::get('/single/{slug}', ProfessionalPage::class)->name('singleBusiness');
+    Route::get('/{slug}', ProfessionalPage::class)->name('singleBusiness');
 });

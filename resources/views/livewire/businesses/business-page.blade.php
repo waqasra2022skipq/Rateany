@@ -117,6 +117,10 @@
                 <div>
                     <h2 class="text-2xl font-bold mb-4">Write a Review</h2>
                     <!-- Add review form here -->
+                    {{-- <a href="{{ route('reviewBusiness') }}"></a> --}}
+                    <a href="{{ route('reviewBusiness', $business->slug) }}" class="text-primary-700">
+                        Review Here
+                    </a>
                 </div>
             @endif
         </div>
