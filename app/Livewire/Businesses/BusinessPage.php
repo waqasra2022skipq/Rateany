@@ -116,7 +116,7 @@ class BusinessPage extends Component
                 "bestRating" => 5,
                 "worstRating" => 1
             ],
-            "review" => $this->getReviewsSchema()
+            "reviews" => $this->getReviewsSchema()
         ];
 
         return json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
