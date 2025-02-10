@@ -27,7 +27,7 @@
         @livewireStyles
 
         <script type="application/ld+json">
-            {!! $schemaMarkup !!}
+            {!! $schemaMarkup ?? "" !!}
         </script>
     </head>
 
