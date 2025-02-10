@@ -34,13 +34,15 @@ class BusinessPage extends Component
 
     public function render()
     {
+
+        $schemaMarkup = $this->getSchemaMarkup();
         return view('livewire.businesses.business-page', [
             'business' => $this->business,
             'ratingBreakdown' => $this->getRatingBreakdown(),
             'reviews' => $this->getReviews()
         ])->layout(
             'components.layouts.app',
-            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription]
+            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription, 'schemaMarkup' =>  $schemaMarkup]
         );
     }
 
@@ -87,5 +89,69 @@ class BusinessPage extends Component
                 $query->orderBy('rating', 'asc');
             })
             ->paginate(10); // 10 reviews per page
+    }
+
+    public function getSchemaMarkup()
+    {
+        $schema = [
+            "@context" => "https://schema.org",
+            "@type" => $this->getBusinessSchemaType(),
+            "@id" => route('businesses.show', ['slug' => $this->business->slug]),
+            "name" => $this->business->name,
+            "address" => [
+                "@type" => "PostalAddress",
+                "streetAddress" => $this->business->location,
+            ],
+            "geo" => [
+                "@type" => "GeoCoordinates",
+                "latitude" => $this->business->latitude,
+                "longitude" => $this->business->longitude
+            ],
+            "url" => route('businesses.show', ['slug' => $this->business->slug]),
+            "image" => [$this->business->business_logo],
+            "aggregateRating" => [
+                "@type" => "AggregateRating",
+                "ratingValue" => round($this->business->average_rating, 1),
+                "ratingCount" => $this->business->reviews_count,
+                "bestRating" => 5,
+                "worstRating" => 1
+            ],
+            "review" => $this->getReviewsSchema()
+        ];
+
+        return json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    }
+
+    private function getBusinessSchemaType()
+    {
+        $category = strtolower($this->business->category->name);
+        return match ($category) {
+            'restaurant' => 'Restaurant',
+            'clinic', 'doctor' => 'MedicalClinic',
+            'mechanic' => 'AutoRepair',
+            'artist' => 'Person',
+            default => 'LocalBusiness'
+        };
+    }
+
+    private function getReviewsSchema()
+    {
+        return $this->business->reviews->map(function ($review) {
+            return [
+                "@type" => "Review",
+                "author" => [
+                    "@type" => "Person",
+                    "name" => $review->reviewer_name
+                ],
+                "datePublished" => $review->created_at->format('Y-m-d'),
+                "reviewBody" => $review->review_text,
+                "reviewRating" => [
+                    "@type" => "Rating",
+                    "ratingValue" => $review->rating,
+                    "bestRating" => 5,
+                    "worstRating" => 1
+                ]
+            ];
+        })->toArray();
     }
 }

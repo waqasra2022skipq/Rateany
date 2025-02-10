@@ -25,6 +25,10 @@
             content="{{ $metaDescription ?? 'Discover and review top-rated businesses across various industries. Find the best restaurants, doctors, books, technicians based on real customer ratings.' }}">
         @vite('resources/css/app.css')
         @livewireStyles
+
+        <script type="application/ld+json">
+            {!! $schemaMarkup !!}
+        </script>
     </head>
 
 
