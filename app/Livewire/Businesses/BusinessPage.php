@@ -102,11 +102,6 @@ class BusinessPage extends Component
                 "@type" => "PostalAddress",
                 "streetAddress" => $this->business->location,
             ],
-            "geo" => [
-                "@type" => "GeoCoordinates",
-                "latitude" => $this->business->latitude,
-                "longitude" => $this->business->longitude
-            ],
             "url" => route('businesses.show', ['slug' => $this->business->slug]),
             "image" => [$this->business->business_logo],
             "aggregateRating" => [
