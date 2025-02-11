@@ -139,7 +139,7 @@ class BusinessPage extends Component
                     "name" => $review->reviewer_name
                 ],
                 "datePublished" => $review->created_at->format('Y-m-d'),
-                "reviewBody" => $review->review_text,
+                "reviewBody" => $review->comments,
                 "reviewRating" => [
                     "@type" => "Rating",
                     "ratingValue" => $review->rating,
