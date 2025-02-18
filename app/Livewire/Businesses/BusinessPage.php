@@ -95,7 +95,7 @@ class BusinessPage extends Component
     {
         $schema = [
             "@context" => "https://schema.org",
-            "@type" => $this->getBusinessSchemaType(),
+            "@type" => "LocalBusiness",
             "@id" => route('businesses.show', ['slug' => $this->business->slug]),
             "name" => $this->business->name,
             "address" => [
