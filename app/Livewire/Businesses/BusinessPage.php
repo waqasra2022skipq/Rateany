@@ -16,14 +16,18 @@ class BusinessPage extends Component
     public $sortBy = 'newest'; // Default sorting
     public $pageTitle;
     public $metaDescription;
+    public $totalReviews;
+    public $averageRating;
 
     public function mount($slug)
     {
         // Fetch business data
 
         $this->business = Business::where('slug', $slug)->first();
+        $this->totalReviews = $this->business->reviews_count;
+        $this->averageRating = $this->business->average_rating;
 
-        $this->pageTitle = $this->business->name;
+        $this->pageTitle = $this->business->name . " Reviews and Ratings - rated $this->averageRating out of 5, $this->totalReviews reviews";
         $this->metaDescription = $this->business->description;
     }
     public function updated($propertyName)
@@ -49,7 +53,7 @@ class BusinessPage extends Component
     protected function getRatingBreakdown()
     {
         // Calculate rating breakdown (1-5 stars)
-        $totalReviews = $this->business->reviews_count;
+        $totalReviews = $this->totalReviews;
         $breakdown = [
             1 => $this->business->{'1_star_count'},
             2 => $this->business->{'2_star_count'},
@@ -106,7 +110,7 @@ class BusinessPage extends Component
             "image" => [$this->business->business_logo],
             "aggregateRating" => [
                 "@type" => "AggregateRating",
-                "ratingValue" => round($this->business->average_rating, 1),
+                "ratingValue" => round($this->averageRating, 1),
                 "ratingCount" => $this->business->reviews_count,
                 "bestRating" => 5,
                 "worstRating" => 1
