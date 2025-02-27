@@ -8,7 +8,6 @@
     @endcomponent
     {{-- Business Page Header End --}}
 
-
     <section class="container py-8 mx-auto" id="business-details">
         <!-- Tabs Container -->
         <div class="flex flex-wrap justify-center gap-2 ">
@@ -113,14 +112,85 @@
                 </div>
                 {{-- @include('components.contact-info', ['entity' => $business]) --}}
             @elseif ($activeTab === 'review-form')
-                <!-- Review Form Content -->
                 <div>
                     <h2 class="text-2xl font-bold mb-4">Write a Review</h2>
-                    <!-- Add review form here -->
-                    {{-- <a href="{{ route('reviewBusiness') }}"></a> --}}
-                    <a href="{{ route('reviewBusiness', $business->slug) }}" class="text-primary-700">
-                        Review Here
-                    </a>
+                    <!-- Review Form -->
+                    <form wire:submit.prevent="submitReview">
+                        <!-- Rating -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                            <div class="flex space-x-1">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="$set('rating', {{ $i }})"
+                                        class="text-2xl {{ $i <= $rating ? 'text-yellow-400' : 'text-gray-300' }}">
+                                        <i class="star fa fa-star rev-star" data-value="1"></i>
+                                    </button>
+                                @endfor
+                            </div>
+                            @error('rating')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-6">
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Comment</label>
+                            <textarea wire:model="comment" id="comment" rows="5"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600"
+                                placeholder="Share your experience..."></textarea>
+                            @error('comment')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        @auth
+                            <input type="hidden" wire:model="reviewer_id">
+                        @endauth
+                        <!-- Guest Fields -->
+                        @guest
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <!-- Name -->
+                                <div>
+                                    <label for="reviewer_name" class="block text-sm font-medium text-gray-700 mb-2">Your
+                                        Name</label>
+                                    <input wire:model="reviewer_name" type="text" id="reviewer_name"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600">
+                                    @error('reviewer_name')
+                                        <span class="text-sm text-red-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Email -->
+                                <div>
+                                    <label for="reviewer_email" class="block text-sm font-medium text-gray-700 mb-2">Your
+                                        Email</label>
+                                    <input wire:model="reviewer_email" type="email" id="reviewer_email"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600">
+                                    @error('reviewer_email')
+                                        <span class="text-sm text-red-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- CAPTCHA -->
+                            {{-- <div class="mb-6">
+                                <div wire:ignore>
+
+                                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}">
+                                    </div>
+                                </div>
+                                @error('recaptcha')
+                                    <span class="text-sm text-red-600">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+                        @endguest
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Submit Review
+                        </button>
+                    </form>
                 </div>
             @endif
         </div>

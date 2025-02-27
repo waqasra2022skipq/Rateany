@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Business;
 use App\Models\Review;
 use Livewire\WithPagination;
+// use App\Services\CaptchaService;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessPage extends Component
 {
@@ -19,6 +21,21 @@ class BusinessPage extends Component
     public $totalReviews;
     public $averageRating;
 
+    // Review Form Fields
+    public $rating = 1;
+    public $comment = '';
+    public $reviewer_name = '';
+    public $reviewer_email = '';
+    public $reviewer_id;
+
+    protected $rules = [
+        'rating' => 'required|integer|min:1|max:5',
+        'comment' => 'required|string|max:1000',
+        'reviewer_id' => 'nullable|exists:users,id',
+        'reviewer_name' => 'required_if:reviewer_id,null|string|max:255',
+        'reviewer_email' => 'required_if:reviewer_id,null|email|max:255',
+    ];
+
     public function mount($slug)
     {
         // Fetch business data
@@ -29,6 +46,7 @@ class BusinessPage extends Component
 
         $this->pageTitle = $this->business->name . " Reviews and Ratings - rated $this->averageRating out of 5, $this->totalReviews reviews";
         $this->metaDescription = $this->business->description;
+        $this->reviewer_id = Auth::id();
     }
     public function updated($propertyName)
     {
@@ -152,5 +170,65 @@ class BusinessPage extends Component
                 ]
             ];
         })->toArray();
+    }
+
+    public function submitReview()
+    {
+        // Validate the form
+        $this->validate();
+
+        // // Verify CAPTCHA for guest users
+        // if (!Auth::check()) {
+        //     $captchaService = new CaptchaService();
+        //     $captchaResult = $captchaService->verifyCaptcha($data);
+
+        //     if (isset($captchaResult['error'])) {
+        //         $this->addError('recaptcha', $captchaResult['captchaErrorMessage']);
+        //         return;
+        //     }
+        // }
+
+        // Create the review
+        Review::create([
+            'business_id' => $this->business->id,
+            'reviewer_id' => Auth::id(),
+            'reviewer_name' => Auth::check() ? Auth::user()->name : $this->reviewer_name,
+            'reviewer_email' => Auth::check() ? Auth::user()->email : $this->reviewer_email,
+            'rating' => $this->rating,
+            'comments' => $this->comment,
+        ]);
+
+        $this->updatingCounting($this->business, $this->rating);
+
+        // Reset the form
+        $this->reset(['rating', 'comment', 'reviewer_name', 'reviewer_email']);
+
+        // Switch to the reviews tab
+        $this->switchTab('reviews');
+
+        // Show success message
+        session()->flash('message', 'Review submitted successfully!');
+    }
+
+    private function updatingCounting($business, $ratings)
+    {
+        $star_column = "{$ratings}_star_count";
+        $business->increment('reviews_count');
+        $business->increment($star_column);
+
+        // Recalculate the average rating
+        $total_rating = (
+            1 * $business->{'1_star_count'} +
+            2 * $business->{'2_star_count'} +
+            3 * $business->{'3_star_count'} +
+            4 * $business->{'4_star_count'} +
+            5 * $business->{'5_star_count'}
+        );
+        $average_rating = $total_rating / $business->reviews_count;
+        $business->average_rating = $average_rating;
+        $business->save();
+
+        $this->totalReviews = $business->reviews_count;
+        $this->averageRating = $average_rating;
     }
 }
