@@ -37,7 +37,7 @@
 
             <div>
                 <button type="submit"
-                    class="flex w-full justify-center rounded-md bg-primary-600 hover:bg-primary-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus:ring-primary-300">Sign
+                    class="flex w-full justify-center rounded-md bg-primary-600 hover:bg-primary-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus:ring-primary-300">Sign
                     in</button>
             </div>
         </form>
