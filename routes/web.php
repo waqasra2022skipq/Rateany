@@ -18,6 +18,7 @@ use App\Livewire\Professionals\ProfessionPage;
 use App\Livewire\Professionals\Professions;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Businesses\Ratenow;
 
 Route::prefix('auth')->group(function () {
     // Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
@@ -84,6 +85,7 @@ Route::prefix('/professions')->group(function () {
 });
 
 Route::prefix('/businesses')->group(function () {
+    Route::get('/rate-now', Ratenow::class)->name('rate-now');
     Route::get('/', BusinessesList::class)->name('allBusinesses');
     Route::get('/{slug}', BusinessPage::class)->name('businesses.show');
 });
