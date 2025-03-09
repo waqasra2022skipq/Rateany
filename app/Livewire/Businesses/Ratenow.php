@@ -94,13 +94,6 @@ class Ratenow extends Component
                 'categoryId' => $business_category->id,
                 'location' => $this->business_location,
                 'contact_phone' => $this->contact_phone,
-                'reviews_count' => 0,
-                'average_rating' => 0,
-                '1_star_count' => 0,
-                '2_star_count' => 0,
-                '3_star_count' => 0,
-                '4_star_count' => 0,
-                '5_star_count' => 0,
             ]);
         }
 
