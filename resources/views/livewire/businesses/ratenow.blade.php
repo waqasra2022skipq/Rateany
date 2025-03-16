@@ -1,4 +1,4 @@
-<div class="container mx-auto py-10">
+<div class="container py-10 mx-auto px-5">
     <!-- Review Form -->
     <form wire:submit.prevent="submitReview">
         <!-- Business Information (if not found) -->
