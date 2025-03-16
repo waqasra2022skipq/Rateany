@@ -3,7 +3,7 @@
     <form wire:submit.prevent="submitReview">
         <!-- Business Information (if not found) -->
         <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Business Name</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Name <b class="text-red-500">*</b></label>
             <input wire:model="business_name" type="text"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('business_name')
@@ -12,7 +12,7 @@
         </div>
 
         <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Business Category</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Category <b class="text-red-500">*</b></label>
 
             <!-- Search by Category -->
             <input list="categories" wire:model="business_category" placeholder="Select Category"
@@ -29,21 +29,30 @@
         </div>
 
         <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Business Address</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
             <input wire:model="business_location" type="text"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('business_location')
                 <span class="text-sm text-red-600">{{ $message }}</span>
             @enderror
         </div>
-
-        <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Business Phone</label>
-            <input wire:model="contact_phone" type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-            @error('contact_phone')
-                <span class="text-sm text-red-600">{{ $message }}</span>
-            @enderror
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                <input wire:model="contact_phone" type="text"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                @error('contact_phone')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Website</label>
+                <input wire:model="contact_phone" type="text"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                @error('contact_phone')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
         </div>
 
         <!-- Rating -->
@@ -64,7 +73,8 @@
 
         <!-- Comment -->
         <div class="mb-6">
-            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Comment</label>
+            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Comment <b
+                    class="text-red-500">*</b></label>
             <textarea wire:model="comment" id="comment" rows="5"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600"
                 placeholder="Share your experience..."></textarea>
@@ -82,7 +92,7 @@
                 <!-- Name -->
                 <div>
                     <label for="reviewer_name" class="block text-sm font-medium text-gray-700 mb-2">Your
-                        Name</label>
+                        Name <b class="text-red-500">*</b></label>
                     <input wire:model="reviewer_name" type="text" id="reviewer_name"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600">
                     @error('reviewer_name')
@@ -93,7 +103,7 @@
                 <!-- Email -->
                 <div>
                     <label for="reviewer_email" class="block text-sm font-medium text-gray-700 mb-2">Your
-                        Email</label>
+                        Email <b class="text-red-500">*</b></label>
                     <input wire:model="reviewer_email" type="email" id="reviewer_email"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600">
                     @error('reviewer_email')

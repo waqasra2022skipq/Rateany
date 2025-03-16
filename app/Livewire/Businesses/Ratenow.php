@@ -24,17 +24,20 @@ class Ratenow extends Component
     public $business_category;
     public $business_location;
     public $contact_phone;
+    public $contact_website;
 
     protected $rules = [
         'business_name' => 'required|string|max:255',
         'business_category' => 'required|string|max:20',
-        'business_location' => 'required|string|max:255',
+        'business_location' => 'nullable|string|max:255',
         'rating' => 'required|integer|min:1|max:5',
         'comment' => 'required|string|max:1000',
         'reviewer_id' => 'nullable|exists:users,id',
         'reviewer_name' => 'required_if:reviewer_id,null|string|max:255',
         'reviewer_email' => 'required_if:reviewer_id,null|email|max:255',
         'contact_phone' => ['nullable', 'string', 'max:20'],
+        'contact_website' => 'nullable|string|max:1000',
+
     ];
 
     public function mount()
@@ -94,6 +97,7 @@ class Ratenow extends Component
                 'categoryId' => $business_category->id,
                 'location' => $this->business_location,
                 'contact_phone' => $this->contact_phone,
+                'contact_website' => $this->contact_website,
             ]);
         }
 
