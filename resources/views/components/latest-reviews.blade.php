@@ -10,7 +10,7 @@
         </div>
 
         <!-- Reviews Grid -->
-        <div class="grid gap-6 md:gap-8 md:grid-cols-3 mb-8 rounded-lg shadow-sm  bg-white dark:bg-gray-800 p-6">
+        <div class="grid gap-6 md:gap-8 md:grid-cols-3 mb-8 rounded-lg shadow-sm bg-white dark:bg-gray-800 p-6">
             @foreach ($reviews as $review)
                 <figure
                     class="flex flex-col items-center justify-center p-6 text-center bg-gray-50 border-b border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 business-card transform transition-transform hover:scale-105">
@@ -27,11 +27,18 @@
                     </blockquote>
 
                     <!-- Reviewer Info -->
-                    <figcaption class="flex items-center justify-center mt-4">
+                    <figcaption class="flex flex-col items-center justify-center mt-4">
                         <div class="text-left ms-3 rtl:text-right">
                             <div class="text-lg font-semibold text-gray-800 dark:text-white">
                                 {{ $review->reviewer_name }}
                             </div>
+                            <!-- Business Name -->
+                            @if ($review->business)
+                                <a href="{{ route('businesses.show', $review->business->slug) }}"
+                                    class="text-primary-500 hover:underline text-sm font-medium mt-1">
+                                    {{ $review->business->name }}
+                                </a>
+                            @endif
                         </div>
                     </figcaption>
                 </figure>
