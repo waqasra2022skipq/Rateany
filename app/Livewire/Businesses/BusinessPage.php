@@ -64,7 +64,7 @@ class BusinessPage extends Component
             'reviews' => $this->getReviews()
         ])->layout(
             'components.layouts.app',
-            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription, 'schemaMarkup' =>  $schemaMarkup]
+            ['pageTitle' => $this->pageTitle, 'metaDescription' => $this->metaDescription, 'schemaMarkup' =>  $schemaMarkup, 'ogImage' => $this->business->business_logo]
         );
     }
 
