@@ -111,7 +111,9 @@ class BusinessController extends Controller
             $validatedData = $request->validated();
 
             if ($request->hasFile('business_logo')) {
-                $validatedData['business_logo'] = $this->handleLogoUpload($request->file('business_logo'));
+                $imagePath = $this->handleLogoUpload($request->file('business_logo'));
+                $validatedData['business_logo'] = $imagePath;
+                \Storage::disk('s3')->setVisibility($imagePath, 'public');
             }
 
             if ($request->filled('category_slug')) {
@@ -133,7 +135,7 @@ class BusinessController extends Controller
 
     private function handleLogoUpload($file)
     {
-        return $file->store('business_logos', 'public');
+        return $file->store('business_logos', 's3');
     }
 
     public function edit($id)
@@ -156,11 +158,13 @@ class BusinessController extends Controller
 
             if ($request->hasFile('business_logo')) {
                 // Delete old profile picture if exists
-                if ($business->business_logo && \Storage::exists('public/' . $business->business_logo)) {
-                    \Storage::delete('public/' . $business->business_logo);
+                if ($business->business_logo && \Storage::disk('s3')->exists($business->business_logo)) {
+                    // dd($business->business_logo);
+                    \Storage::disk('s3')->delete($business->business_logo);
                 }
-                $imagePath = $request->file('business_logo')->store('business_logos', 'public');
+                $imagePath = $request->file('business_logo')->store('business_logos', 's3');
                 $validatedData['business_logo'] = $imagePath;
+                \Storage::disk('s3')->setVisibility($imagePath, 'public');
             }
 
             if ($request->filled('category_slug')) {
