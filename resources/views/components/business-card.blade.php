@@ -2,8 +2,9 @@
     <div class="card h-100">
         <!-- Business Logo -->
         <a href="{{ route('businesses.show', $business->slug) }}" class="business-link">
-            <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
+            <img src="{{ $business->business_logo ? Storage::disk('s3')->url($business->business_logo) : asset('default-business-logo.png') }}"
                 alt="{{ $business->name }} Logo" class="card-img-top img-fluid" style="height: 100px; object-fit: cover;">
+
         </a>
         <div class="card-body">
             <h5 class="card-title">

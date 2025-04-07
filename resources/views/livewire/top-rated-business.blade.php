@@ -15,9 +15,8 @@
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
                             <!-- Business Logo -->
                             <a href="{{ route('businesses.show', $business->slug) }}">
-                                <img src="{{ $business->business_logo ? asset('storage/' . $business->business_logo) : asset('default-business-logo.png') }}"
-                                    alt="{{ $business->name }} Logo" class="rounded-t-lg w-full h-20 object-cover"
-                                    title="{{ $business->name }} logo">
+                                <img src="{{ $business->business_logo ? Storage::disk('s3')->url($business->business_logo) : asset('default-business-logo.png') }}"
+                                    alt="{{ $business->name }} Logo" class="rounded-t-lg w-full h-20 object-cover">
                             </a>
 
                             <!-- Card Content -->
