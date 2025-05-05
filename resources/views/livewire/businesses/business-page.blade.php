@@ -37,7 +37,7 @@
 
             <!-- AI Review Summary -->
             <button wire:click="switchTab('ai-summary')"
-                class="flex-1 md:flex-none text-sm md:text-base font-medium px-4 py-2 rounded border-b-2 {{ $activeTab === 'ai-review-summary' ? 'border-b-2 border-yellow-500' : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-100' }}">
+                class="flex-1 md:flex-none text-sm md:text-base font-medium px-4 py-2 rounded border-b-2 {{ $activeTab === 'ai-summary' ? 'border-b-2 border-yellow-500' : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-100' }}">
                 AI Review Summary
             </button>
         </div>
