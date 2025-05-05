@@ -34,6 +34,12 @@
                 class="flex-1 md:flex-none text-sm md:text-base font-medium px-4 py-2 rounded border-b-2 {{ $activeTab === 'review-form' ? 'border-b-2 border-yellow-500' : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-100' }}">
                 Write Review
             </button>
+
+            <!-- AI Review Summary -->
+            <button wire:click="switchTab('ai-summary')"
+                class="flex-1 md:flex-none text-sm md:text-base font-medium px-4 py-2 rounded border-b-2 {{ $activeTab === 'ai-review-summary' ? 'border-b-2 border-yellow-500' : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-100' }}">
+                AI Review Summary
+            </button>
         </div>
 
         <!-- Tab Content -->
@@ -191,6 +197,16 @@
                             Submit Review
                         </button>
                     </form>
+                </div>
+            @elseif ($activeTab === 'ai-summary')
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">AI Review Summary</h2>
+                    <p>{{ $aiSummary }}</p>
+                    {{-- Show button to generate latest AI summary for this business --}}
+                    <button wire:click="generateAiSummary"
+                        class="mt-4 px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-300">
+                        Generate Latest AI Summary
+                    </button>
                 </div>
             @endif
         </div>
