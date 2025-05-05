@@ -94,4 +94,9 @@ class Business extends Model
             [self::RATING_WEIGHT, self::REVIEW_COUNT_WEIGHT]
         );
     }
+
+    public function aiSummary()
+    {
+        return $this->hasOne(AISummary::class, 'business_id');
+    }
 }

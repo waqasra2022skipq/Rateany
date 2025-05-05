@@ -8,10 +8,17 @@ use App\Models\Review;
 use Livewire\WithPagination;
 // use App\Services\CaptchaService;
 use Illuminate\Support\Facades\Auth;
+use App\Services\AIReviewsService;
 
 class BusinessPage extends Component
 {
     use WithPagination;
+
+    private AIReviewsService $aiReviewsService;
+    public function boot(AIReviewsService $aiReviewsService)
+    {
+        $this->aiReviewsService = new $aiReviewsService;
+    }
 
     public $business;
     public $activeTab = 'ai-summary'; // Default active tab
@@ -27,6 +34,7 @@ class BusinessPage extends Component
     public $reviewer_name = '';
     public $reviewer_email = '';
     public $reviewer_id;
+    public $aiSummary = '';
 
     protected $rules = [
         'rating' => 'required|integer|min:1|max:5',
@@ -38,6 +46,7 @@ class BusinessPage extends Component
 
     public function mount($slug)
     {
+
         // Fetch business data
 
         $this->business = Business::where('slug', $slug)->first();
@@ -47,6 +56,8 @@ class BusinessPage extends Component
         $this->pageTitle = $this->business->name . " Reviews and Ratings - rated $this->averageRating out of 5, $this->totalReviews reviews";
         $this->metaDescription = $this->business->description;
         $this->reviewer_id = Auth::id();
+
+        $this->aiSummary = $this->business->aiSummary?->ai_summary;
     }
     public function updated($propertyName)
     {
@@ -230,5 +241,19 @@ class BusinessPage extends Component
 
         $this->totalReviews = $business->reviews_count;
         $this->averageRating = $average_rating;
+    }
+
+    public function generateAiSummary()
+    {
+        $aiSummary = $this->aiReviewsService->generateBusinessAIReview($this->business->id);
+
+        // Save the AI-generated summary to the database
+        $this->aiReviewsService->saveAIReview($this->business->id, $aiSummary);
+
+        // Update the local variable
+        $this->aiSummary = $aiSummary;
+
+        // Show success message
+        session()->flash('message', 'AI summary generated successfully!');
     }
 }
