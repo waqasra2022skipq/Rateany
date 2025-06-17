@@ -203,10 +203,13 @@
                     <h2 class="text-2xl font-bold mb-4">AI Review</h2>
                     <p>{!! nl2br(e($aiSummary)) !!}</p>
                     {{-- Show button to generate latest AI summary for this business --}}
-                    {{-- <button wire:click="generateAiSummary"
-                        class="mt-4 px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-300">
-                        Generate Latest AI Summary
-                    </button> --}}
+                    @if (count($reviews) > 0 && !$aiSummary)
+                        <button wire:click="generateAiSummary"
+                            class="mt-4 px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary-300">
+                            Generate Latest AI Summary
+                        </button>
+                    @endif
+
                 </div>
             @endif
         </div>

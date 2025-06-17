@@ -21,7 +21,7 @@ class BusinessPage extends Component
     }
 
     public $business;
-    public $activeTab = 'ai-summary'; // Default active tab
+    public $activeTab = 'reviews'; // Default active tab
     public $sortBy = 'newest'; // Default sorting
     public $pageTitle;
     public $metaDescription;
