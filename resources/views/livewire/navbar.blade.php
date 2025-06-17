@@ -48,18 +48,22 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li
+                    class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('generate-ai-review') }}">
+                    <a href="{{ route('generate-ai-review') }}">Generate AI</a>
+                </li>
                 <li>
-                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
+                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('rate-now') }}"
                         href="{{ route('rate-now') }}">
                         Rate Now</a>
                 </li>
                 <li>
-                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
+                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('allBusinesses') }}"
                         href="{{ route('allBusinesses') }}">
                         Explore</a>
                 </li>
                 <li>
-                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('register') }}"
+                    <a class="block py-2 px-3 rounded hover:bg-primary-600 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-300 dark:hover:bg-primary-600 dark:hover:text-white md:dark:hover:bg-transparent {{ $this->isActive('contact.show') }}"
                         href="{{ route('contact.show') }}">
                         Contact Us
                     </a>

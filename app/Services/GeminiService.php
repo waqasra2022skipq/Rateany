@@ -8,7 +8,7 @@ class GeminiService
 {
     public function generateContent(string $prompt, array $options = []): string
     {
-        $model = $options['model'] ?? 'gemini-2.0-pro-exp';
+        $model = $options['model'] ?? 'gemini-2.0-flash';
         $temperature = $options['temperature'] ?? 0.7;
 
         $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $model . ':generateContent?key=' . env('GEMINI_API_KEY');

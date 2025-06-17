@@ -19,6 +19,7 @@ use App\Livewire\Professionals\Professions;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Businesses\Ratenow;
+use App\Livewire\GenerateAIReview;
 
 Route::prefix('auth')->group(function () {
     // Route::get('/login', [AuthController::class, 'loginForm'])->name("login")->middleware('guest');
@@ -89,6 +90,12 @@ Route::prefix('/businesses')->group(function () {
     Route::get('/', BusinessesList::class)->name('allBusinesses');
     Route::get('/{slug}', BusinessPage::class)->name('businesses.show');
 });
+
+Route::prefix('/ai')->group(
+    function () {
+        Route::get('/generate-ai-review', GenerateAIReview::class)->name('generate-ai-review');
+    }
+);
 
 Route::prefix('/professionals')->group(function () {
     Route::get('/', ProfessionalsList::class)->name('allUsers');
