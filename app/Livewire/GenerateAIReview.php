@@ -38,7 +38,12 @@ class GenerateAIReview extends Component
             return Category::all();
         });
 
-        return view('livewire.generate-ai-review', ['categories' => $categories]);
+        return view('livewire.generate-ai-review', [
+            'categories' => $categories,
+        ])->layout('components.layouts.app', [
+            'metaDescription' => "Generate AI review for any business, product, or service using RateAny's AI Review Generator.",
+            'pageTitle' => "Generate AI Review for Business - " . config('app.name'),
+        ]);
     }
 
     public function generateAIReview()
