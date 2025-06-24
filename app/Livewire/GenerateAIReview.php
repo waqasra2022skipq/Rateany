@@ -18,6 +18,7 @@ class GenerateAIReview extends Component
     public $contact_website;
 
     public $generating = false;
+    public $latestAIReviews = [];
 
     protected $rules = [
         'business_name' => 'required|string|max:255',
@@ -30,6 +31,7 @@ class GenerateAIReview extends Component
     public function boot(AIReviewsService $aiReviewsService)
     {
         $this->aiReviewsService = new $aiReviewsService;
+        $this->latestAIReviews = \App\Models\AISummary::with('business')->latest()->take(10)->get();
     }
 
     public function render()
@@ -40,6 +42,7 @@ class GenerateAIReview extends Component
 
         return view('livewire.generate-ai-review', [
             'categories' => $categories,
+            'latestAIReviews' => $this->latestAIReviews,
         ])->layout('components.layouts.app', [
             'metaDescription' => "Generate AI review for any business, product, or service using RateAny's AI Review Generator.",
             'pageTitle' => "Generate AI Review for Business - " . config('app.name'),

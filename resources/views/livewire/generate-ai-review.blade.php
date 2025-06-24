@@ -63,4 +63,28 @@
         </button>
     </form>
 
+    <!-- Latest AI Reviews -->
+    <div class="mt-10">
+        <h2 class="text-xl font-bold mb-4">Latest AI Reviews</h2>
+        @if (isset($latestAIReviews) && count($latestAIReviews))
+            <div class="space-y-6">
+                @foreach ($latestAIReviews as $aiReview)
+                    <div class="p-4 border rounded shadow-sm bg-gray-50">
+                        <div class="font-semibold">
+                            {{ $aiReview->business->name ?? 'Business' }}
+                        </div>
+                        <div class="text-sm text-gray-600 mb-2">
+                            {{ $aiReview->business->category->name ?? '' }} | {{ $aiReview->business->location ?? '' }}
+                        </div>
+                        <div class="prose max-w-none">{!! nl2br(e($aiReview->ai_summary)) !!}</div>
+                        <div class="text-xs text-gray-400 mt-2">
+                            {{ $aiReview->created_at?->diffForHumans() }}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-500">No AI reviews yet.</p>
+        @endif
+    </div>
 </div>

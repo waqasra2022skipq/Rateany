@@ -16,4 +16,9 @@ class AISummary extends Model
     ];
 
     public $table = 'ai_summaries';
+
+    public function business()
+    {
+        return $this->belongsTo(Business::class);
+    }
 }
