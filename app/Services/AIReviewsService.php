@@ -81,7 +81,11 @@ class AIReviewsService
 
                     Give a summary rating out of 5, and a catchy final verdict in one sentence.
 
-                    Your tone should be neutral yet engaging, sounding authoritative but easy to read—ideal for display on a public-facing business review website\n\n";
+                    Your tone should be neutral yet engaging, sounding authoritative but easy to read—ideal for display on a public-facing business review website
+                    Follow these instructions carefully:
+                    1. Do not give an intro or an outro.
+                    2. Return the ratings in bold.
+                    \n\n";
     }
 
     /**
@@ -111,6 +115,9 @@ class AIReviewsService
             If no significant information is found online, please say so clearly.
 
             Your tone should be engaging, professional, and suitable for display on a public business review platform.
+            Follow these instructions carefully:
+                    1. Do not give an intro or an outro.
+                    2. Return the ratings in bold.
 
             Business Information:
             Name: {$businessName}

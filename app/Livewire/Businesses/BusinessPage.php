@@ -58,6 +58,10 @@ class BusinessPage extends Component
         $this->reviewer_id = Auth::id();
 
         $this->aiSummary = $this->business->aiSummary?->ai_summary;
+
+        if ($this->totalReviews < 1) {
+            $this->activeTab = 'ai-summary'; // Switch to AI reviews tab if no reviews exist
+        }
     }
     public function updated($propertyName)
     {

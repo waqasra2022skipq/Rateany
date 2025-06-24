@@ -33,7 +33,7 @@
         </div>
 
         <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Address(optional)</label>
             <input wire:model="business_location" type="text" placeholder="Enter the address of the business"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('business_location')
@@ -43,9 +43,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Website</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Website(optional)</label>
                 <input wire:model="contact_website" type="text"
-                    placeholder="Enter the website address of the business"
+                    placeholder="Enter the link of the business, product or professional"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('contact_website')
                     <span class="text-sm text-red-600">{{ $message }}</span>
