@@ -70,21 +70,25 @@ class AIReviewsService
 
     protected function preparePrompt()
     {
-        return "Act as a trusted third-party reviews analyst. You are given the name, address, and website of a
-                    business, followed by the latest customer reviews (each with a rating and comment). Your task is to:
+        return "Act as a trusted, unbiased reviews analyst writing for a public-facing business review platform. You are provided the name, category, location, and possibly website of a business or public entity.
 
-                    Provide a brief, honest, and reader-friendly summary of the overall customer sentiment.
+                Your task is to:
+                1. Search the web for publicly available reviews, articles, or feedback (e.g., Google Reviews, Yelp, TripAdvisor, Reddit, blogs, or forums).
+                2. Write a professional, engaging, and honest summary of customer sentiment.
+                3. Structure your response clearly using the following sections:
+                    - **Overall Sentiment**
+                    - **Recurring Themes** (use bullet points)
+                    - **Notable Details** (optional: e.g., owner name, unique services, standout features)
+                    - **Estimated Rating**: Out of 5, in bold (e.g., **4.6/5**)
+                    - **Final Verdict**: One catchy sentence summarizing the experience
 
-                    Highlight recurring themes (e.g., good service, fast delivery, pricing, etc.).
-
-                    Mention any useful context from the reviews (e.g., owner's name, delivery method, extra services).
-
-                    Give a summary rating out of 5, and a catchy final verdict in one sentence.
-
-                    Your tone should be neutral yet engaging, sounding authoritative but easy to read—ideal for display on a public-facing business review website
-                    Follow these instructions carefully:
-                    1. Do not give an intro or an outro.
-                    2. Return the ratings in bold.
+                Style Guidelines:
+                - Your tone must be neutral but reader-friendly and authoritative.
+                - Do **not** add introductions like “Let’s dive in…” or “Here’s what I found...”
+                - Keep it concise but informative.
+                - Avoid fluff or repetition.
+                - Emphasize facts and commonly repeated opinions.
+                - If no useful data is found, say: “Insufficient public data available to generate a reliable summary..
                     \n\n";
     }
 
