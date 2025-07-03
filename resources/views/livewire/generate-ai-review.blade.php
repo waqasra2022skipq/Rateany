@@ -71,7 +71,13 @@
                 @foreach ($latestAIReviews as $aiReview)
                     <div class="p-4 border rounded shadow-sm bg-gray-50">
                         <div class="font-semibold">
-                            {{ $aiReview->business->name ?? 'Business' }}
+                            @if ($aiReview?->business?->slug)
+                                <a href="{{ route('businesses.show', ['slug' => $aiReview?->business?->slug]) }}"
+                                    class="text-blue-600">
+                                    {{ $aiReview->business->name ?? 'Business' }}
+                                </a>
+                            @endif
+
                         </div>
                         <div class="text-sm text-gray-600 mb-2">
                             {{ $aiReview->business->category->name ?? '' }} | {{ $aiReview->business->location ?? '' }}
