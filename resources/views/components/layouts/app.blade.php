@@ -29,6 +29,8 @@
         <script type="application/ld+json">
             {!! $schemaMarkup ?? "" !!}
         </script>
+
+        <meta name="google-adsense-account" content="ca-pub-2238581185309046">
     </head>
 
 
