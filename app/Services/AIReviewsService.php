@@ -108,7 +108,7 @@ class AIReviewsService
         $contact_website = $business->contact_website;
 
         $prompt = "Act as a trusted third-party reviews analyst. You are given the name, category, and location of a business. 
-            Your task is to perform a web search and analyze publicly available reviews, comments, and feedback (e.g., Google, Yelp, TripAdvisor, glassdoor, forums, social media, etc.) to:
+            Your task is to perform a web search and analyze publicly available reviews, comments, and feedback (e.g., Google, Yelp, TripAdvisor, glassdoor, G2, Reddit, blogs, forums, social media, etc.) to:
 
             - Provide a concise, neutral, and reader-friendly summary of the general customer sentiment.
             - Highlight recurring themes in the available feedback (e.g., quality of service, pricing, staff behavior, atmosphere, delivery speed).
